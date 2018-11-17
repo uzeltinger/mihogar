@@ -1,18 +1,31 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Mi Hogar</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-card *ngFor="let property of properties" class="offer-list-card">   
+   
+    <ion-card-header>
+      {{property.pro_name}}
+    </ion-card-header>
+    <a target="_blank" href="http://diportal.com.ar/component/osproperty/{{property.ref}}-{{property.pro_alias}}-{{property.id}}.html">
+    <img src="http://diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{property.image}}"/>
+  </a>
+    <ion-card-content>
+      <ion-card-title>
+          {{property.pro_name}}
+        </ion-card-title>
+      <p>
+          {{property.pro_small_desc}}
+      </p>
+    </ion-card-content>
+          
+  </ion-card>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>
