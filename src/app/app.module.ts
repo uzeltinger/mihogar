@@ -10,12 +10,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { ServicioProvider } from '../providers/servicio/servicio';
+import { AgentPropertiesListPage } from '../pages/agent-properties-list/agent-properties-list';
+import { PropertyPage } from '../pages/property/property';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    AgentPropertiesListPage,PropertyPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { ServicioProvider } from '../providers/servicio/servicio';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    AgentPropertiesListPage,PropertyPage
   ],
   providers: [
     StatusBar,

@@ -7,25 +7,86 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<div *ngIf="showSplash" class="splash">
+    <div class="spinner">
+        <ion-spinner></ion-spinner>
+    </div>
+</div>
 
-  <ion-card *ngFor="let property of properties" class="offer-list-card">   
+<ion-content padding class="ion-content-1rem">
+
+  <ion-card *ngFor="let property of items" class="offer-list-card">   
    
     <ion-card-header>
-      {{property.pro_name}}
+        <a (click)="navToPropertyPage($event, property)">
+      {{property.category_name}} {{property.type_name}}
+      </a>
     </ion-card-header>
-    <a target="_blank" href="http://diportal.com.ar/component/osproperty/{{property.ref}}-{{property.pro_alias}}-{{property.id}}.html">
+    
+      <a (click)="navToPropertyPage($event, property)">
     <img src="http://diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{property.image}}"/>
   </a>
     <ion-card-content>
       <ion-card-title>
           {{property.pro_name}}
         </ion-card-title>
-      <p>
-          {{property.pro_small_desc}}
-      </p>
+
+      <div class="list-icons">
+        <span *ngIf="property.bed_room>0" class="icono habitaciones"></span><span *ngIf="property.bed_room>0" class="cantidad">{{property.bed_room}} habs</span>
+        <span *ngIf="property.bath_room>0" class="icono banios"></span><span *ngIf="property.bath_room>0" class="cantidad">{{property.bath_room}} baño<span *ngIf="property.bath_room>1">s</span></span>
+        <span *ngIf="property.square_feet>0" class="icono area"></span><span *ngIf="property.square_feet>0" class="cantidad">{{property.square_feet}}m2</span>  
+        <span *ngIf="property.parking>0" class="icono garage"></span><span *ngIf="property.parking>0" class="cantidad">{{property.parking}}</span>      
+      </div>
+      <!--<ion-icon name="heart"></ion-icon>  active -->
+      <!--<ion-icon name="heart" isActive="false"></ion-icon> <span class="cantidad">2</span>        inactive -->
+      <p class="smalltext">
+          Agente: <a (click)="navToAgentPropertiesListPage($event, property)">{{property.agent_name}}</a>
+        </p>
+
     </ion-card-content>
           
   </ion-card>
 
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más ofertas...">
+      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
+<!--
+
+  <a target="_blank" href="http://diportal.com.ar/component/osproperty/{{property.ref}}-{{property.pro_alias}}-{{property.id}}.html">
+
+{"id":"498",
+"ref":"268",
+"pro_name":"RAMOS MEJ\u00cdA - DEPARTAMENTO TRIPLEX 4 AMB C\/COCHERA",
+"pro_alias":"depto-triplex-4-amb-c-cochera-249",
+"agent_id":"44",
+"company_id":"1",
+"price":"209000.00",
+"pro_small_desc":"Description Peque\u00f1o",
+"pro_type":"1",
+"isFeatured":"0",
+"lat_add":"-34.64671",
+"long_add":"-58.57358",
+"city":"29782",
+"state":"52",
+"address":"CASTELLI 900",
+"bed_room":"3",
+"bath_room":"1.00",
+"rooms":"4",
+"parking":"0",
+"square_feet":"0.00",
+"p":"0.00",
+"name":"Etchart",
+"user_id":"65",
+"photo":"etchart_57024f31d965a.jpg",
+"published":"1",
+"mobile":"",
+"type_name":"Venta",
+"category_name":"Departamento",
+"category_id":"1",
+"image":"1_20160629_1157196050.jpg",
+"iordering":"0"}
+category_name en type_name
+-->

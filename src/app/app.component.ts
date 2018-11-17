@@ -16,13 +16,16 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Inicio', component: HomePage },
+      { title: 'Propiedades', component: HomePage },
+      { title: 'Buscar', component: HomePage }
     ];
 
   }
@@ -33,6 +36,13 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      
+      if (this.platform.is('android')) {
+        this.statusBar.styleBlackOpaque();
+        this.statusBar.backgroundColorByHexString('#1565C0');
+        this.statusBar.show();
+      }
+
     });
   }
 
