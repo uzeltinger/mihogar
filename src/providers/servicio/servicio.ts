@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
 
 /*
   Generated class for the ProvidersServicioProvider provider.
@@ -9,8 +11,8 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class ServicioProvider {
-  //apiUrl: string = 'http://diportal.local/';
-  apiUrl: string = 'http://diportal.com.ar/';
+  apiUrl: string = 'http://diportal.local/';
+  //apiUrl: string = 'http://diportal.com.ar/';
   httpOptions: any = {};
   constructor(public httpClient: HttpClient) {
     console.log('Hello ProvidersServicioProvider Provider');
@@ -37,6 +39,15 @@ export class ServicioProvider {
     return this.httpClient.get(url);
   }
 
+  increaseWhatsappClick(property: any): Observable<any> {
+    console.log('offer', property);
+    this.httpOptions = this.getHeader();
+    return this.httpClient.post<any>(this.apiUrl + "index.php?option=com_osproperty&task=api_whatsappaddclick", property.id, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  
   getHeader() {
     return {
       headers: new HttpHeaders({
@@ -46,4 +57,16 @@ export class ServicioProvider {
     };
   }
   
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const err = error || '';
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
+  }
+
 }

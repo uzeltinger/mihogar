@@ -15,11 +15,12 @@ export class HomePage {
   offersLimitStart: number = 0;
   offersLimit: number = 10;
   offersShowAll: boolean = false;
+  whatsappText:string
 
   constructor(public navCtrl: NavController,
     private alertController: AlertController,
     public proveedor: ServicioProvider) {
-
+      this.whatsappText = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0AGracias.%0A";
   }
 
   ionViewDidLoad() {    
@@ -42,9 +43,21 @@ export class HomePage {
 
           this.properties.forEach(element => {
             element.bath_room = parseInt(element.bath_room);
+            if(element.mobile==''){
+              element.mobile = "1130190242";
+            }
+            element.link = "http://diportal.com.ar/component/osproperty/"+element.ref+"-"+element.pro_alias+"-"+element.id+".html"
+            
+            element.price = parseInt(element.price);
+            element.price = element.price.toLocaleString('es-AR');
+            if(element.curr==1){
+              element.moneda="$";
+            }else{
+              element.moneda="u$s";
+            }
             this.items.push(element);
           });
-
+          
           this.properties = data;
           this.showSplash = false;
         },
@@ -55,6 +68,19 @@ export class HomePage {
         this.showAlert('Ocurrió un error',error);
         }
       )
+  }
+
+  increaseWhatsappClick(property){
+    console.log('increaseWhatsappClick');
+    this.proveedor.increaseWhatsappClick(property)
+    .subscribe(
+      data => {
+        console.log('increaseWhatsappClick data: ',data);        
+      },
+      error => {
+        console.log('increaseWhatsappClick error: ',error);             
+      }
+    ); 
   }
 
   doInfinite(): Promise<any> {

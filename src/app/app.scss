@@ -7,21 +7,27 @@
 }
 .menu-inner .content-md{
     background: #2196F3;
-  }
-  .menu-inner .list-md{ 
+}
+.menu-inner .list-md{ 
     border-top: 1px solid #E3F2FD;
-  }
-  .menu-inner .item-md {
+}
+.menu-inner .item-md {
     background: #2196F3;
     border-bottom: 1px solid #E3F2FD;
-  }
-  .label, .icon {
+}
+.label, .icon {
     color: #fff;
-  }
-  .list-md .item-block .item-inner {
+}
+.list-md .item-block .item-inner {
       border: none;
-  }
-
+}
+.darkbackground {
+    background: #263134;
+}
+.offer-list-card {
+    border-radius: 10px;
+    background: #10191E;
+}
 .splash {
     position: absolute;
     width: 100%;
@@ -30,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: center;    
-    background: #2196F3 url('../assets/img/splash.png') center center no-repeat;
+    background: #2196F3 url('../assets/imgs/splash.png') center center no-repeat;
 }
 ion-spinner * {
     width: 28px;
@@ -83,4 +89,43 @@ ion-spinner * {
 }
 p.smalltext {
     font-size: 1.6rem;
+}
+.darkbackground a {
+    color: #E3F2FD;
+}
+.darkbackground {
+    color: #fff;
+}
+.darkbackground p {
+    color: #fff;
+}
+.darkbackground .card-title-md {
+    color: #fff;
+    padding: 0 0 .4rem 0;
+}
+.offer-list-card-img {
+    position: relative;
+}
+.offer-list-icon-whatsapp {
+    position: absolute;
+    bottom: -24px;
+    right: 1rem;
+}
+.darkbackground .card-content .item-price{
+background: none;
+padding-left: 0;
+min-height: 1rem;
+}
+.darkbackground .card-content .item-price .item-inner {
+padding: 0;
+}
+.badge-price {
+    margin: 0!important;
+    padding: .5rem 1rem;
+    font-size: 2rem;
+    background: #FF0000;
+    font-weight: 400;
+}
+.darkbackground .card-content .item-price .label-md {
+    margin: 0;
 }
