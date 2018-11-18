@@ -39,6 +39,14 @@ export class ServicioProvider {
     return this.httpClient.get(url);
   }
 
+  getProperty(id) {
+    this.httpOptions = this.getHeader();
+    let params: string = "";    
+    let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_property&id='+id;
+    console.log('url',url);
+    return this.httpClient.get(url);
+  }
+
   increaseWhatsappClick(property: any): Observable<any> {
     console.log('offer', property);
     this.httpOptions = this.getHeader();
@@ -46,6 +54,18 @@ export class ServicioProvider {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  getCategories() {
+    let url = '';
+    url = this.apiUrl + 'index.php?option=com_osproperty&task=json_categories';
+    return this.httpClient.get(url);
+  }
+
+  getCities() {
+    let url = '';
+    url = this.apiUrl + 'index.php?option=com_osproperty&task=json_cities';
+    return this.httpClient.get(url);
   }
   
   getHeader() {

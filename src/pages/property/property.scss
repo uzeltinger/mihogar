@@ -1,3 +1,38 @@
 page-property {
-
+    ion-slides {
+        height: auto;
+    }
+    .slides {
+        height: auto;
+    }
+    h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 500;
+    line-height: 1;
+    font-size: 1.8rem!important;
+    }
+    span.categoria {
+        font-size: 1.4rem;
+    }
+    .property-top-slide {
+        position: relative;
+    }
+    .property-detail-card {
+        color: #10191E;
+        margin: 14px 0;
+        border-radius: 0;
+        width: 100%;
+    }
+    .property-detail-card p{
+        color: #10191E;
+    }
+    .property-detail-card a {
+        color: #1565C0;
+    }
+    #map_canvas {
+        width: 90%;
+        height: 80%;
+        border: 1px solid red;
+      }
 }

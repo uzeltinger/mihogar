@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ModalController } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 import { AgentPropertiesListPage } from '../agent-properties-list/agent-properties-list';
 import { PropertyPage } from '../property/property';
+import { ModalSearchPage } from '../modal-search/modal-search';
 
 @Component({
   selector: 'page-home',
@@ -16,9 +17,13 @@ export class HomePage {
   offersLimit: number = 10;
   offersShowAll: boolean = false;
   whatsappText:string
+  filtrosAplicados: boolean = false;
+  categoriesFiltered: any = [];
+  citiesFiltered: any = [];
 
   constructor(public navCtrl: NavController,
     private alertController: AlertController,
+    public modalCtrl: ModalController,
     public proveedor: ServicioProvider) {
       this.whatsappText = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0AGracias.%0A";
   }
@@ -116,6 +121,57 @@ export class HomePage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  presentModal() {
+    if(this.filtrosAplicados){
+      this.showSplash = true;
+      this.limpiarFiltros();    
+    }else{  
+      const modal = this.modalCtrl.create(ModalSearchPage);
+      modal.onDidDismiss(data => {
+        console.log(data);
+        this.showSplash = true;
+        this.getProperties();
+      });
+      modal.present();
+      this.showSplash = true;
+      }
+  }
+
+  getCitiesFiltered(){
+    if (localStorage.getItem("citiesFiltered") === null) {
+      this.citiesFiltered = [];
+    }else{
+      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
+    }
+  }
+
+  getCategoriesFiltered(){
+    if (localStorage.getItem("categoriesFiltered") === null) {
+      this.categoriesFiltered = [];
+    }else{
+      this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
+    }
+  }
+
+
+
+  limpiarFiltros(){
+    this.citiesFiltered = [];
+    this.categoriesFiltered = [];
+    this.setCitiesFiltered();
+    this.setCategoriesFiltered();
+    this.getProperties();
+  }
+  setCitiesFiltered(){    
+    localStorage.setItem("citiesFiltered", JSON.stringify(this.citiesFiltered))
+    console.log('citiesFiltered',this.citiesFiltered);    
+  }
+
+  setCategoriesFiltered(){    
+    localStorage.setItem("categoriesFiltered", JSON.stringify(this.categoriesFiltered))
+    console.log('categoriesFiltered',this.categoriesFiltered);    
   }
 
 }

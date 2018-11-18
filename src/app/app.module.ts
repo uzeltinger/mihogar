@@ -12,13 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServicioProvider } from '../providers/servicio/servicio';
 import { AgentPropertiesListPage } from '../pages/agent-properties-list/agent-properties-list';
 import { PropertyPage } from '../pages/property/property';
+import { ModalSearchPage } from '../pages/modal-search/modal-search';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    AgentPropertiesListPage,PropertyPage
+    AgentPropertiesListPage,PropertyPage,ModalSearchPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,7 @@ import { PropertyPage } from '../pages/property/property';
     MyApp,
     HomePage,
     ListPage,
-    AgentPropertiesListPage,PropertyPage
+    AgentPropertiesListPage,PropertyPage,ModalSearchPage
   ],
   providers: [
     StatusBar,

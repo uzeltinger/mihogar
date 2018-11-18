@@ -77,40 +77,12 @@
   </ion-infinite-scroll>
 
 </ion-content>
-<!--
 
-  <a target="_blank" href="http://diportal.com.ar/component/osproperty/{{property.ref}}-{{property.pro_alias}}-{{property.id}}.html">
-
-{"id":"498",
-"ref":"268",
-"pro_name":"RAMOS MEJ\u00cdA - DEPARTAMENTO TRIPLEX 4 AMB C\/COCHERA",
-"pro_alias":"depto-triplex-4-amb-c-cochera-249",
-"agent_id":"44",
-"company_id":"1",
-"price":"209000.00",
-"pro_small_desc":"Description Peque\u00f1o",
-"pro_type":"1",
-"isFeatured":"0",
-"lat_add":"-34.64671",
-"long_add":"-58.57358",
-"city":"29782",
-"state":"52",
-"address":"CASTELLI 900",
-"bed_room":"3",
-"bath_room":"1.00",
-"rooms":"4",
-"parking":"0",
-"square_feet":"0.00",
-"p":"0.00",
-"name":"Etchart",
-"user_id":"65",
-"photo":"etchart_57024f31d965a.jpg",
-"published":"1",
-"mobile":"",
-"type_name":"Venta",
-"category_name":"Departamento",
-"category_id":"1",
-"image":"1_20160629_1157196050.jpg",
-"iordering":"0"}
-category_name en type_name
--->
+<div class="boton-buscar">
+    <ion-item text-center>
+        <button class="button-action" ion-button block color="verdeDaniel" (click)="presentModal()">
+            <div *ngIf="!filtrosAplicados">BUSCAR</div>
+            <div *ngIf="filtrosAplicados">LIMPIAR BÚSQUEDA</div>
+        </button>
+    </ion-item>
+</div>

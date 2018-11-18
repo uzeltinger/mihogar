@@ -110,6 +110,7 @@ p.smalltext {
     position: absolute;
     bottom: -24px;
     right: 1rem;
+    z-index: 9;
 }
 .darkbackground .card-content .item-price{
 background: none;
@@ -129,3 +130,26 @@ padding: 0;
 .darkbackground .card-content .item-price .label-md {
     margin: 0;
 }
+.background-black {
+    background: #10191E;
+}
+.boton-buscar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: none;
+    z-index: 10;
+}    
+.boton-buscar .item {
+    background: none;
+}
+.boton-buscar .button-action {
+    padding: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0, 107, 9, 0.65); 
+    font-size: 2rem; 
+    margin-top: 1rem;
+  } 

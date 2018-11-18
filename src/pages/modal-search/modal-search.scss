@@ -1,0 +1,30 @@
+page-modal-search {
+    .boton-buscar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background: none;
+    }    
+    .boton-buscar .item {
+        background: none;
+    }
+    .title {
+        padding: .4rem 0;
+        text-align: center;
+        color: #fff;
+    }
+    .listado {
+        background: #7C0000;
+        height: 200px;
+        overflow-x: scroll;
+        overflow-y: scroll;
+    }
+    .listado .item {
+        background: none;
+        height: 56px;
+    }
+    .listado .item .label {
+        color: #fff;
+    }
+}
