@@ -11,6 +11,7 @@
 .menu-inner .list-md{ 
     border-top: 1px solid #E3F2FD;
 }
+
 .menu-inner .item-md {
     background: #2196F3;
     border-bottom: 1px solid #E3F2FD;
@@ -23,6 +24,10 @@
 }
 .darkbackground {
     background: #263134;
+}
+.darkbackground .item-md {
+    color: fff;
+    background: none;
 }
 .offer-list-card {
     border-radius: 10px;
@@ -62,10 +67,7 @@ ion-spinner * {
     display: flex;
     margin-bottom: 1.6rem;
 }
-.icono {
-    width: 20px;
-    height: 20px;
-}
+
 .icono.habitaciones {
     background: url('/assets/icon/habitaciones.jpg') no-repeat center center;  
     background-size: 100%;  
@@ -84,15 +86,13 @@ ion-spinner * {
 }
 .cantidad {
     font-size: 1.6rem;
-    margin-left: .3rem;
-    margin-right: .5rem;
+    margin-left: 0;
+    margin-right: .8rem;
 }
 p.smalltext {
     font-size: 1.6rem;
 }
-.darkbackground a {
-    color: #E3F2FD;
-}
+
 .darkbackground {
     color: #fff;
 }
@@ -152,4 +152,7 @@ padding: 0;
     background-color: rgba(0, 107, 9, 0.65); 
     font-size: 2rem; 
     margin-top: 1rem;
-  } 
+}
+.text-align-center {
+    text-align: center;
+}

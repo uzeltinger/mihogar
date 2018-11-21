@@ -2,20 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, ToastController, LoadingController } from 'ionic-angular';
 import { AgentPropertiesListPage } from '../agent-properties-list/agent-properties-list';
 import { ServicioProvider } from '../../providers/servicio/servicio';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  MyLocation
-} from '@ionic-native/google-maps';
-/**
- * Generated class for the PropertyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -27,7 +13,6 @@ export class PropertyPage {
   propertyData: any;
   showSplash:boolean = false;
   imagenes: any = [];
-
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -44,16 +29,9 @@ export class PropertyPage {
 
   async ngOnInit() {
     // Since ngOnInit() is executed before `deviceready` event,
-    // you have to wait the event.
-    
-   
+    // you have to wait the event.   
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PropertyPage');
-    // Since ngOnInit() is executed before `deviceready` event,
-    // you have to wait the event.
-  }
   getProperty(id){
   this.proveedor.getProperty(id)
       .subscribe(
@@ -76,17 +54,13 @@ export class PropertyPage {
     });
   }
   
- 
-
-  async showToast(message: string) {
-    let toast = await this.toastCtrl.create({
+  showToast(message: string) {
+    let toast = this.toastCtrl.create({
       message: message,
       duration: 2000,
       position: 'middle'
     });
 
-    toast.present();
+    toast.present(toast);
   }
-
-  
 }
