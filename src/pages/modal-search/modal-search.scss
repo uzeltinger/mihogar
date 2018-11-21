@@ -15,16 +15,36 @@ page-modal-search {
         color: #fff;
     }
     .listado {
-        background: #7C0000;
-        height: 200px;
+        background: #2196F3;
+        height: 110px;
         overflow-x: scroll;
         overflow-y: scroll;
     }
     .listado .item {
         background: none;
-        height: 56px;
     }
     .listado .item .label {
         color: #fff;
+    }
+    .label-md {
+        margin: 3px 8px 3px 0;
+    }
+    .item-md .toggle-md {
+        padding: 4px 8px 4px 16px;
+    }
+    .toggle-md.toggle-checked .toggle-inner {
+        background-color: #00A76C;
+    }
+    .grid {
+        padding: 0;
+    }
+    .col {
+        padding: 0;
+    }
+    .item-md.item-block .item-inner {
+        border: none;
+    }
+    .range-md {
+        padding: 0;
     }
 }

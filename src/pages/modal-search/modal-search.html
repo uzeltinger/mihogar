@@ -18,9 +18,11 @@
   </ion-header>
   
   
-  <ion-content>
-
+  
+ <!--
       <form (ngSubmit)="onSubmitSaveFilters(filterDataForm)" #filterDataForm="ngForm">
+
+       
       <ion-list>
           <ion-item class="ion-item-input-trans">
               <ion-label>Categoría</ion-label>
@@ -40,20 +42,37 @@
               </ion-select>
           </ion-item>
       </ion-list>
-
+   
       <div class="boton-buscar">
           <ion-item text-center>
               <button class="button-action" ion-button block color="verdeDaniel" (click)="dismiss()">APLICAR</button>
           </ion-item>
       </div>
 </form>
+ -->
+ <ion-content class="darkbackground">
+    <ion-grid>
+        <ion-row>
+            <ion-col col-1></ion-col>
+          <ion-col col-4>
+            <button (click)="setType('2')" ion-button block>ALQUILER</button>
+            </ion-col>
+            <ion-col col-1></ion-col>
+            <ion-col col-1></ion-col>
+            <ion-col col-4>
+              <button (click)="setType('1')" ion-button block>VENTA</button>
+              </ion-col>
+              <ion-col col-1></ion-col>
+              </ion-row>
+              </ion-grid>
 
-  <!--
-    <div class="title">RUBROS</div>
+
+
+    <div class="title">TIPO DE PROPIEDAD</div>
     <div class="listado">
     <ion-list>
       <ion-item *ngFor="let category of categories">
-            <ion-label class="font-18">{{category.name}}</ion-label>
+            <ion-label class="font-18">{{category.category_name}}</ion-label>
             <ion-toggle color="verde" (ngModelChange)="toggleCategory(category)" [(ngModel)]="category.isAssigned"></ion-toggle>                
           </ion-item>
     </ion-list>
@@ -62,17 +81,64 @@
     <div class="listado">
         <ion-list>
           <ion-item *ngFor="let city of cities">
-                <ion-label class="font-18">{{city.city}}</ion-label>
+                <ion-label class="font-18">{{city.city_name}}</ion-label>
                 <ion-toggle color="verde" (ngModelChange)="toggleCity(city)" [(ngModel)]="city.isAssigned"></ion-toggle>                
               </ion-item>
         </ion-list>
       </div>
-      <p><br></p>
-  
-      <div class="boton-buscar">
-          <ion-item text-center>
-              <button class="button-action" ion-button block color="verdeDaniel" (click)="dismiss()">APLICAR</button>
-          </ion-item>
-      </div>
-  -->
-  </ion-content>
+      
+      <ion-grid>
+            <ion-row>
+              <ion-col col-6>
+                    <div class="title">AMBIENTES</div>
+
+                    <ion-item>
+                      <ion-label>{{ambientesValue}}</ion-label>
+                      <ion-range min="0" max="10" step="1" snaps="true" [(ngModel)]="ambientesValue"></ion-range>
+                    </ion-item>
+
+
+              </ion-col>
+           
+              <ion-col col-6>
+                    <div class="title">DORMITORIOS</div>
+
+                    <ion-item>
+                      <ion-label>{{dormitoriosValue}}</ion-label>
+                      <ion-range min="0" max="10" step="1" snaps="true"[(ngModel)]="dormitoriosValue"></ion-range>
+                    </ion-item>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+          <div class="title">PRECIO</div>
+
+                             
+                
+                    <ion-item *ngIf="typeSelected==1">
+                      <ion-label>u$s{{priceRangeValue.lower}} - u$s{{priceRangeValue.upper}}</ion-label>
+                      <ion-range dualKnobs="true" min="50000" max="200000" step="1000" [(ngModel)]="priceRangeValue"></ion-range>
+                    </ion-item>               
+                 
+
+                  <ion-item *ngIf="typeSelected==2">
+                    <ion-label>${{alquilerRangeValue.lower}} - ${{alquilerRangeValue.upper}}</ion-label>
+                    <ion-range dualKnobs="true" min="5000" max="20000" step="100" [(ngModel)]="alquilerRangeValue"></ion-range>
+                  </ion-item>
+              
+                
+
+
+              <p><br></p>
+              <p><br></p>
+              <p><br></p>
+
+ 
+  </ion-content>  
+  <div class="boton-buscar">
+                  <ion-item text-center>
+                      <button class="button-action" ion-button block color="verdeDaniel" (click)="dismiss()">APLICAR</button>
+                  </ion-item>
+              </div>
