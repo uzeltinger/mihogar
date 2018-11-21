@@ -13,13 +13,14 @@ import { ServicioProvider } from '../providers/servicio/servicio';
 import { AgentPropertiesListPage } from '../pages/agent-properties-list/agent-properties-list';
 import { PropertyPage } from '../pages/property/property';
 import { ModalSearchPage } from '../pages/modal-search/modal-search';
-
+import { ProbarmapaPage } from '../pages/probarmapa/probarmapa';
+import { GoogleMaps } from '@ionic-native/google-maps';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    AgentPropertiesListPage,PropertyPage,ModalSearchPage
+    AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage
   ],
   imports: [
     BrowserModule,
@@ -31,13 +32,13 @@ import { ModalSearchPage } from '../pages/modal-search/modal-search';
     MyApp,
     HomePage,
     ListPage,
-    AgentPropertiesListPage,PropertyPage,ModalSearchPage
+    AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ServicioProvider
+    ServicioProvider,GoogleMaps
   ]
 })
 export class AppModule {}

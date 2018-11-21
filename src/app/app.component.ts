@@ -4,8 +4,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { ModalSearchPage } from '../pages/modal-search/modal-search';
+//import { ListPage } from '../pages/list/list';
+//import { ModalSearchPage } from '../pages/modal-search/modal-search';
+//import { ProbarmapaPage } from '../pages/probarmapa/probarmapa';
 
 @Component({
   templateUrl: 'app.html'

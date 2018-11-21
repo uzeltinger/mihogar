@@ -1,7 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, ToastController, LoadingController } from 'ionic-angular';
 import { AgentPropertiesListPage } from '../agent-properties-list/agent-properties-list';
 import { ServicioProvider } from '../../providers/servicio/servicio';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  GoogleMapsAnimation,
+  MyLocation,
+  GoogleMapOptions
+} from '@ionic-native/google-maps';
+import { timestamp } from 'rxjs/operators';
 
 @IonicPage()
 @Component({
@@ -9,12 +19,16 @@ import { ServicioProvider } from '../../providers/servicio/servicio';
   templateUrl: 'property.html',
 })
 export class PropertyPage {
+ // @ViewChild('map') mapElement: ElementRef;
   property: any;
   propertyData: any;
   showSplash:boolean = false;
   imagenes: any = [];
+  mapReady: boolean = false;
+  map: GoogleMap;
 
   constructor(public navCtrl: NavController,
+    //public googleMaps: GoogleMaps,
      public navParams: NavParams,
      public loadingCtrl: LoadingController,
      public toastCtrl: ToastController,
@@ -28,8 +42,6 @@ export class PropertyPage {
   }
 
   async ngOnInit() {
-    // Since ngOnInit() is executed before `deviceready` event,
-    // you have to wait the event.   
   }
 
   getProperty(id){
@@ -63,4 +75,51 @@ export class PropertyPage {
 
     toast.present(toast);
   }
+
+  ionViewDidLoad() {
+    //if(!this.platform.is('core')){
+      this.loadMap();
+    //}
+    
+  }
+
+  loadMap() {
+    console.log('this.property.lat_add', this.property.lat_add);
+    console.log('this.property.long_add', this.property.long_add);
+    this.map = GoogleMaps.create('map_property', {
+      camera: {
+        target: {
+          lat: parseFloat(this.property.lat_add),
+          lng: parseFloat(this.property.long_add)
+        },
+        zoom: 15,
+        tilt: 30
+      }
+    });
+    this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
+      //this.mapReady = true;
+      this.addMarkerToMap();
+    });
+  } 
+
+  addMarkerToMap(){
+    console.log('setCenter','setCenter');
+    var center = {"lat": parseFloat(this.property.lat_add), "lng": parseFloat(this.property.long_add)};    
+    this.map.set('center',center);
+    
+    let marker: Marker = this.map.addMarkerSync({
+      title: this.property.city_name + ' - ' + this.property.category_name,
+      icon: 'blue',
+      animation: 'DROP',
+      position: {
+        lat: parseFloat(this.property.lat_add),
+        lng: parseFloat(this.property.long_add)
+      }
+    });
+    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+      alert('clicked');
+    });
+
+  }
+
 }
