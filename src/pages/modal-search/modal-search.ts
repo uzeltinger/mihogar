@@ -1,15 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
-import { FormControl, FormGroup } from '@angular/forms';
-
-
-/**
- * Generated class for the ModalSearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,14 +11,10 @@ export class ModalSearchPage {
 
   categories: any;
   cities: any;
-  //allCategories: any;
-  //allCities: any;
   categoriesFiltered: any = [];
   citiesFiltered: any = [];
   showSplash = true;
-  filtro: any = {'categories':"","cities":""};
-
- 
+  filtro: any = {'categories':"","cities":""}; 
   priceRangeValue = {lower: 50000, upper: 200000};
   alquilerRangeValue = {lower: 5000, upper: 20000};
   dormitoriosValue: number = 0;
@@ -41,20 +28,26 @@ export class ModalSearchPage {
   }
 
   ionViewDidLoad() {
+    //localStorage.clear();
     console.log('ionViewDidLoad ModalSearchPage');
     this.citiesFiltered = [];
     this.categoriesFiltered = [];
-    this.setCitiesFiltered();
-    this.setCategoriesFiltered();
+    //this.setCitiesFiltered();
+    //this.setCategoriesFiltered();
+    this.getCitiesFiltered();
+    this.getCategoriesFiltered();
     this.getCategories();
     this.getCities();
-
+    this.getPriceRangeValue();
+    this.getAlquilerRangeValue();
+    this.getDormitoriosValue();
+    this.getAmbientesValue();
+    this.getTypeSelected();
   }
 
   setType(type){
     this.typeSelected = type;
   }
-
 
   getCities(){
     this.proveedor.getCities()
@@ -64,7 +57,7 @@ export class ModalSearchPage {
         this.cities = data; 
         this.cities.forEach((valor : any) => {
           //console.log('valor.id',valor.city);
-          let a = this.citiesFiltered.indexOf(valor.city);
+          let a = this.citiesFiltered.indexOf(valor.city_id);
           if(a!=-1){            
             valor.isAssigned = true;          
           }else{
@@ -153,7 +146,11 @@ export class ModalSearchPage {
 
     this.setCitiesFiltered();
   }
-
+  
+  changeAmbientes(){}
+  changeDormitorios(){}
+  changeAlquilerPrice(){}
+  changePrice(){}
 
   getCitiesFiltered(){
     if (localStorage.getItem("citiesFiltered") === null) {
@@ -161,6 +158,7 @@ export class ModalSearchPage {
     }else{
       this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
     }
+    console.log('citiesFiltered',this.citiesFiltered);   
   }
 
   getCategoriesFiltered(){
@@ -169,6 +167,7 @@ export class ModalSearchPage {
     }else{
       this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
     }
+    console.log('categoriesFiltered',this.categoriesFiltered);    
   }
 
   setCitiesFiltered(){    
@@ -181,183 +180,60 @@ export class ModalSearchPage {
     console.log('categoriesFiltered',this.categoriesFiltered);    
   }
 
-  dismiss() { 
-    let data = { 'foo': 'bar' };
-    this.viewCtrl.dismiss(data);
-  }
-
-
-
-
-
-
-/*
-  rangeCtrl = new FormControl({value: '66', disabled: true});
-  dualRangeCtrl = new FormControl({value: {lower: 33, upper: 60}, disabled: true});
-
-  rangeForm = new FormGroup({
-    'range': this.rangeCtrl,
-    'dualRange': this.dualRangeCtrl
-  });
-*/
-  
-/*
-  toggleCategoryMULTIPLE(category){
-    if (localStorage.getItem("categoriesFiltered") === null) {
-      this.categoriesFiltered = [];
+  getPriceRangeValue(){
+    if (localStorage.getItem("priceRangeValue") === null) {
+      this.priceRangeValue = {lower: 50000, upper: 200000};
     }else{
-      this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
+      this.priceRangeValue = JSON.parse(localStorage.getItem("priceRangeValue"));
     }
-    if(category.isAssigned){
-      let existe:boolean = false;
-      this.categoriesFiltered.forEach((valor : any) => {
-        if(valor==category.id){
-          existe = true;
-        }        
-      });
-      if(!existe){
-        this.categoriesFiltered.push(category.id);
-      }
-    }else{
-      let newCategoriesFiltered = [];
-      this.categoriesFiltered.forEach((valor : any) => {
-        if(valor!=category.id){
-          newCategoriesFiltered.push(valor);
-        }
-      });
-      this.categoriesFiltered = newCategoriesFiltered;
-    }
-    this.setCategoriesFiltered();
+    console.log('priceRangeValue',this.priceRangeValue);   
   }
-
-  toggleCategory(category){  
-    console.log('togglecategory',category);
-    if (localStorage.getItem("categoriesFiltered") === null) {
-      this.categoriesFiltered = [];
+  getAlquilerRangeValue(){
+    if (localStorage.getItem("alquilerRangeValue") === null) {
+      this.alquilerRangeValue = {lower: 5000, upper: 20000};
     }else{
-      this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
-    }    
-    this.categoriesFiltered = [];
-    this.categories.forEach((valor : any) => {
-      if(valor.id!=category.id){
-        console.log('valor',valor);
-        valor.isAssigned = false;         
-      }           
-    });    
-    if(category.isAssigned){
-      console.log('category.isAssigned',category.isAssigned);
-      this.categoriesFiltered = [];     
+      this.alquilerRangeValue = JSON.parse(localStorage.getItem("alquilerRangeValue"));
     }
-    if(!category.isAssigned){
-      console.log('!category.isAssigned',category.isAssigned);
-      this.categoriesFiltered.push(category.id);   
-    }
-    this.setCategoriesFiltered();
+    console.log('alquilerRangeValue',this.alquilerRangeValue);   
   }
-
-  toggleCity(city){  
-    console.log('toggleCity',city);
-    if (localStorage.getItem("citiesFiltered") === null) {
-      this.citiesFiltered = [];
+  getDormitoriosValue(){
+    if (localStorage.getItem("dormitoriosValue") === null) {
+      this.dormitoriosValue = 0;
     }else{
-      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
-    }    
-    this.citiesFiltered = [];
-    this.cities.forEach((valor : any) => {
-      if(valor.city!=city.city){
-        console.log('valor city ',valor.city + " - " + city.city);
-        valor.isAssigned = false;         
-      }
-    });
-
-    if(city.isAssigned){
-      console.log('city.isAssigned',city.isAssigned);   
-      this.citiesFiltered = [];        
+      this.dormitoriosValue = JSON.parse(localStorage.getItem("dormitoriosValue"));
     }
-    if(!city.isAssigned){
-      console.log('!city.isAssigned',city.isAssigned);
-      this.citiesFiltered.push(city.city);   
-    }
-
-    this.setCitiesFiltered();
+    console.log('dormitoriosValue',this.dormitoriosValue);   
   }
-
-  toggleCityMULTIPLES(city){  
-    if (localStorage.getItem("citiesFiltered") === null) {
-      this.citiesFiltered = [];
+  getAmbientesValue(){
+    if (localStorage.getItem("ambientesValue") === null) {
+      this.ambientesValue = 0;
     }else{
-      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
+      this.ambientesValue = JSON.parse(localStorage.getItem("ambientesValue"));
     }
-    if(city.isAssigned){
-      let existe:boolean = false;
-      this.citiesFiltered.forEach((valor : any) => {
-        if(valor==city.city){
-          existe = true;
-        }        
-      });
-      if(!existe){
-        this.citiesFiltered.push(city.city);
-      }
+    console.log('ambientesValue',this.ambientesValue);   
+  }
+  getTypeSelected(){
+    if (localStorage.getItem("typeSelected") === null) {
+      this.typeSelected = 0;
     }else{
-      let newCitiesFiltered = [];
-      this.citiesFiltered.forEach((valor : any) => {
-        if(valor!=city.city){
-          newCitiesFiltered.push(valor);
-        }
-      });
-      this.citiesFiltered = newCitiesFiltered;
+      this.typeSelected = JSON.parse(localStorage.getItem("typeSelected"));
     }
-    this.setCitiesFiltered();
-  }
-
-  getCitiesFiltered(){
-    if (localStorage.getItem("citiesFiltered") === null) {
-      this.citiesFiltered = [];
-    }else{
-      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
-    }
-  }
-
-  getCategoriesFiltered(){
-    if (localStorage.getItem("categoriesFiltered") === null) {
-      this.categoriesFiltered = [];
-    }else{
-      this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
-    }
-  }
-
-  setCitiesFiltered(){    
-    localStorage.setItem("citiesFiltered", JSON.stringify(this.citiesFiltered))
-    console.log('citiesFiltered',this.citiesFiltered);    
-  }
-
-  setCategoriesFiltered(){    
-    localStorage.setItem("categoriesFiltered", JSON.stringify(this.categoriesFiltered))
-    console.log('categoriesFiltered',this.categoriesFiltered);    
+    console.log('typeSelected',this.typeSelected);   
   }
 
   dismiss() { 
     let data = { 'foo': 'bar' };
+    console.log('priceRangeValue',this.priceRangeValue);
+    console.log('alquilerRangeValue',this.alquilerRangeValue);
+    console.log('dormitoriosValue',this.dormitoriosValue);
+    console.log('ambientesValue',this.ambientesValue);
+    console.log('typeSelected',this.typeSelected);
+    localStorage.setItem("priceRangeValue", JSON.stringify(this.priceRangeValue));
+    localStorage.setItem("alquilerRangeValue", JSON.stringify(this.alquilerRangeValue));
+    localStorage.setItem("dormitoriosValue", JSON.stringify(this.dormitoriosValue));
+    localStorage.setItem("ambientesValue", JSON.stringify(this.ambientesValue));
+    localStorage.setItem("typeSelected", JSON.stringify(this.typeSelected));
     this.viewCtrl.dismiss(data);
   }
-
-  onSubmitSaveFilters(form){
-    console.log('form',form);
-    let datos = form.form.value;
-    console.log('datos',datos);
-
-    this.citiesFiltered = datos.cities;
-    this.categoriesFiltered = datos.categories;
-    this.setCitiesFiltered();
-    this.setCategoriesFiltered();
-
-    console.log('filtro',this.filtro);
-    console.log('cities',this.cities);
-    console.log('allCategories',this.allCategories);
-    console.log('allCities',this.allCities);
-    console.log('categoriesFiltered',this.categoriesFiltered);
-  }
-
-  */
-  
+ 
 }

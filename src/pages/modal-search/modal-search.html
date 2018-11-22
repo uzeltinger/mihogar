@@ -50,17 +50,19 @@
       </div>
 </form>
  -->
- <ion-content class="darkbackground">
+ <ion-content class="darkbackground padding-8">
     <ion-grid>
         <ion-row>
             <ion-col col-1></ion-col>
           <ion-col col-4>
-            <button (click)="setType('2')" ion-button block>ALQUILER</button>
+            <button [ngClass]="{'active':typeSelected==2}" 
+            (click)="setType('2')" ion-button block>ALQUILER</button>
             </ion-col>
             <ion-col col-1></ion-col>
             <ion-col col-1></ion-col>
             <ion-col col-4>
-              <button (click)="setType('1')" ion-button block>VENTA</button>
+              <button [ngClass]="{'active':typeSelected==1}" 
+              (click)="setType('1')" ion-button block>VENTA</button>
               </ion-col>
               <ion-col col-1></ion-col>
               </ion-row>
@@ -92,9 +94,9 @@
               <ion-col col-6>
                     <div class="title">AMBIENTES</div>
 
-                    <ion-item>
+                    <ion-item class="ambientes">
                       <ion-label>{{ambientesValue}}</ion-label>
-                      <ion-range min="0" max="10" step="1" snaps="true" [(ngModel)]="ambientesValue"></ion-range>
+                      <ion-range min="0" max="9" step="1" snaps="true" [(ngModel)]="ambientesValue" (ionChange)="changeAmbientes()"></ion-range>
                     </ion-item>
 
 
@@ -103,9 +105,9 @@
               <ion-col col-6>
                     <div class="title">DORMITORIOS</div>
 
-                    <ion-item>
+                    <ion-item class="dormitorios">
                       <ion-label>{{dormitoriosValue}}</ion-label>
-                      <ion-range min="0" max="10" step="1" snaps="true"[(ngModel)]="dormitoriosValue"></ion-range>
+                      <ion-range min="0" max="9" step="1" snaps="true"[(ngModel)]="dormitoriosValue" (ionChange)="changeDormitorios()"></ion-range>
                     </ion-item>
 
               </ion-col>
@@ -115,17 +117,15 @@
 
           <div class="title">PRECIO</div>
 
-                             
-                
-                    <ion-item *ngIf="typeSelected==1">
+                    <ion-item class="padding-16" *ngIf="typeSelected==1">
                       <ion-label>u$s{{priceRangeValue.lower}} - u$s{{priceRangeValue.upper}}</ion-label>
-                      <ion-range dualKnobs="true" min="50000" max="200000" step="1000" [(ngModel)]="priceRangeValue"></ion-range>
+                      <ion-range dualKnobs="true" min="50000" max="200000" step="1000" [(ngModel)]="priceRangeValue"  (ionChange)="changePrice()"></ion-range>
                     </ion-item>               
                  
 
-                  <ion-item *ngIf="typeSelected==2">
+                  <ion-item class="padding-16" *ngIf="typeSelected==2">
                     <ion-label>${{alquilerRangeValue.lower}} - ${{alquilerRangeValue.upper}}</ion-label>
-                    <ion-range dualKnobs="true" min="5000" max="20000" step="100" [(ngModel)]="alquilerRangeValue"></ion-range>
+                    <ion-range dualKnobs="true" min="5000" max="20000" step="100" [(ngModel)]="alquilerRangeValue" (ionChange)="changeAlquilerPrice()"></ion-range>
                   </ion-item>
               
                 

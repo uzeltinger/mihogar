@@ -46,5 +46,24 @@ page-modal-search {
     }
     .range-md {
         padding: 0;
+        
+    }
+    .item.ambientes .item-inner .input-wrapper, .item.dormitorios .item-inner .input-wrapper {
+        
+    }
+    .item.ambientes .item-inner .input-wrapper .label-md, .item.dormitorios .item-inner .input-wrapper .label-md {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .padding-8 .scroll-content {
+        padding: 8px;
+    }
+    
+    .padding-16.item-md.item-block .item-inner  {
+         padding-right: 16px;
+    }
+
+    button.active {
+        background-color: #00A76C!important;
     }
 }
