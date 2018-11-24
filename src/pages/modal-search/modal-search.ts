@@ -20,7 +20,7 @@ export class ModalSearchPage {
   alquilerRangeValue = { lower: 5000, upper: 20000 };
   dormitoriosValue: number = 0;
   ambientesValue: number = 0;
-  typeSelected: number = 2;
+  typeSelected: number = 0;
 
   constructor(public navCtrl: NavController,
     public proveedor: ServicioProvider,

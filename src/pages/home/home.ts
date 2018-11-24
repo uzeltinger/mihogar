@@ -79,8 +79,6 @@ export class HomePage {
       )
   }
 
-
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
     this.obtenerFiltrosAplicados();
@@ -156,8 +154,8 @@ export class HomePage {
       "type": 0,
       "ambientes": null,
       "dormitorios": null,
-      "priceRange": {"lower":null, "upper":null},
-      "alquilerRange": {"lower":null, "upper":null}
+      "priceRange": {"lower":0, "upper":0},
+      "alquilerRange": {"lower":0, "upper":0}
     };
     if (this.citiesFiltered != null && this.categoriesFiltered.length > 0) {
       sendData.cities = this.citiesFiltered;
@@ -189,6 +187,8 @@ export class HomePage {
         (data) => {
           console.log('getProperties', data);
           this.properties = data;
+          console.log('getProperties total', this.properties.lenght);
+
           if (this.properties.length < this.offersLimit) {
             this.offersShowAll = true;
           }
@@ -267,6 +267,7 @@ export class HomePage {
         break;
 
     }
+    this.items = [];
     this.actualizarFiltros();
     this.getProperties();
   }
@@ -320,10 +321,7 @@ export class HomePage {
   }
 
   presentModal() {
-    /*if(this.filtrosAplicados){
-      this.showSplash = true;
-      this.limpiarFiltros();    
-    }else{  */
+    this.items = [];
     const modal = this.modalCtrl.create(ModalSearchPage);
     modal.onDidDismiss(data => {
       console.log(data);
@@ -332,8 +330,7 @@ export class HomePage {
       this.getProperties();
     });
     modal.present();
-    this.showSplash = true;
-    /*}*/
+    this.showSplash = true;    
   }
 
   getCitiesFiltered() {
