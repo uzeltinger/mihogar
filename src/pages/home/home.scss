@@ -1,3 +1,40 @@
 page-home {
-    
+    .filtro {
+        border-radius: 4px;
+        color: #fff;
+        background-color: #1565C0;    
+        padding: 5px 8px;
+        text-align: center;
+        display: inline-block;
+        min-width: 10px;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        white-space: nowrap;
+        vertical-align: baseline;
+        margin-left: 1rem;
+    }
+    .filtro span.cerrar {
+        border-radius: 50%;
+        background: #fff;
+        color: #1565C0;
+        width: 12px;
+        display: inline-block;
+        font-weight: 600;
+        margin-left: 1rem;
+    }
+    .pattern1 {
+        min-width: 50px;
+    }
+    .properties-list-filtros {
+        display: inline-flex;
+        margin-right: 1rem;
+        margin-top: 1rem;
+    }
+    .offer-list-card {
+        margin-top: 0px;
+    }
+    .filtrosNoAplicados {
+        margin-top: 10px;
+    }
 }

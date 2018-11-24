@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { PropertiesPage } from '../pages/properties/properties';
 //import { ListPage } from '../pages/list/list';
 //import { ModalSearchPage } from '../pages/modal-search/modal-search';
 //import { ProbarmapaPage } from '../pages/probarmapa/probarmapa';
@@ -21,12 +22,13 @@ export class MyApp {
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen) {
+      localStorage.clear();
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Inicio', component: HomePage },
-      { title: 'Propiedades', component: HomePage },
+      { title: 'Propiedades', component: PropertiesPage },
       { title: 'Buscar', component: HomePage }
     ];
 

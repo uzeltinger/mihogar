@@ -15,7 +15,7 @@ export class ServicioProvider {
   apiUrl: string = 'http://diportal.com.ar/';
   httpOptions: any = {};
   constructor(public httpClient: HttpClient) {
-    console.log('Hello ProvidersServicioProvider Provider');
+    //console.log('Hello ProvidersServicioProvider Provider');
   }
   getProperties(data) {
     this.httpOptions = this.getHeader();
@@ -31,7 +31,7 @@ export class ServicioProvider {
     }
     
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties'+params;
-    console.log('url',url);
+    //console.log('url',url);
     return this.httpClient.get(url);
   }
   getAgentProperties(agent_id) {
@@ -43,12 +43,12 @@ export class ServicioProvider {
     this.httpOptions = this.getHeader();
     let params: string = "";    
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_property&id='+id;
-    console.log('url',url);
+    //console.log('url',url);
     return this.httpClient.get(url);
   }
 
   increaseWhatsappClick(property: any): Observable<any> {
-    console.log('offer', property);
+    //console.log('offer', property);
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>(this.apiUrl + "index.php?option=com_osproperty&task=api_whatsappaddclick", property.id, this.httpOptions)
       .pipe(
