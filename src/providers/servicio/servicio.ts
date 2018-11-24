@@ -21,17 +21,38 @@ export class ServicioProvider {
     this.httpOptions = this.getHeader();
     let params: string = "";
     if(data.limit){
-      params = params + "&limmit="+data.limit;
+      params = params + "&limit="+data.limit;
     }
     if(data.limitstart){
       params = params + "&limitstart="+data.limitstart;
     }
     if(data.isFeatured){
       params = params + "&isFeatured="+data.isFeatured;
+    }    
+    if(data.cities){
+      params = params + "&cities="+data.cities;
+    }
+    if(data.categories){
+      params = params + "&categories="+data.categories;
+    }
+    if(data.type){
+      params = params + "&type="+data.type;
+    }
+    if(data.ambientes){
+      params = params + "&ambientes="+data.ambientes;
+    }
+    if(data.dormitorios){
+      params = params + "&dormitorios="+data.dormitorios;
+    }
+    if(data.priceRange){
+      params = params + "&priceRange="+data.priceRange.lower+"-"+data.priceRange.upper;
+    }
+    if(data.alquilerRange){
+      params = params + "&alquilerRange="+data.alquilerRange.lower+"-"+data.alquilerRange.upper;
     }
     
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties'+params;
-    //console.log('url',url);
+    console.log('url',url);
     return this.httpClient.get(url);
   }
   getAgentProperties(agent_id) {

@@ -147,7 +147,43 @@ export class HomePage {
   getProperties() {
     this.showSplash = true;
     //let sendData = {"cities":this.citiesFiltered,"categories":this.categoriesFiltered,"latitude":this.latitude,"longitude":this.longitude,"limit":this.offersLimit,"limitstart": this.offersLimitStart};
-    let sendData = { "limit": this.offersLimit, "limitstart": this.offersLimitStart, "isFeatured": 1 };
+    let sendData = {
+      "limit": this.offersLimit,
+      "limitstart": this.offersLimitStart,
+      "isFeatured": 1,
+      "cities": null,
+      "categories": null,
+      "type": 0,
+      "ambientes": null,
+      "dormitorios": null,
+      "priceRange": {"lower":null, "upper":null},
+      "alquilerRange": {"lower":null, "upper":null}
+    };
+    if (this.citiesFiltered != null && this.categoriesFiltered.length > 0) {
+      sendData.cities = this.citiesFiltered;
+    }
+    if (this.categoriesFiltered != null && this.categoriesFiltered.length > 0) {
+      sendData.categories = this.categoriesFiltered;
+    }
+    if (this.typeSelected != null && this.typeSelected > 0) {
+      sendData.type = this.typeSelected;
+    }
+    if (this.ambientesValue != null && this.ambientesValue > 0) {
+      sendData.ambientes = this.ambientesValue;
+    }
+    if (this.dormitoriosValue != null && this.dormitoriosValue > 0) {
+      sendData.dormitorios = this.dormitoriosValue;
+    }
+    if(this.priceRangeValueApplied){
+      sendData.priceRange.lower = this.priceRangeValue.lower;
+      sendData.priceRange.upper = this.priceRangeValue.upper;
+    }
+    if(this.alquilerRangeValueApplied){
+      sendData.alquilerRange.lower = this.alquilerRangeValue.lower;
+      sendData.alquilerRange.upper = this.alquilerRangeValue.upper;
+    }
+    console.log('sendData', sendData);
+
     this.proveedor.getProperties(sendData)
       .subscribe(
         (data) => {
