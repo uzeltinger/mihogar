@@ -8,6 +8,7 @@ export class SessionProvider {
   ciudades: any = [];
   ciudadesById: any = [];
   categoriasById: any = [];
+  conectadoAinternet: boolean = false;
 
   constructor(public http: HttpClient) {
     //console.log('Hello SessionProvider Provider');
@@ -41,5 +42,12 @@ export class SessionProvider {
   }
   getCategoriasById(){
     return this.categoriasById;
+  }
+  setConectadoAinternet(conectadoAinternet) {
+    console.log('ProveedorProvider setConectadoAinternet', conectadoAinternet);
+    this.conectadoAinternet = conectadoAinternet;
+  }
+  getConectadoAinternet() {
+    return this.conectadoAinternet;
   }
 }

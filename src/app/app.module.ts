@@ -5,7 +5,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-
+import { Network } from '@ionic-native/network';
+import { Toast } from '@ionic-native/toast';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,7 +43,7 @@ import { SessionProvider } from '../providers/session/session';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicioProvider,GoogleMaps,
-    SessionProvider
+    SessionProvider,Network,Toast
   ]
 })
 export class AppModule {}
