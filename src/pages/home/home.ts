@@ -94,6 +94,7 @@ export class HomePage {
     this.getDormitoriosValue();
     this.getAmbientesValue();
     this.getTypeSelected();
+    this.filtrosAplicados = false;
     this.priceRangeValueApplied = false;
     this.alquilerRangeValueApplied = false;
     /*
@@ -268,7 +269,9 @@ export class HomePage {
 
     }
     this.items = [];
+    this.offersShowAll = false;
     this.actualizarFiltros();
+    this.obtenerFiltrosAplicados();
     this.getProperties();
   }
 
@@ -323,6 +326,7 @@ export class HomePage {
 
   presentModal() {
     this.items = [];
+    this.offersShowAll = false;
     const modal = this.modalCtrl.create(ModalSearchPage);
     modal.onDidDismiss(data => {
       console.log(data);

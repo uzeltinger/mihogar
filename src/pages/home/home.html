@@ -13,9 +13,8 @@
   </div>
 </div>
 
-<ion-content class="ion-content-1rem darkbackground">
-
-  <ion-scroll scrollX="true" style="height: 50px" *ngIf="filtrosAplicados">
+<div class="topfilters" *ngIf="filtrosAplicados">
+  <ion-scroll scrollX="true" style="height: 50px">
     <div style="height: 50px;" class="pattern1">
       <div class="properties-list-filtros">
         <div class="filtro" *ngIf="typeSelected" (click)="eliminarFiltro('typeSelected',typeSelected)">
@@ -49,7 +48,12 @@
       </div>
     </div>
   </ion-scroll>
+</div>
+<ion-content class="ion-content-1rem darkbackground">
 
+
+
+  <div class="filtrosAplicados" *ngIf="filtrosAplicados"></div>
   <div class="filtrosNoAplicados" *ngIf="!filtrosAplicados"></div>
 
   <ion-card *ngFor="let property of items" class="offer-list-card">

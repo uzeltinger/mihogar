@@ -37,4 +37,15 @@ page-home {
     .filtrosNoAplicados {
         margin-top: 10px;
     }
+    .filtrosAplicados {
+        height: 50px;;
+    }
+    .topfilters{
+        position: absolute;
+        top: 56px;
+        position: fixed;
+        z-index: 10;
+        width: 100%;
+        background: #263134;
+    }
 }
