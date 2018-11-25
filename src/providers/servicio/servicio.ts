@@ -2,22 +2,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
+import { SessionProvider } from '../session/session';
 
-/*
-  Generated class for the ProvidersServicioProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class ServicioProvider {
   //apiUrl: string = 'http://diportal.local/';
   apiUrl: string = 'http://diportal.com.ar/';
   httpOptions: any = {};
-  constructor(public httpClient: HttpClient) {
+  constructor(public sessionProvider: SessionProvider,
+    public httpClient: HttpClient) {
     //console.log('Hello ProvidersServicioProvider Provider');
   }
-  getProperties(data) {
+  getProperties(data) {    
     this.httpOptions = this.getHeader();
     let params: string = "";
     if(data.limit){
@@ -54,6 +50,13 @@ export class ServicioProvider {
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties'+params;
     console.log('url',url);
     return this.httpClient.get(url);
+
+    if(this.sessionProvider.getConectadoAinternet()==true){   
+
+    }else{
+
+    }
+    
   }
   getAgentProperties(agent_id) {
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties&agent_id='+agent_id;

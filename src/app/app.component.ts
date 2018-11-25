@@ -44,13 +44,14 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      //this.statusBar.styleDefault();
       
+      this.listenConnection();
       if (this.platform.is('android')) {
         this.statusBar.styleBlackOpaque();
         this.statusBar.backgroundColorByHexString('#1565C0');
         this.statusBar.show();
+        this.splashScreen.hide();
       }
 
     });
@@ -61,6 +62,7 @@ export class MyApp {
     if (this.network.type == 'none') {
       this.sessionProvider.setConectadoAinternet(false);
       console.log('this.network.type es == none');
+      this.showToast('Dispositivo desconectado. Por favor verifique su conección a internet!');
     } else {
       this.sessionProvider.setConectadoAinternet(true);
     }
@@ -90,7 +92,7 @@ export class MyApp {
     if (this.platform.is('android')) {
       this.toast.show(text, duration, position).subscribe(
         toast => {
-          console.log('line: 109  toast this.userInfo.first_name ', this.userInfo.first_name);
+          console.log('line: 109  toast this.userInfo.first_name ', '');
         }
       );
     } else {

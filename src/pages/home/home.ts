@@ -216,8 +216,12 @@ export class HomePage {
         (error) => {
           console.log('error', error);
           this.showSplash = false;
-
-          this.showAlert('Ocurrió un error', error);
+          if(error.status==0){
+            this.showAlert('Ocurrió un error', 'UPS! Parece que no hay conexión a internet.');
+          }else{
+            this.showAlert('Ocurrió un error', error.message);
+          }
+          
         }
       )
   }
