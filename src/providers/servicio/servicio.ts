@@ -11,8 +11,8 @@ import { catchError } from 'rxjs/operators';
 */
 @Injectable()
 export class ServicioProvider {
-  //apiUrl: string = 'http://diportal.local/';
-  apiUrl: string = 'http://diportal.com.ar/';
+  apiUrl: string = 'http://diportal.local/';
+  //apiUrl: string = 'http://diportal.com.ar/';
   httpOptions: any = {};
   constructor(public httpClient: HttpClient) {
     //console.log('Hello ProvidersServicioProvider Provider');

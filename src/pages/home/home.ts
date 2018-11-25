@@ -142,8 +142,7 @@ export class HomePage {
     }
   }
 
-  getProperties() {
-    this.showSplash = true;
+  getProperties() {    
     //let sendData = {"cities":this.citiesFiltered,"categories":this.categoriesFiltered,"latitude":this.latitude,"longitude":this.longitude,"limit":this.offersLimit,"limitstart": this.offersLimitStart};
     let sendData = {
       "limit": this.offersLimit,
@@ -225,6 +224,7 @@ export class HomePage {
   eliminarFiltro(tipo: string, objeto: any) {
     console.log('tipo', tipo);
     console.log('objeto', objeto);
+    this.showSplash = true;
     switch (tipo) {
 
       case 'city':
@@ -290,6 +290,7 @@ export class HomePage {
     return new Promise((resolve) => {
       this.offersLimitStart += this.offersLimit;
       console.log('this.offersLimitStart', this.offersLimitStart);
+      console.log('this.offersShowAll', this.offersShowAll);
       if (!this.offersShowAll) {
         this.getProperties();
       }
