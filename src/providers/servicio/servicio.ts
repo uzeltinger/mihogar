@@ -11,6 +11,12 @@ export class ServicioProvider {
   constructor(public httpClient: HttpClient) {
     //console.log('Hello ProvidersServicioProvider Provider');
   }
+  getPropertiesWhatsapp(){
+    this.httpOptions = this.getHeader();
+    let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties_whatsapp';
+    console.log('url',url);
+    return this.httpClient.get(url);
+  }
   getProperties(data) {    
     this.httpOptions = this.getHeader();
     let params: string = "";

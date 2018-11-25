@@ -13,13 +13,49 @@
   </div>
 </div>
 
+<div class="topfilters" *ngIf="filtrosAplicados">
+  <ion-scroll scrollX="true" style="height: 50px">
+    <div style="height: 50px;" class="pattern1">
+      <div class="properties-list-filtros">
+        <div class="filtro" *ngIf="typeSelected" (click)="eliminarFiltro('typeSelected',typeSelected)">
+          <span *ngIf="typeSelected==3">Alquiler</span> <span *ngIf="typeSelected==1">Venta</span> <span class="cerrar">
+            -</span>
+        </div>
+        <div class="filtro" *ngFor="let city of citiesFiltered" (click)="eliminarFiltro('city',city)">
+          <span>{{ciudadesById[city].city_name}}</span> <span class="cerrar"> -</span>
+        </div>
+        <div class="filtro" *ngFor="let category of categoriesFiltered" (click)="eliminarFiltro('category',category)">
+          <span>{{categoriasById[category].category_name}}</span> <span class="cerrar"> -</span>
+        </div>
+        <div class="filtro" *ngIf="ambientesValue" (click)="eliminarFiltro('ambientesValue',ambientesValue)">
+          <span>{{ambientesValue}}</span> ambiente<span *ngIf="ambientesValue>1">s</span> <span class="cerrar"> -</span>
+        </div>
+        <div class="filtro" *ngIf="dormitoriosValue" (click)="eliminarFiltro('dormitoriosValue',dormitoriosValue)">
+          <span>{{dormitoriosValue}}</span> dormitorio<span *ngIf="dormitoriosValue>1">s</span> <span class="cerrar"> -</span>
+        </div>
+        <div class="filtro" *ngIf="priceRangeValueApplied" (click)="eliminarFiltro('priceRangeValue',priceRangeValue)">
+          <span *ngIf="priceRangeValue.lower!=50000 && priceRangeValue.upper==200000">desde</span>
+          <span *ngIf="priceRangeValue.lower!=50000">u$s{{priceRangeValue.lower}}</span>
+          <span *ngIf="priceRangeValue.upper!=200000"> hasta </span>
+          <span *ngIf="priceRangeValue.upper!=200000">u$s{{priceRangeValue.upper}}</span> <span class="cerrar"> -</span>
+        </div>
+        <div class="filtro" *ngIf="alquilerRangeValueApplied" (click)="eliminarFiltro('alquilerRangeValue',alquilerRangeValue)">
+          <span *ngIf="alquilerRangeValue.lower!=50000 && alquilerRangeValue.upper==200000">desde</span>
+          <span *ngIf="alquilerRangeValue.lower!=50000">u$s{{alquilerRangeValue.lower}}</span>
+          <span *ngIf="alquilerRangeValue.upper!=200000"> hasta </span>
+          <span *ngIf="alquilerRangeValue.upper!=200000">u$s{{alquilerRangeValue.upper}}</span> <span class="cerrar"> -</span>
+        </div>
+      </div>
+    </div>
+  </ion-scroll>
+</div>
 <ion-content class="ion-content-1rem darkbackground">
+
+  <div class="filtrosAplicados" *ngIf="filtrosAplicados"></div>
+  <div class="filtrosNoAplicados" *ngIf="!filtrosAplicados"></div>
 
   <ion-card *ngFor="let property of items" class="offer-list-card">
 
-    <!--<ion-card-header>
-        <a (click)="navToPropertyPage($event, property)">      {{property.category_name}} {property.type_name}}      </a>
-    </ion-card-header>-->
     <div class="offer-list-card-img">
 
       <a (click)="navToPropertyPage($event, property)">
@@ -38,24 +74,11 @@
       <ion-card-title>
         {{property.city_name}}
       </ion-card-title>
-      <!--
-        <div class="offer-list-title text-uppercase">{{property.pro_name}}</div>
-      <div class="list-icons">
-        <span *ngIf="property.bed_room>0" class="icono habitaciones"></span><span *ngIf="property.bed_room>0" class="cantidad">{{property.bed_room}} habs</span>
-        <span *ngIf="property.bath_room>0" class="icono banios"></span><span *ngIf="property.bath_room>0" class="cantidad">{{property.bath_room}} baño<span *ngIf="property.bath_room>1">s</span></span>
-        <span *ngIf="property.square_feet>0" class="icono area"></span><span *ngIf="property.square_feet>0" class="cantidad">{{property.square_feet}}m2</span>  
-        <span *ngIf="property.parking>0" class="icono garage"></span><span *ngIf="property.parking>0" class="cantidad">{{property.parking}}</span>      
-      </div>-->
-      <!--<ion-icon name="heart"></ion-icon>  active -->
-      <!--<ion-icon name="heart" isActive="false"></ion-icon> <span class="cantidad">2</span>        inactive -->
-      <!--<p class="smalltext">
-          Agente: <a (click)="navToAgentPropertiesListPage($event, property)">{{property.agent_name}}</a>
-        </p>-->
-      
+
       <p>{{property.category_name}}</p>
       <ion-item class="item-price">
-        
-          <span *ngIf="property.rooms>0">{{property.rooms}} Ambientes</span>
+
+        <span *ngIf="property.rooms>0">{{property.rooms}} Ambientes</span>
 
         <ion-badge item-end class="badge-price" *ngIf="property.price>0">
           <span>{{property.moneda}} {{property.price}}</span>
@@ -75,10 +98,9 @@
 </ion-content>
 
 <div class="boton-buscar">
-    <ion-item text-center>
-        <button class="button-action" ion-button block color="verdeDaniel" (click)="presentModal()">
-            <div *ngIf="!filtrosAplicados">BUSCAR</div>
-            <div *ngIf="filtrosAplicados">LIMPIAR BÚSQUEDA</div>
-        </button>
-    </ion-item>
+  <ion-item text-center>
+    <button class="button-action" ion-button block color="verdeDaniel" (click)="presentModal()">
+      <div>BUSCAR</div>
+    </button>
+  </ion-item>
 </div>

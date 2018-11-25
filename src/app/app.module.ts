@@ -19,13 +19,15 @@ import { ProbarmapaPage } from '../pages/probarmapa/probarmapa';
 import { PropertiesPage } from '../pages/properties/properties';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { SessionProvider } from '../providers/session/session';
+import { WhatsappPropertiesListPage } from '../pages/whatsapp-properties-list/whatsapp-properties-list';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage
+    AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
+    WhatsappPropertiesListPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { SessionProvider } from '../providers/session/session';
     MyApp,
     HomePage,
     ListPage,
-    AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage
+    AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
+    WhatsappPropertiesListPage
   ],
   providers: [
     StatusBar,

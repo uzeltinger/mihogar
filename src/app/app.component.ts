@@ -8,6 +8,7 @@ import { PropertiesPage } from '../pages/properties/properties';
 import { SessionProvider } from '../providers/session/session';
 import { Toast } from '@ionic-native/toast';
 import { HeaderColor } from '@ionic-native/header-color';
+import { WhatsappPropertiesListPage } from '../pages/whatsapp-properties-list/whatsapp-properties-list';
 //import { ListPage } from '../pages/list/list';
 //import { ModalSearchPage } from '../pages/modal-search/modal-search';
 //import { ProbarmapaPage } from '../pages/probarmapa/probarmapa';
@@ -36,8 +37,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Inicio', component: HomePage },
-      { title: 'Propiedades', component: HomePage },
-      { title: 'Buscar', component: HomePage }
+      { title: 'Propiedades', component: PropertiesPage }
     ];
 
   }
@@ -47,7 +47,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       //this.statusBar.styleDefault();
-      this.headerColor.tint('#1565C0');
+      this.headerColor.tint('#2196F3');
       this.listenConnection();
       if (this.platform.is('android')) {
         this.statusBar.styleBlackOpaque();

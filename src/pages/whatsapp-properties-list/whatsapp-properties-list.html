@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Propiedades y whatsapps acumulados</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-content>
+
+    <ion-item-group *ngFor="let property of properties">
+
+      <ion-item-divider *ngIf="property.lastAgentId != property.agent_id" color="dark">{{property.agent_name}}
+
+          <p item-end> 
+              <ion-badge item-end>{{agentTotals[property.agent_id].totalPropiedades}}</ion-badge>
+            <ion-badge item-end color="verdeWhatsapp">{{agentTotals[property.agent_id].totalWhatsapps}}</ion-badge> </p>
+      </ion-item-divider>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+            <img src="http://diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{property.image}}" />
+        </ion-thumbnail>
+        <p>Ref: {{property.ref}}</p>
+        <p>{{property.pro_name}}</p>
+        <ion-badge item-end color="verdeWhatsapp">{{property.total_pro_id}}</ion-badge>
+      </ion-item>
+
+    </ion-item-group>
+  </ion-content>
+
+</ion-content>

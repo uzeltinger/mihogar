@@ -1,51 +1,24 @@
 page-home {
-    .filtro {
-        border-radius: 4px;
-        color: #fff;
-        background-color: #1565C0;    
-        padding: 5px 8px;
+    .bg-image{
+        background: url('../assets/imgs/inicioFondo.jpg') no-repeat center center;
+    }
+    .home-logo {
+        margin: auto;
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+        width: 128px;
+        height: 128px;
         text-align: center;
-        display: inline-block;
-        min-width: 10px;
-        font-size: 1.5rem;
-        font-weight: 400;
-        line-height: 1;
-        white-space: nowrap;
-        vertical-align: baseline;
-        margin-left: 1rem;
+        background: url('../assets/imgs/home-logo.png') no-repeat center center;
     }
-    .filtro span.cerrar {
-        border-radius: 50%;
-        background: #fff;
-        color: #1565C0;
-        width: 12px;
-        display: inline-block;
-        font-weight: 600;
-        margin-left: 1rem;
+    button.seleccione {
+        background-color: rgba(26, 24, 24, 0.6);        
+        padding: 4rem;
+        width: 80%;
+        margin-top: 2rem;
+        font-size: 2rem;
     }
-    .pattern1 {
-        min-width: 50px;
-    }
-    .properties-list-filtros {
-        display: inline-flex;
-        margin-right: 1rem;
-        margin-top: 1rem;
-    }
-    .offer-list-card {
-        margin-top: 0px;
-    }
-    .filtrosNoAplicados {
-        margin-top: 10px;
-    }
-    .filtrosAplicados {
-        height: 50px;;
-    }
-    .topfilters{
-        position: absolute;
-        top: 56px;
-        position: fixed;
-        z-index: 10;
-        width: 100%;
-        background: #263134;
+    .button span {
+       color: #fff;
     }
 }

@@ -5,12 +5,37 @@ import { AgentPropertiesListPage } from '../agent-properties-list/agent-properti
 import { PropertyPage } from '../property/property';
 import { ModalSearchPage } from '../modal-search/modal-search';
 import { SessionProvider } from '../../providers/session/session';
+import { PropertiesPage } from '../properties/properties';
+import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp-properties-list';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  clickHomeLogoAmount: number = 0;
+  
+  constructor(public navCtrl: NavController){
+
+  }
+
+  goPropertiesPage(){
+    this.navCtrl.setRoot(PropertiesPage);    
+  }
+
+  public goProfilePage(){
+    //this.navCtrl.setRoot(ProfilePage);    
+  }
+
+  clickHomeLogo(){
+    this.clickHomeLogoAmount++;
+    if(this.clickHomeLogoAmount==9){
+      this.clickHomeLogoAmount = 0;
+      this.navCtrl.setRoot(WhatsappPropertiesListPage);    
+    }
+  }
+
+  /*
   showSplash: boolean;
   properties: any;
   items: any = [];
@@ -97,17 +122,7 @@ export class HomePage {
     this.filtrosAplicados = false;
     this.priceRangeValueApplied = false;
     this.alquilerRangeValueApplied = false;
-    /*
-        console.log('this.citiesFiltered length',this.citiesFiltered.length);
-        console.log('this.categoriesFiltered length',this.categoriesFiltered.length);
-        console.log('this.citiesFiltered',this.citiesFiltered);
-        console.log('this.categoriesFiltered',this.categoriesFiltered);
-        console.log('this.typeSelected',this.typeSelected);
-        console.log('this.priceRangeValue',this.priceRangeValue);
-        console.log('this.alquilerRangeValue',this.alquilerRangeValue);
-        console.log('this.dormitoriosValue',this.dormitoriosValue);
-        console.log('this.ambientesValue',this.ambientesValue);
-    */
+    
     if (this.citiesFiltered != null && this.categoriesFiltered.length > 0) {
       this.filtrosAplicados = true; console.log('citiesFiltered');
     }
@@ -429,4 +444,5 @@ export class HomePage {
     localStorage.setItem("ambientesValue", JSON.stringify(this.ambientesValue));
     localStorage.setItem("typeSelected", JSON.stringify(this.typeSelected));
   }
+  */
 }
