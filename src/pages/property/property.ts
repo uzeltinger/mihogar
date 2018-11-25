@@ -77,9 +77,9 @@ export class PropertyPage {
   }
 
   ionViewDidLoad() {
-    //if(!this.platform.is('core')){
+    if(!this.platform.is('core')){
       this.loadMap();
-    //}
+    }
     
   }
 

@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { PropertiesPage } from '../pages/properties/properties';
 import { SessionProvider } from '../providers/session/session';
 import { Toast } from '@ionic-native/toast';
+import { HeaderColor } from '@ionic-native/header-color';
 //import { ListPage } from '../pages/list/list';
 //import { ModalSearchPage } from '../pages/modal-search/modal-search';
 //import { ProbarmapaPage } from '../pages/probarmapa/probarmapa';
@@ -26,6 +27,7 @@ export class MyApp {
     private alertController: AlertController,
     public sessionProvider: SessionProvider,
     private network: Network,
+    public headerColor: HeaderColor,
     private toast: Toast,
     public splashScreen: SplashScreen) {
       localStorage.clear();
@@ -45,7 +47,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       //this.statusBar.styleDefault();
-      
+      this.headerColor.tint('#1565C0');
       this.listenConnection();
       if (this.platform.is('android')) {
         this.statusBar.styleBlackOpaque();

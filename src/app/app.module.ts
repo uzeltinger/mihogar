@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { HeaderColor } from '@ionic-native/header-color';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -43,7 +44,7 @@ import { SessionProvider } from '../providers/session/session';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicioProvider,GoogleMaps,
-    SessionProvider,Network,Toast
+    SessionProvider,Network,Toast,HeaderColor
   ]
 })
 export class AppModule {}
