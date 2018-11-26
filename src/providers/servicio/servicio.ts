@@ -77,6 +77,15 @@ export class ServicioProvider {
       );
   }
 
+  addCompany(company: any): Observable<any> {
+    console.log('company', company);
+    this.httpOptions = this.getHeader();
+    return this.httpClient.post<any>(this.apiUrl + "index.php?option=com_osproperty&task=api_addCompany", company, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getCategories() {
     let url = '';
     url = this.apiUrl + 'index.php?option=com_osproperty&task=json_categories';

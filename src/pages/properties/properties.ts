@@ -5,6 +5,7 @@ import { AgentPropertiesListPage } from '../agent-properties-list/agent-properti
 import { PropertyPage } from '../property/property';
 import { ModalSearchPage } from '../modal-search/modal-search';
 import { SessionProvider } from '../../providers/session/session';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @IonicPage()
 @Component({
@@ -36,8 +37,9 @@ export class PropertiesPage {
     private alertController: AlertController,
     public modalCtrl: ModalController,
     public sessionData: SessionProvider,
+    private socialSharing: SocialSharing,
     public proveedor: ServicioProvider) {
-    this.whatsappText = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0AGracias.%0A";
+    this.whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nGracias.\r\n";
 
     this.getCategories();
     this.getCities();
@@ -281,16 +283,26 @@ export class PropertiesPage {
   }
 
   increaseWhatsappClick(property) {
+    this.shareToWhatsapp(property);
     console.log('increaseWhatsappClick');
     this.proveedor.increaseWhatsappClick(property)
       .subscribe(
         data => {
           console.log('increaseWhatsappClick data: ', data);
+          //href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{property.link}}"
         },
         error => {
           console.log('increaseWhatsappClick error: ', error);
         }
       );
+  }
+
+  shareToWhatsapp(property:any){
+
+  let whatsappUrl = "";
+  let image = "http://diportal.com.ar/images/osproperty/properties/"+property.id+"/medium/"+property.image;
+  this.socialSharing.shareViaWhatsAppToReceiver("54"+property.mobile,this.whatsappText, image, null);       
+       console.log('image',image);
   }
 
   doInfinite(): Promise<any> {

@@ -7,6 +7,8 @@ import { ModalSearchPage } from '../modal-search/modal-search';
 import { SessionProvider } from '../../providers/session/session';
 import { PropertiesPage } from '../properties/properties';
 import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp-properties-list';
+import { MyCompanyPage } from '../my-company/my-company';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-home',
@@ -15,7 +17,8 @@ import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp
 export class HomePage {
   clickHomeLogoAmount: number = 0;
   
-  constructor(public navCtrl: NavController){
+  constructor(public navCtrl: NavController,
+    private socialSharing: SocialSharing){
 
   }
 
@@ -23,8 +26,12 @@ export class HomePage {
     this.navCtrl.setRoot(PropertiesPage);    
   }
 
-  public goProfilePage(){
-    //this.navCtrl.setRoot(ProfilePage);    
+  public goMyCompanyPage(){
+    //let mensaje: string = "Hola.%0AEstoy%20interesado%20en%20agregar%20mi%20inmobiliaria.%0AGracias.%0A";
+    let mensaje: string = "Hola.\r\nEstoy interesado en agregar mi inmobiliaria.\r\nGracias.\r\n";
+    this.socialSharing.shareViaWhatsAppToReceiver("541130190242",mensaje, null, null);    
+    //this.navCtrl.setRoot(MyCompanyPage);    
+    //this.navCtrl.push(MyCompanyPage);
   }
 
   clickHomeLogo(){
