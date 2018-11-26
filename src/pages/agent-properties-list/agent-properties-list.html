@@ -1,44 +1,62 @@
 <ion-header>
-    <ion-navbar color="primary">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>{{agent_name}}</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding class="ion-content-1rem">
-  
-    <ion-card *ngFor="let property of properties" class="offer-list-card">   
-     
-      <ion-card-header>
-          <a (click)="navToPropertyPage($event, property)">
-        {{property.category_name}} {{property.type_name}}
-        </a>
-      </ion-card-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{agent_name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<div *ngIf="showSplash" class="splash">
+  <div class="spinner">
+    <ion-spinner></ion-spinner>
+  </div>
+</div>
+
+<ion-content class="ion-content-1rem darkbackground">
+
+  <div class="filtrosAplicados" *ngIf="filtrosAplicados"></div>
+  <div class="filtrosNoAplicados" *ngIf="!filtrosAplicados"></div>
+
+  <ion-card *ngFor="let property of items" class="offer-list-card">
+
+    <div class="offer-list-card-img">
+
       <a (click)="navToPropertyPage($event, property)">
-      <img src="http://diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{property.image}}"/>
+        <img src="http://diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{property.image}}" />
       </a>
-    
-      <ion-card-content>
-        <ion-card-title>
-            {{property.pro_name}}
-          </ion-card-title>
-  
-        <div class="list-icons">
-          <span *ngIf="property.bed_room>0" class="icono habitaciones"></span><span *ngIf="property.bed_room>0" class="cantidad">{{property.bed_room}} habs</span>
-          <span *ngIf="property.bath_room>0" class="icono banios"></span><span *ngIf="property.bath_room>0" class="cantidad">{{property.bath_room}} baño<span *ngIf="property.bath_room>1">s</span></span>
-          <span *ngIf="property.square_feet>0" class="icono area"></span><span *ngIf="property.square_feet>0" class="cantidad">{{property.square_feet}}m2</span>  
-          <span *ngIf="property.parking>0" class="icono garage"></span><span *ngIf="property.parking>0" class="cantidad">{{property.parking}}</span>      
-        </div>
-        <!--<ion-icon name="heart"></ion-icon>  active -->
-        <!--<ion-icon name="heart" isActive="false"></ion-icon> <span class="cantidad">2</span>        inactive -->
-        <p class="smalltext">
-            Agente: {{property.agent_name}}
-          </p>
-  
-      </ion-card-content>
-            
-    </ion-card>
-  
-  </ion-content>
+
+      <div class="offer-list-icon-whatsapp">
+        <ion-icon float-right>
+          <a target="_blank" (click)="increaseWhatsappClick(property)">
+            <img src="assets/imgs/whatsappicon.png">
+          </a>
+        </ion-icon>
+      </div>
+    </div>
+    <ion-card-content>
+      <ion-card-title>
+        {{property.city_name}}
+      </ion-card-title>
+
+      <p>{{property.category_name}}</p>
+      <ion-item class="item-price">
+
+        <span *ngIf="property.rooms>0">{{property.rooms}} Ambientes</span>
+
+        <ion-badge item-end class="badge-price" *ngIf="property.price>0">
+          <span>{{property.moneda}} {{property.price}}</span>
+        </ion-badge>
+
+      </ion-item>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más propiedades...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

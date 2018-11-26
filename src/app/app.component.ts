@@ -39,7 +39,7 @@ export class MyApp {
       { title: 'Inicio', component: HomePage },
       { title: 'Propiedades', component: PropertiesPage }
     ];
-
+    
   }
 
   initializeApp() {
@@ -53,7 +53,7 @@ export class MyApp {
         this.statusBar.styleBlackOpaque();
         this.statusBar.backgroundColorByHexString('#1565C0');
         this.statusBar.show();
-        this.splashScreen.hide();
+        //this.splashScreen.hide();
       }
 
     });

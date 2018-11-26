@@ -28,7 +28,10 @@ export class ServicioProvider {
     }
     if(data.isFeatured){
       params = params + "&isFeatured="+data.isFeatured;
-    }    
+    }
+    if(data.agent_id){
+      params = params + "&agent_id="+data.agent_id;
+    }
     if(data.cities){
       params = params + "&cities="+data.cities;
     }
@@ -55,8 +58,19 @@ export class ServicioProvider {
     console.log('url',url);
     return this.httpClient.get(url);
   }
-  getAgentProperties(agent_id) {
-    let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties&agent_id='+agent_id;
+  getAgentProperties(data) {
+    let params: string = "";
+    if(data.limit){
+      params = params + "&limit="+data.limit;
+    }
+    if(data.limitstart){
+      params = params + "&limitstart="+data.limitstart;
+    }
+    if(data.agent_id){
+      params = params + "&agent_id="+data.agent_id;
+    }
+    let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties'+params;
+    console.log('url',url);
     return this.httpClient.get(url);
   }
 

@@ -12,6 +12,7 @@ import {
   GoogleMapOptions
 } from '@ionic-native/google-maps';
 import { timestamp } from 'rxjs/operators';
+import { PropertiesPage } from '../properties/properties';
 
 @IonicPage()
 @Component({
@@ -61,7 +62,11 @@ export class PropertyPage {
       )
   }
   navToAgentPropertiesListPage(event, property){
-    this.navCtrl.push(AgentPropertiesListPage, {
+    let agentFiltered = { agent_id: property.agent_id, agent_name: property.agent_name };
+    console.log('agentFiltered',agentFiltered);
+      localStorage.setItem("agentFiltered", JSON.stringify(agentFiltered));
+    
+    this.navCtrl.push(PropertiesPage, {
       property: property
     });
   }

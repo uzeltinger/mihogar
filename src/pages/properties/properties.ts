@@ -21,6 +21,8 @@ export class PropertiesPage {
   offersShowAll: boolean = false;
   whatsappText: string
   filtrosAplicados: boolean = false;
+  agentFiltered:any = { agent_id: 0, agent_name: "" };
+  agentSelected: boolean = false;
   categoriesFiltered: any = [];
   citiesFiltered: any = [];
   priceRangeValue = { lower: 50000, upper: 200000 };
@@ -90,6 +92,7 @@ export class PropertiesPage {
   }
 
   obtenerFiltrosAplicados() {
+    this.getAgentFiltered();
     this.getCitiesFiltered();
     this.getCategoriesFiltered();
     this.getPriceRangeValue();
@@ -100,6 +103,7 @@ export class PropertiesPage {
     this.filtrosAplicados = false;
     this.priceRangeValueApplied = false;
     this.alquilerRangeValueApplied = false;
+    this.agentSelected = false;
     /*
         console.log('this.citiesFiltered length',this.citiesFiltered.length);
         console.log('this.categoriesFiltered length',this.categoriesFiltered.length);
@@ -111,6 +115,10 @@ export class PropertiesPage {
         console.log('this.dormitoriosValue',this.dormitoriosValue);
         console.log('this.ambientesValue',this.ambientesValue);
     */
+    if (this.agentFiltered != null && this.agentFiltered.agent_id > 0) {
+      this.filtrosAplicados = true; console.log('agentFiltered',this.agentFiltered);
+      this.agentSelected = true;
+    }
     if (this.citiesFiltered != null && this.categoriesFiltered.length > 0) {
       this.filtrosAplicados = true; console.log('citiesFiltered');
     }
@@ -146,20 +154,24 @@ export class PropertiesPage {
     }
   }
 
-  getProperties() {    
+  getProperties() {
     //let sendData = {"cities":this.citiesFiltered,"categories":this.categoriesFiltered,"latitude":this.latitude,"longitude":this.longitude,"limit":this.offersLimit,"limitstart": this.offersLimitStart};
     let sendData = {
       "limit": this.offersLimit,
       "limitstart": this.offersLimitStart,
+      "agent_id": 0,
       "isFeatured": 1,
       "cities": null,
       "categories": null,
       "type": 0,
       "ambientes": null,
       "dormitorios": null,
-      "priceRange": {"lower":0, "upper":0},
-      "alquilerRange": {"lower":0, "upper":0}
+      "priceRange": { "lower": 0, "upper": 0 },
+      "alquilerRange": { "lower": 0, "upper": 0 }
     };
+    if (this.agentFiltered != null && this.agentFiltered.agent_id > 0) {
+      sendData.agent_id = this.agentFiltered.agent_id;
+    }
     if (this.citiesFiltered != null && this.categoriesFiltered.length > 0) {
       sendData.cities = this.citiesFiltered;
     }
@@ -175,11 +187,11 @@ export class PropertiesPage {
     if (this.dormitoriosValue != null && this.dormitoriosValue > 0) {
       sendData.dormitorios = this.dormitoriosValue;
     }
-    if(this.priceRangeValueApplied){
+    if (this.priceRangeValueApplied) {
       sendData.priceRange.lower = this.priceRangeValue.lower;
       sendData.priceRange.upper = this.priceRangeValue.upper;
     }
-    if(this.alquilerRangeValueApplied){
+    if (this.alquilerRangeValueApplied) {
       sendData.alquilerRange.lower = this.alquilerRangeValue.lower;
       sendData.alquilerRange.upper = this.alquilerRangeValue.upper;
     }
@@ -219,12 +231,12 @@ export class PropertiesPage {
         (error) => {
           console.log('error', error);
           this.showSplash = false;
-          if(error.status==0){
+          if (error.status == 0) {
             this.showAlert('Ocurrió un error', 'UPS! Parece que no hay conexión a internet.');
-          }else{
+          } else {
             this.showAlert('Ocurrió un error', error.message);
           }
-          
+
         }
       )
   }
@@ -235,13 +247,22 @@ export class PropertiesPage {
     this.showSplash = true;
     switch (tipo) {
 
+      case 'agentFiltered':
+      this.agentSelected = false;
+        this.agentFiltered.agent_id = 0;
+        this.agentFiltered.agent_name = "";
+        this.items = [];
+        this.offersShowAll = false;
+        localStorage.setItem("agentFiltered", this.agentFiltered);
+        this.navCtrl.setRoot(PropertiesPage);
+
+        break;
       case 'city':
         let a = this.citiesFiltered.indexOf(objeto);
         if (a != -1) {
           this.citiesFiltered.splice(a, 1);
         }
         break;
-
       case 'category':
         let c = this.categoriesFiltered.indexOf(objeto);
         if (c != -1) {
@@ -297,12 +318,12 @@ export class PropertiesPage {
       );
   }
 
-  shareToWhatsapp(property:any){
+  shareToWhatsapp(property: any) {
 
-  let whatsappUrl = "";
-  let image = "http://diportal.com.ar/images/osproperty/properties/"+property.id+"/medium/"+property.image;
-  this.socialSharing.shareViaWhatsAppToReceiver("54"+property.mobile,this.whatsappText, image, null);       
-       console.log('image',image);
+    let whatsappUrl = "";
+    let image = "http://diportal.com.ar/images/osproperty/properties/" + property.id + "/medium/" + property.image;
+    this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, this.whatsappText, image, null);
+    console.log('image', image);
   }
 
   doInfinite(): Promise<any> {
@@ -352,7 +373,15 @@ export class PropertiesPage {
       this.getProperties();
     });
     modal.present();
-    this.showSplash = true;    
+    this.showSplash = true;
+  }
+
+  getAgentFiltered() {
+    if (localStorage.getItem("agentFiltered") === null) {
+      this.agentFiltered = null;
+    } else {
+      this.agentFiltered = JSON.parse(localStorage.getItem("agentFiltered"));
+    }
   }
 
   getCitiesFiltered() {
@@ -433,7 +462,8 @@ export class PropertiesPage {
     localStorage.setItem("categoriesFiltered", JSON.stringify(this.categoriesFiltered))
     //console.log('categoriesFiltered',this.categoriesFiltered);    
   }
-  actualizarFiltros(){    
+  actualizarFiltros() {
+    localStorage.setItem("agentFiltered", JSON.stringify(this.agentFiltered));
     localStorage.setItem("citiesFiltered", JSON.stringify(this.citiesFiltered));
     localStorage.setItem("categoriesFiltered", JSON.stringify(this.categoriesFiltered));
     localStorage.setItem("priceRangeValue", JSON.stringify(this.priceRangeValue));
