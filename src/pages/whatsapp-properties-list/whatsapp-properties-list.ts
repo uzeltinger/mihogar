@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 
 /**
@@ -9,7 +9,6 @@ import { ServicioProvider } from '../../providers/servicio/servicio';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-whatsapp-properties-list',
   templateUrl: 'whatsapp-properties-list.html',

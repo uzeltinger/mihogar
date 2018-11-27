@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ModalController, IonicPage } from 'ionic-angular';
+import { NavController, AlertController, ModalController } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 import { AgentPropertiesListPage } from '../agent-properties-list/agent-properties-list';
 import { PropertyPage } from '../property/property';
@@ -7,7 +7,6 @@ import { ModalSearchPage } from '../modal-search/modal-search';
 import { SessionProvider } from '../../providers/session/session';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
-@IonicPage()
 @Component({
   selector: 'page-properties',
   templateUrl: 'properties.html',

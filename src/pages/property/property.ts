@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Platform, ToastController, LoadingController } from 'ionic-angular';
 import { AgentPropertiesListPage } from '../agent-properties-list/agent-properties-list';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 import {
@@ -15,7 +15,6 @@ import { timestamp } from 'rxjs/operators';
 import { PropertiesPage } from '../properties/properties';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
-@IonicPage()
 @Component({
   selector: 'page-property',
   templateUrl: 'property.html',
@@ -128,7 +127,7 @@ export class PropertyPage {
     });
 
   }
-  
+
   increaseWhatsappClick(property) {
     this.shareToWhatsapp(property);
     console.log('increaseWhatsappClick');

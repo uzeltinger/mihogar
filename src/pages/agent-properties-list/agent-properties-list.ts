@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ModalController, IonicPage, NavParams } from 'ionic-angular';
+import { NavController, AlertController, ModalController, NavParams } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 import { PropertyPage } from '../property/property';
 import { SessionProvider } from '../../providers/session/session';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
-@IonicPage()
 @Component({
   selector: 'page-agent-properties-list',
   templateUrl: 'agent-properties-list.html',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 
 /**
@@ -9,7 +9,6 @@ import { ServicioProvider } from '../../providers/servicio/servicio';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-my-company',
   templateUrl: 'my-company.html',

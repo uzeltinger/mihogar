@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 import { SessionProvider } from '../../providers/session/session';
 
-@IonicPage()
 @Component({
   selector: 'page-modal-search',
   templateUrl: 'modal-search.html',
