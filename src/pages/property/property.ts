@@ -13,6 +13,7 @@ import {
 } from '@ionic-native/google-maps';
 import { timestamp } from 'rxjs/operators';
 import { PropertiesPage } from '../properties/properties';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @IonicPage()
 @Component({
@@ -32,6 +33,7 @@ export class PropertyPage {
     //public googleMaps: GoogleMaps,
      public navParams: NavParams,
      public loadingCtrl: LoadingController,
+     private socialSharing: SocialSharing,
      public toastCtrl: ToastController,
      public proveedor: ServicioProvider,
      private platform: Platform) {
@@ -125,6 +127,30 @@ export class PropertyPage {
       alert('clicked');
     });
 
+  }
+  
+  increaseWhatsappClick(property) {
+    this.shareToWhatsapp(property);
+    console.log('increaseWhatsappClick');
+    this.proveedor.increaseWhatsappClick(property)
+      .subscribe(
+        data => {
+          console.log('increaseWhatsappClick data: ', data);
+          //href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{property.link}}"
+        },
+        error => {
+          console.log('increaseWhatsappClick error: ', error);
+        }
+      );
+  }
+
+  shareToWhatsapp(property: any) {
+    let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nReferencia: "+property.ref+"\r\n"+property.pro_name+"\r\nGracias.\r\n";
+    let whatsappUrl = "";
+    let image = "http://diportal.com.ar/images/osproperty/properties/" + property.id + "/medium/" + property.image;
+    this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, image, null);
+    //this.socialSharing.share('',null,image,null);
+    console.log('image', image);    
   }
 
 }
