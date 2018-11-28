@@ -83,7 +83,10 @@
 
           <div class="text-align-center">
 
-            <div class="texto">Inmobiliaria<br> <a (click)="navToAgentPropertiesListPage($event, property)">{{property.agent_name}}</a>
+            <div class="texto">Inmobiliaria<br> 
+              <a *ngIf="!agentSelected" (click)="navToAgentPropertiesListPage($event, property)">{{property.agent_name}}</a>
+              <b *ngIf="agentSelected">{{property.agent_name}}</b>
+
             </div>
             <div class="icono icono-whatsapp-after-inmobiliaria">
               <ion-icon>

@@ -22,6 +22,8 @@ export class PropertyPage {
   imagenes: any = [];
   mapReady: boolean = false;
   map: GoogleMap;
+  agentSelected: boolean = false;
+  agentFiltered:any = { agent_id: 0, agent_name: "" };
 
   constructor(public navCtrl: NavController,
     //public googleMaps: GoogleMaps,
@@ -39,7 +41,19 @@ export class PropertyPage {
   }
 
   async ngOnInit() {
+
+    if (localStorage.getItem("agentFiltered") === null) {
+      this.agentFiltered = null;
+    } else {
+      this.agentFiltered = JSON.parse(localStorage.getItem("agentFiltered"));
+    }
+    
+    if (this.agentFiltered != null && this.agentFiltered.agent_id > 0) {
+      this.agentSelected = true;
+    }
+
   }
+
 
   getProperty(id){
   this.proveedor.getProperty(id)
