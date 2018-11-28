@@ -76,7 +76,6 @@ export class ServicioProvider {
 
   getProperty(id) {
     this.httpOptions = this.getHeader();
-    let params: string = "";    
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_property&id='+id;
     //console.log('url',url);
     return this.httpClient.get(url);

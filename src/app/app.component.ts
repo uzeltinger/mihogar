@@ -8,10 +8,6 @@ import { PropertiesPage } from '../pages/properties/properties';
 import { SessionProvider } from '../providers/session/session';
 import { Toast } from '@ionic-native/toast';
 import { HeaderColor } from '@ionic-native/header-color';
-import { WhatsappPropertiesListPage } from '../pages/whatsapp-properties-list/whatsapp-properties-list';
-//import { ListPage } from '../pages/list/list';
-//import { ModalSearchPage } from '../pages/modal-search/modal-search';
-//import { ProbarmapaPage } from '../pages/probarmapa/probarmapa';
 
 @Component({
   templateUrl: 'app.html'

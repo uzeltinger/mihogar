@@ -90,7 +90,7 @@ export class ModalSearchPage {
       let a = this.categoriesFiltered.indexOf(category.id);
       console.log('aaaaaaaaaaa', a);
       if (a != -1) {
-        var removed = this.categoriesFiltered.splice(a, 1);
+        this.categoriesFiltered.splice(a, 1);
       }
     }
     if (!category.isAssigned) {
@@ -115,7 +115,7 @@ export class ModalSearchPage {
       let a = this.citiesFiltered.indexOf(city.city_id);
       console.log('aaaaaaaaaaa', a);
       if (a != -1) {
-        var removed = this.citiesFiltered.splice(a, 1);
+        this.citiesFiltered.splice(a, 1);
       }
     }
     if (!city.isAssigned) {

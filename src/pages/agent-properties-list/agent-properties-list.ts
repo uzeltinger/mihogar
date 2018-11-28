@@ -120,8 +120,6 @@ export class AgentPropertiesListPage {
   }
 
   shareToWhatsapp(property:any){
-
-  let whatsappUrl = "";
   let image = "http://diportal.com.ar/images/osproperty/properties/"+property.id+"/medium/"+property.image;
   this.socialSharing.shareViaWhatsAppToReceiver("54"+property.mobile,this.whatsappText, image, null);       
        console.log('image',image);

@@ -1,17 +1,12 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, NavParams, Platform, ToastController, LoadingController } from 'ionic-angular';
-import { AgentPropertiesListPage } from '../agent-properties-list/agent-properties-list';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  MyLocation,
-  GoogleMapOptions
+  Marker
 } from '@ionic-native/google-maps';
-import { timestamp } from 'rxjs/operators';
 import { PropertiesPage } from '../properties/properties';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -144,8 +139,7 @@ export class PropertyPage {
   }
 
   shareToWhatsapp(property: any) {
-    let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nReferencia: "+property.ref+"\r\n"+property.pro_name+"\r\nGracias.\r\n";
-    let whatsappUrl = "";
+    let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nReferencia: "+property.ref+"\r\n"+property.pro_name+"\r\nGracias.\r\n";    
     let image = "http://diportal.com.ar/images/osproperty/properties/" + property.id + "/medium/" + property.image;
     this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, image, null);
     //this.socialSharing.share('',null,image,null);

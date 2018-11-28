@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ModalController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { PropertiesPage } from '../properties/properties';
 import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp-properties-list';
 import { SocialSharing } from '@ionic-native/social-sharing';

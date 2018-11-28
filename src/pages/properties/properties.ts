@@ -319,7 +319,6 @@ export class PropertiesPage {
 
   shareToWhatsapp(property: any) {
     let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nReferencia: "+property.ref+"\r\n"+property.pro_name+"\r\nGracias.\r\n";
-    let whatsappUrl = "";
     let image = "http://diportal.com.ar/images/osproperty/properties/" + property.id + "/medium/" + property.image;
     this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, image, null);
     //this.socialSharing.share('',null,image,null);
