@@ -42,8 +42,7 @@ export class PropertiesPage {
     public proveedor: ServicioProvider) {
     this.whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nGracias.\r\n";
 
-    this.getCategories();
-    this.getCities();
+    
 
   }
 
@@ -85,6 +84,8 @@ export class PropertiesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+    this.getCategories();
+    this.getCities();
     this.obtenerFiltrosAplicados();
     this.getProperties();
     this.showSplash = true;
@@ -318,11 +319,11 @@ export class PropertiesPage {
   }
 
   shareToWhatsapp(property: any) {
-    let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nReferencia: "+property.ref+"\r\n"+property.pro_name+"\r\nGracias.\r\n";
-    let image = "http://diportal.com.ar/images/osproperty/properties/" + property.id + "/medium/" + property.image;
-    this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, image, null);
+    let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\n";
+    let link = "http://miohogar.com.ar/propiedad/" + property.id + ".html";
+    this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, null, link);
     //this.socialSharing.share('',null,image,null);
-    console.log('image', image);    
+    console.log('image', link);
   }
 
   doInfinite(): Promise<any> {

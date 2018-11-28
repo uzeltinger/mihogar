@@ -25,10 +25,10 @@
           <span>{{agentFiltered.agent_name}}</span> <span class="cerrar"> -</span>
         </div>
         <div class="filtro citiesFiltered" *ngFor="let city of citiesFiltered" (click)="eliminarFiltro('city',city)">
-          <span>{{ciudadesById[city].city_name}}</span> <span class="cerrar"> -</span>
+          <span *ngIf="ciudadesById[city]">{{ciudadesById[city].city_name}}</span> <span class="cerrar"> -</span>
         </div>
         <div class="filtro categoriesFiltered" *ngFor="let category of categoriesFiltered" (click)="eliminarFiltro('category',category)">
-          <span>{{categoriasById[category].category_name}}</span> <span class="cerrar"> -</span>
+          <span *ngIf="categoriasById[category]">{{categoriasById[category].category_name}}</span> <span class="cerrar"> -</span>
         </div>
         <div class="filtro ambientesValue" *ngIf="ambientesValue" (click)="eliminarFiltro('ambientesValue',ambientesValue)">
           <span>{{ambientesValue}}</span> ambiente<span *ngIf="ambientesValue>1">s</span> <span class="cerrar"> -</span>
