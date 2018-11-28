@@ -154,7 +154,7 @@ export class PropertyPage {
 
   shareToWhatsapp(property: any) {
     let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\n";
-    let link = "https://mihogar.net.ar/propiedad/" + property.id + ".html";
+    let link = "http://mihogar.net.ar/propiedad/" + property.id + ".html";
     this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, null, link);
     //this.socialSharing.share('',null,image,null);
     console.log('image', link);
