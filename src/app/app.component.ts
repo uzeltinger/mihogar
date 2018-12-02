@@ -8,6 +8,7 @@ import { PropertiesPage } from '../pages/properties/properties';
 import { SessionProvider } from '../providers/session/session';
 import { Toast } from '@ionic-native/toast';
 import { HeaderColor } from '@ionic-native/header-color';
+import { ServicioProvider } from '../providers/servicio/servicio';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,17 +18,18 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, 
-    public statusBar: StatusBar, 
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
     private alertController: AlertController,
     public sessionProvider: SessionProvider,
+    public proveedor: ServicioProvider,
     private network: Network,
     public headerColor: HeaderColor,
     private toast: Toast,
     public splashScreen: SplashScreen) {
-      localStorage.clear();
+    localStorage.clear();
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -35,26 +37,66 @@ export class MyApp {
       { title: 'Inicio', component: HomePage },
       { title: 'Propiedades', component: PropertiesPage }
     ];
-    
+
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      //this.statusBar.styleDefault();
+      //this.statusBar.styleDefault();      
       this.headerColor.tint('#2196F3');
       this.listenConnection();
+      this.getLastVersion();
       if (this.platform.is('android')) {
         this.statusBar.styleBlackOpaque();
         this.statusBar.backgroundColorByHexString('#1565C0');
         this.statusBar.show();
         //this.splashScreen.hide();
+
       }
 
     });
   }
-  
+
+  getLastVersion() {
+    let version = "0.0.2"
+    this.proveedor.getLastVersion()
+      .subscribe(
+        (data) => {
+          console.log('getLastVersion : this version ', data+' : '+version);
+          if (data > version) {
+            this.showConfirm();
+          }
+        },
+        (error) => { console.log('error', error); }
+      )
+  }
+
+  showConfirm() {
+    const confirm = this.alertController.create({
+      title: 'Actualización',
+      message: 'Hay una nueva versión de la aplicación, es recomendable que la actualice desde Play Store.',
+      buttons: [
+        {
+          text: 'Actualizar',
+          handler: () => {
+            console.log('Actualizar clicked');
+            window.open('https://play.google.com/store/apps/details?id=ar.com.mihogar', '_system', 'location=yes');
+
+          }
+        },
+        {
+          text: 'Cerrar',
+          handler: () => {
+            console.log('Cerrar clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
   private listenConnection(): void {
     console.log('this.network.type', this.network.type);
     if (this.network.type == 'none') {

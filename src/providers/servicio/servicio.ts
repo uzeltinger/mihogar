@@ -81,6 +81,12 @@ export class ServicioProvider {
     return this.httpClient.get(url);
   }
 
+  getLastVersion(){    
+    this.httpOptions = this.getHeader();
+    let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_getLastVersion';
+    return this.httpClient.get(url);
+  }
+
   increaseWhatsappClick(property: any): Observable<any> {
     //console.log('offer', property);
     this.httpOptions = this.getHeader();

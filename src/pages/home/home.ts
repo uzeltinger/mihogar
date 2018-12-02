@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { PropertiesPage } from '../properties/properties';
 import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp-properties-list';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { ServicioProvider } from '../../providers/servicio/servicio';
 
 @Component({
   selector: 'page-home',
@@ -12,8 +13,13 @@ export class HomePage {
   clickHomeLogoAmount: number = 0;
   
   constructor(public navCtrl: NavController,
+    private alertController: AlertController,
+    public proveedor: ServicioProvider,
     private socialSharing: SocialSharing){
 
+  }
+  ionViewDidLoad() {
+    
   }
 
   goPropertiesPage(){
@@ -105,7 +111,7 @@ export class HomePage {
       )
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() {showConfirm
     console.log('ionViewDidLoad HomePage');
     this.obtenerFiltrosAplicados();
     this.getProperties();

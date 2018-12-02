@@ -33,6 +33,7 @@ export class PropertiesPage {
   alquilerRangeValueApplied: boolean = false;
   ciudadesById: any = [];
   categoriasById: any = [];
+  firstSearch:boolean = true;
 
   constructor(public navCtrl: NavController,
     private alertController: AlertController,
@@ -204,6 +205,11 @@ export class PropertiesPage {
           this.properties = data;
           console.log('getProperties total', this.properties.lenght);
 
+          
+          if(this.firstSearch && this.properties.length==0){
+            this.showAlert('No hay resultados', 'UPS! Parece que no hay resultados con esos criterios de búsqueda.');
+          }
+
           if (this.properties.length < this.offersLimit) {
             this.offersShowAll = true;
           }
@@ -252,6 +258,7 @@ export class PropertiesPage {
         this.agentFiltered.agent_id = 0;
         this.agentFiltered.agent_name = "";
         this.items = [];
+        this.firstSearch = true;
         this.offersShowAll = false;
         localStorage.setItem("agentFiltered", this.agentFiltered);
         this.navCtrl.setRoot(PropertiesPage);
@@ -297,6 +304,7 @@ export class PropertiesPage {
 
     }
     this.items = [];
+    this.firstSearch = true;
     this.offersShowAll = false;
     this.actualizarFiltros();
     this.obtenerFiltrosAplicados();
@@ -363,6 +371,7 @@ export class PropertiesPage {
   }
 
   presentModal() {
+    this.firstSearch = true;
     this.items = [];
     this.offersShowAll = false;
     const modal = this.modalCtrl.create(ModalSearchPage);
@@ -471,5 +480,9 @@ export class PropertiesPage {
     localStorage.setItem("dormitoriosValue", JSON.stringify(this.dormitoriosValue));
     localStorage.setItem("ambientesValue", JSON.stringify(this.ambientesValue));
     localStorage.setItem("typeSelected", JSON.stringify(this.typeSelected));
+  }
+
+  showNoResults(){
+
   }
 }
