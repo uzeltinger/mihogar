@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { PropertiesPage } from '../properties/properties';
 import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp-properties-list';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -13,7 +13,6 @@ export class HomePage {
   clickHomeLogoAmount: number = 0;
   
   constructor(public navCtrl: NavController,
-    private alertController: AlertController,
     public proveedor: ServicioProvider,
     private socialSharing: SocialSharing){
 
