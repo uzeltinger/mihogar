@@ -79,11 +79,13 @@ export class ModalSearchPage {
   }
 
   toggleCategory(category) {
+    this.categoriesFiltered = [];
     console.log('togglecategory', category);
     if (localStorage.getItem("categoriesFiltered") === null) {
       this.categoriesFiltered = [];
     } else {
       this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
+      console.log('this.categoriesFiltered', this.categoriesFiltered);
     }
     if (category.isAssigned) {
       console.log('category.isAssigned', category.isAssigned);
@@ -109,6 +111,7 @@ export class ModalSearchPage {
       this.citiesFiltered = [];
     } else {
       this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
+      console.log('this.citiesFiltered', this.citiesFiltered);
     }
     if (city.isAssigned) {
       console.log('city.isAssigned', city.isAssigned);

@@ -258,6 +258,7 @@ export class PropertiesPage {
         this.agentFiltered.agent_id = 0;
         this.agentFiltered.agent_name = "";
         this.items = [];
+        this.offersLimitStart = 0;
         this.firstSearch = true;
         this.offersShowAll = false;
         localStorage.setItem("agentFiltered", this.agentFiltered);
@@ -304,6 +305,7 @@ export class PropertiesPage {
 
     }
     this.items = [];
+    this.offersLimitStart = 0;
     this.firstSearch = true;
     this.offersShowAll = false;
     this.actualizarFiltros();
@@ -373,6 +375,7 @@ export class PropertiesPage {
   presentModal() {
     this.firstSearch = true;
     this.items = [];
+    this.offersLimitStart = 0;
     this.offersShowAll = false;
     const modal = this.modalCtrl.create(ModalSearchPage);
     modal.onDidDismiss(data => {
