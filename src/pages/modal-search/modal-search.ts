@@ -15,8 +15,8 @@ export class ModalSearchPage {
   citiesFiltered: any = [];
   showSplash = true;
   //filtro: any = {'categories':"","cities":""}; 
-  priceRangeValue = { lower: 50000, upper: 200000 };
-  alquilerRangeValue = { lower: 5000, upper: 20000 };
+  priceRangeValue = { lower: 50000, upper: 800000 };
+  alquilerRangeValue = { lower: 5000, upper: 35000 };
   dormitoriosValue: number = 0;
   ambientesValue: number = 0;
   typeSelected: number = 0;
@@ -105,6 +105,16 @@ export class ModalSearchPage {
     this.setCategoriesFiltered();
   }
 
+  toggleCityLabel(city){
+    console.log('toggleCityLabel', city);
+    if(city.isAssigned){city.isAssigned=false;}else{city.isAssigned=true;}
+    this.toggleCity(city);
+  }
+  toggleCategoryLabel(category){
+    category.isAssigned = !category.isAssigned;
+    this.toggleCategory(category);
+  }
+
   toggleCity(city) {
     console.log('toggleCity', city);
     if (localStorage.getItem("citiesFiltered") === null) {
@@ -142,6 +152,7 @@ export class ModalSearchPage {
       this.citiesFiltered = [];
     } else {
       this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
+      console.log('this.citiesFiltered', this.citiesFiltered);
     }
   }
 
@@ -163,14 +174,14 @@ export class ModalSearchPage {
 
   getPriceRangeValue() {
     if (localStorage.getItem("priceRangeValue") === null) {
-      this.priceRangeValue = { lower: 50000, upper: 200000 };
+      this.priceRangeValue = { lower: 50000, upper: 800000 };
     } else {
       this.priceRangeValue = JSON.parse(localStorage.getItem("priceRangeValue"));
     }
   }
   getAlquilerRangeValue() {
     if (localStorage.getItem("alquilerRangeValue") === null) {
-      this.alquilerRangeValue = { lower: 5000, upper: 20000 };
+      this.alquilerRangeValue = { lower: 5000, upper: 35000 };
     } else {
       this.alquilerRangeValue = JSON.parse(localStorage.getItem("alquilerRangeValue"));
     }
@@ -210,8 +221,8 @@ export class ModalSearchPage {
   limpiarFiltros() {
     //this.categoriesFiltered = [];
     //this.citiesFiltered = [];
-    this.priceRangeValue = { lower: 50000, upper: 200000 };
-    this.alquilerRangeValue = { lower: 5000, upper: 20000 };
+    this.priceRangeValue = { lower: 50000, upper: 800000 };
+    this.alquilerRangeValue = { lower: 5000, upper: 35000 };
     //this.dormitoriosValue = 0;
     //this.ambientesValue = 0;
   }

@@ -24,8 +24,8 @@ export class PropertiesPage {
   agentSelected: boolean = false;
   categoriesFiltered: any = [];
   citiesFiltered: any = [];
-  priceRangeValue = { lower: 50000, upper: 200000 };
-  alquilerRangeValue = { lower: 5000, upper: 20000 };
+  priceRangeValue = { lower: 50000, upper: 800000 };
+  alquilerRangeValue = { lower: 5000, upper: 35000 };
   dormitoriosValue: number = 0;
   ambientesValue: number = 0;
   typeSelected: number = 2;
@@ -120,7 +120,7 @@ export class PropertiesPage {
       this.filtrosAplicados = true; console.log('agentFiltered',this.agentFiltered);
       this.agentSelected = true;
     }
-    if (this.citiesFiltered != null && this.categoriesFiltered.length > 0) {
+    if (this.citiesFiltered != null && this.citiesFiltered.length > 0) {
       this.filtrosAplicados = true; console.log('citiesFiltered');
     }
     if (this.categoriesFiltered != null && this.categoriesFiltered.length > 0) {
@@ -130,14 +130,14 @@ export class PropertiesPage {
       this.filtrosAplicados = true; console.log('typeSelected');
     }
     if (this.priceRangeValue != null) {
-      if (this.priceRangeValue.lower == 50000 && this.priceRangeValue.upper == 200000) {
+      if (this.priceRangeValue.lower == 50000 && this.priceRangeValue.upper == 800000) {
       } else {
         this.filtrosAplicados = true; console.log('priceRangeValue');
         this.priceRangeValueApplied = true;
       }
     }
     if (this.alquilerRangeValue != null) {
-      if (this.alquilerRangeValue.lower == 5000 && this.alquilerRangeValue.upper == 20000) {
+      if (this.alquilerRangeValue.lower == 5000 && this.alquilerRangeValue.upper == 35000) {
       } else {
         this.filtrosAplicados = true; console.log('alquilerRangeValue');
         this.alquilerRangeValueApplied = true;
@@ -173,7 +173,7 @@ export class PropertiesPage {
     if (this.agentFiltered != null && this.agentFiltered.agent_id > 0) {
       sendData.agent_id = this.agentFiltered.agent_id;
     }
-    if (this.citiesFiltered != null && this.categoriesFiltered.length > 0) {
+    if (this.citiesFiltered != null && this.citiesFiltered.length > 0) {
       sendData.cities = this.citiesFiltered;
     }
     if (this.categoriesFiltered != null && this.categoriesFiltered.length > 0) {

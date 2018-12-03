@@ -1,15 +1,18 @@
 page-home {
     .bg-image{
         background: url('../assets/imgs/inicioFondo.jpg') no-repeat center center;
+
     }
     .home-logo {
         margin: auto;
-        margin-top: 5rem;
-        margin-bottom: 5rem;
-        width: 128px;
-        height: 128px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        /*width: 50%;*/
+        height: 40%;
         text-align: center;
         background: url('../assets/imgs/home-logo.png') no-repeat center center;
+        background-size: 100%;
+        background-size: contain;  
     }
     button.seleccione {
         background-color: rgba(26, 24, 24, 0.6);        

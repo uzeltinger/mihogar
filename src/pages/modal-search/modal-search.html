@@ -72,7 +72,7 @@
   <div class="listado">
     <ion-list>
       <ion-item *ngFor="let category of categories">
-        <ion-label class="font-18">{{category.category_name}}</ion-label>
+        <ion-label class="font-18" (click)="toggleCategoryLabel(category)">{{category.category_name}}</ion-label>
         <ion-toggle color="verde" (ngModelChange)="toggleCategory(category)" [(ngModel)]="category.isAssigned"></ion-toggle>
       </ion-item>
     </ion-list>
@@ -81,7 +81,7 @@
   <div class="listado">
     <ion-list>
       <ion-item *ngFor="let city of cities">
-        <ion-label class="font-18">{{city.city_name}}</ion-label>
+        <ion-label class="font-18" (click)="toggleCityLabel(city)">{{city.city_name}}</ion-label>
         <ion-toggle color="verde" (ngModelChange)="toggleCity(city)" [(ngModel)]="city.isAssigned"></ion-toggle>
       </ion-item>
     </ion-list>
@@ -117,13 +117,13 @@
 
   <ion-item class="padding-16" *ngIf="typeSelected==1">
     <ion-label>u$s{{priceRangeValue.lower}} - u$s{{priceRangeValue.upper}}</ion-label>
-    <ion-range dualKnobs="true" min="50000" max="200000" step="1000" [(ngModel)]="priceRangeValue" (ionChange)="changePrice()"></ion-range>
+    <ion-range dualKnobs="true" min="50000" max="800000" step="1000" [(ngModel)]="priceRangeValue" (ionChange)="changePrice()"></ion-range>
   </ion-item>
 
 
   <ion-item class="padding-16" *ngIf="typeSelected==3">
     <ion-label>${{alquilerRangeValue.lower}} - ${{alquilerRangeValue.upper}}</ion-label>
-    <ion-range dualKnobs="true" min="5000" max="20000" step="100" [(ngModel)]="alquilerRangeValue" (ionChange)="changeAlquilerPrice()"></ion-range>
+    <ion-range dualKnobs="true" min="5000" max="35000" step="100" [(ngModel)]="alquilerRangeValue" (ionChange)="changeAlquilerPrice()"></ion-range>
   </ion-item>
 
 
