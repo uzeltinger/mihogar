@@ -4,6 +4,7 @@ import { PropertiesPage } from '../properties/properties';
 import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp-properties-list';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { ServicioProvider } from '../../providers/servicio/servicio';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-home',
@@ -13,7 +14,8 @@ export class HomePage {
   clickHomeLogoAmount: number = 0;
   
   constructor(public navCtrl: NavController,
-    public proveedor: ServicioProvider,
+    public proveedor: ServicioProvider, 
+    private iab: InAppBrowser,
     private socialSharing: SocialSharing){
 
   }
@@ -27,10 +29,16 @@ export class HomePage {
 
   public goMyCompanyPage(){
     //let mensaje: string = "Hola.%0AEstoy%20interesado%20en%20agregar%20mi%20inmobiliaria.%0AGracias.%0A";
-    let mensaje: string = "Hola.\r\nEstoy interesado en agregar mi inmobiliaria.\r\nGracias.\r\n";
-    this.socialSharing.shareViaWhatsAppToReceiver("541130190242",mensaje, null, null);    
+    //let mensaje: string = "Hola.\r\nEstoy interesado en agregar mi inmobiliaria.\r\nGracias.\r\n";
+    //this.socialSharing.shareViaWhatsAppToReceiver("541130190242",mensaje, null, null);    
     //this.navCtrl.setRoot(MyCompanyPage);    
     //this.navCtrl.push(MyCompanyPage);
+    console.log('goMyCompanyPage');
+    let url = 'https://inmobiliaria.diportal.com.ar/';
+    console.log('url', url);    
+    const browser = this.iab.create(url, '_blank', 'location=yes,toolbarcolor=#FD0000,closebuttoncolor=#FFFFFF,closebuttoncaption=Cerrar,hidenavigationbuttons=yes,hideurlbar=yes,footer=no');
+    
+
   }
 
   clickHomeLogo(){

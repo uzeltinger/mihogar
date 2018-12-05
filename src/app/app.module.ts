@@ -24,6 +24,7 @@ import { MyCompanyPage } from '../pages/my-company/my-company';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesProvider } from '../providers/favorites/favorites';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { FavoritesProvider } from '../providers/favorites/favorites';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicioProvider,GoogleMaps,
     SessionProvider,Network,Toast,HeaderColor,SocialSharing,
-    FavoritesProvider
+    FavoritesProvider,InAppBrowser
   ]
 })
 export class AppModule {}

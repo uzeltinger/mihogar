@@ -24,6 +24,8 @@ export class PropertyPage {
   map: GoogleMap;
   agentSelected: boolean = false;
   agentFiltered:any = { agent_id: 0, agent_name: "" };
+  whatsappText: string;
+  whatsappLink: string;
 
   constructor(public navCtrl: NavController,
     //public googleMaps: GoogleMaps,
@@ -42,6 +44,9 @@ export class PropertyPage {
 
   async ngOnInit() {
 
+    this.whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\n";
+    this.whatsappLink = "http://mihogar.net.ar/propiedad/" + this.property.id + ".html";
+    
     if (localStorage.getItem("agentFiltered") === null) {
       this.agentFiltered = null;
     } else {
@@ -151,7 +156,7 @@ export class PropertyPage {
         }
       );
   }
-
+  
   shareToWhatsapp(property: any) {
     let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\n";
     let link = "http://mihogar.net.ar/propiedad/" + property.id + ".html";

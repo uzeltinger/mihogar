@@ -25,9 +25,12 @@
 
         <div class="offer-list-icon-whatsapp">
           <ion-icon float-right>
-            <a target="_blank" (click)="increaseWhatsappClick(property)">
-              <img src="assets/imgs/whatsappicon.png">
+              <a target="_blank" (click)="increaseWhatsappClick(property)" href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{whatsappLink}}">
+                <img src="assets/imgs/whatsappicon.png">
             </a>
+            <!--<a target="_blank" (click)="increaseWhatsappClick(property)">
+              <img src="assets/imgs/whatsappicon.png">
+            </a>-->
           </ion-icon>
         </div>
       </div>
