@@ -22,6 +22,8 @@ import { SessionProvider } from '../providers/session/session';
 import { WhatsappPropertiesListPage } from '../pages/whatsapp-properties-list/whatsapp-properties-list';
 import { MyCompanyPage } from '../pages/my-company/my-company';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { FavoritesPage } from '../pages/favorites/favorites';
+import { FavoritesProvider } from '../providers/favorites/favorites';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     HomePage,
     ListPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
-    WhatsappPropertiesListPage,MyCompanyPage
+    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage
   ],
   imports: [
     BrowserModule,
@@ -42,14 +44,15 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     HomePage,
     ListPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
-    WhatsappPropertiesListPage,MyCompanyPage
+    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicioProvider,GoogleMaps,
-    SessionProvider,Network,Toast,HeaderColor,SocialSharing
+    SessionProvider,Network,Toast,HeaderColor,SocialSharing,
+    FavoritesProvider
   ]
 })
 export class AppModule {}

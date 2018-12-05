@@ -6,6 +6,7 @@ import { PropertyPage } from '../property/property';
 import { ModalSearchPage } from '../modal-search/modal-search';
 import { SessionProvider } from '../../providers/session/session';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { FavoritesProvider } from '../../providers/favorites/favorites';
 
 @Component({
   selector: 'page-properties',
@@ -34,17 +35,17 @@ export class PropertiesPage {
   ciudadesById: any = [];
   categoriasById: any = [];
   firstSearch:boolean = true;
+  favorites: Array<any>;
 
   constructor(public navCtrl: NavController,
     private alertController: AlertController,
     public modalCtrl: ModalController,
+    private favoriteService: FavoritesProvider,
     public sessionData: SessionProvider,
     private socialSharing: SocialSharing,
     public proveedor: ServicioProvider) {
     this.whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nGracias.\r\n";
-
-    
-
+    this.favorites = [];
   }
 
   getCities() {
@@ -88,6 +89,7 @@ export class PropertiesPage {
     this.getCategories();
     this.getCities();
     this.obtenerFiltrosAplicados();
+    this.getFavorites();
     this.getProperties();
     this.showSplash = true;
   }
@@ -153,6 +155,14 @@ export class PropertiesPage {
       this.ciudadesById = this.sessionData.getCiudadesById();
       console.log('this.ciudadesById', this.ciudadesById);
     }
+  }
+
+  addToFavorites(property){
+
+  }
+
+  getFavorites(){
+    this.favorites = this.favoriteService.getFavorites();
   }
 
   getProperties() {

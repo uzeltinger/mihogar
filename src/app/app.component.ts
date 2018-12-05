@@ -9,6 +9,7 @@ import { SessionProvider } from '../providers/session/session';
 import { Toast } from '@ionic-native/toast';
 import { HeaderColor } from '@ionic-native/header-color';
 import { ServicioProvider } from '../providers/servicio/servicio';
+import { FavoritesPage } from '../pages/favorites/favorites';
 
 @Component({
   templateUrl: 'app.html'
@@ -35,7 +36,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Inicio', component: HomePage },
-      { title: 'Propiedades', component: PropertiesPage }
+      { title: 'Propiedades', component: PropertiesPage },
+      { title: 'Mis favoritos', component: FavoritesPage }
     ];
 
   }

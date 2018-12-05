@@ -17,7 +17,7 @@
     <ion-card class="offer-list-card">
 
       <div class="property-top-slide">
-        <ion-slides pager zoom parallax>
+        <ion-slides pager zoom parallax autoplay="2000">
           <ion-slide *ngFor="let image of imagenes">
             <img src="http://diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{image}}" />
           </ion-slide>
