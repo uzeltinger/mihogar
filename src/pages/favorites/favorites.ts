@@ -21,13 +21,14 @@ export class FavoritesPage {
   properties: any;
   items: any = [];
   favoritosGuardados: any = [];
-  whatsappText: string;
+  whatsappText:string = "Hola.\r\nEstoy interesado en esta propiedad.\r\n";
+  whatsappLink:string = "";
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private favoriteService: FavoritesProvider,
     private alertController: AlertController,
     public proveedor: ServicioProvider) {
-      this.whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nGracias.\r\n";
+      this.whatsappText = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0A";
   }
 
   ionViewDidLoad() {
@@ -64,7 +65,7 @@ export class FavoritesPage {
           element.mobile = "1130190242";
         }
         element.link = "http://diportal.com.ar/component/osproperty/" + element.ref + "-" + element.pro_alias + "-" + element.id + ".html"
-
+        element.whatsappLink = "http://mihogar.net.ar/propiedad/" + element.id + ".html";
         element.price = parseInt(element.price);
         element.price = element.price.toLocaleString('es-AR');
         if (element.curr == 1) {

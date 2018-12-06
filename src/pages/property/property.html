@@ -25,8 +25,8 @@
 
         <div class="offer-list-icon-whatsapp">
           <ion-icon float-right>
-              <a target="_blank" (click)="increaseWhatsappClick(property)" href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{whatsappLink}}">
-                <img src="assets/imgs/whatsappicon.png">
+            <a target="_blank" (click)="increaseWhatsappClick(property)" href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{whatsappLink}}">
+              <img src="assets/imgs/whatsappicon.png">
             </a>
             <!--<a target="_blank" (click)="increaseWhatsappClick(property)">
               <img src="assets/imgs/whatsappicon.png">
@@ -86,14 +86,14 @@
 
           <div class="text-align-center">
 
-            <div class="texto">Inmobiliaria<br> 
+            <div class="texto">Inmobiliaria<br>
               <a *ngIf="!agentSelected" (click)="navToAgentPropertiesListPage($event, property)">{{property.agent_name}}</a>
               <b *ngIf="agentSelected">{{property.agent_name}}</b>
 
             </div>
             <div class="icono icono-whatsapp-after-inmobiliaria">
               <ion-icon>
-                <a target="_blank" (click)="increaseWhatsappClick(property)">
+                <a target="_blank" (click)="increaseWhatsappClick(property)" href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{whatsappLink}}">
                   <img src="assets/imgs/whatsappicon.png">
                 </a>
               </ion-icon>

@@ -19,7 +19,6 @@ export class PropertiesPage {
   offersLimitStart: number = 0;
   offersLimit: number = 10;
   offersShowAll: boolean = false;
-  whatsappText: string
   filtrosAplicados: boolean = false;
   agentFiltered:any = { agent_id: 0, agent_name: "" };
   agentSelected: boolean = false;
@@ -36,6 +35,8 @@ export class PropertiesPage {
   categoriasById: any = [];
   firstSearch:boolean = true;
   favorites: Array<any>;
+  whatsappText:string = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0A";
+  whatsappLink:string = "";
 
   constructor(public navCtrl: NavController,
     private alertController: AlertController,
@@ -44,7 +45,6 @@ export class PropertiesPage {
     public sessionData: SessionProvider,
     private socialSharing: SocialSharing,
     public proveedor: ServicioProvider) {
-    this.whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\nGracias.\r\n";
     this.favorites = [];
   }
 
@@ -236,7 +236,7 @@ export class PropertiesPage {
               element.mobile = "1130190242";
             }
             element.link = "http://diportal.com.ar/component/osproperty/" + element.ref + "-" + element.pro_alias + "-" + element.id + ".html"
-
+            element.whatsappLink = "http://mihogar.net.ar/propiedad/" + element.id + ".html";
             element.price = parseInt(element.price);
             element.price = element.price.toLocaleString('es-AR');
             if (element.curr == 1) {
@@ -330,7 +330,7 @@ export class PropertiesPage {
   }
 
   increaseWhatsappClick(property) {
-    this.shareToWhatsapp(property);
+    //this.shareToWhatsapp(property);
     console.log('increaseWhatsappClick');
     this.proveedor.increaseWhatsappClick(property)
       .subscribe(
@@ -345,11 +345,13 @@ export class PropertiesPage {
   }
 
   shareToWhatsapp(property: any) {
+    /*
     let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\n";
     let link = "http://mihogar.net.ar/propiedad/" + property.id + ".html";
     this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, null, link);
     //this.socialSharing.share('',null,image,null);
     console.log('image', link);
+    */
   }
 
   doInfinite(): Promise<any> {

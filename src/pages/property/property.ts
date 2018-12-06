@@ -44,7 +44,7 @@ export class PropertyPage {
 
   async ngOnInit() {
 
-    this.whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\n";
+    this.whatsappText = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0A";
     this.whatsappLink = "http://mihogar.net.ar/propiedad/" + this.property.id + ".html";
     
     if (localStorage.getItem("agentFiltered") === null) {
@@ -143,7 +143,7 @@ export class PropertyPage {
   }
 
   increaseWhatsappClick(property) {
-    this.shareToWhatsapp(property);
+    //this.shareToWhatsapp(property);
     console.log('increaseWhatsappClick');
     this.proveedor.increaseWhatsappClick(property)
       .subscribe(
@@ -158,11 +158,12 @@ export class PropertyPage {
   }
   
   shareToWhatsapp(property: any) {
+    /*
     let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.\r\n";
     let link = "http://mihogar.net.ar/propiedad/" + property.id + ".html";
     this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, null, link);
-    //this.socialSharing.share('',null,image,null);
     console.log('image', link);
+    */
   }
 
 }
