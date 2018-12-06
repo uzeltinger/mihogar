@@ -29,6 +29,7 @@ export class ModalSearchPage {
   }
 
   ionViewDidLoad() {
+    console.log('ionViewDidLoad');
     //localStorage.clear();
     this.citiesFiltered = [];
     this.categoriesFiltered = [];
@@ -80,10 +81,10 @@ export class ModalSearchPage {
     this.showSplash = false;
   }
 
-  toggleCategory(category) {    
-    this.categoriesFiltered = [];
+  toggleCategory(category) {   
+    
     console.log('togglecategory', category);
-    if (localStorage.getItem("categoriesFiltered") === null) {
+    if (localStorage.getItem("categoriesFiltered") === null || localStorage.getItem("categoriesFiltered") == 'null') {
       this.categoriesFiltered = [];
     } else {
       this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
@@ -107,10 +108,37 @@ export class ModalSearchPage {
     this.setCategoriesFiltered();
   }
 
+  toggleCity(city) {
+    console.log('toggleCity', city);
+    if (localStorage.getItem("citiesFiltered") === null || localStorage.getItem("citiesFiltered") == 'null') {
+      this.citiesFiltered = [];
+    } else {
+      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
+      console.log('this.citiesFiltered', this.citiesFiltered);
+    }
+    if (city.isAssigned) {
+      console.log('city.isAssigned', city.isAssigned);
+      let a = this.citiesFiltered.indexOf(city.city_id);
+      console.log('aaaaaaaaaaa', a);
+      if (a != -1) {
+        this.citiesFiltered.splice(a, 1);
+      }
+    }
+    if (!city.isAssigned) {
+      console.log('!city.isAssigned', city.isAssigned);
+      //this.citiesFiltered.push(city.city_id);
+      let b = this.citiesFiltered.indexOf(city.city_id);
+      if (b == -1) {
+        this.citiesFiltered.push(city.city_id);
+      }
+    }
+    this.setCitiesFiltered();
+  }
+
   toggleCityLabel(city){
     
     console.log('toggleCity', city);
-    if (localStorage.getItem("citiesFiltered") === null) {
+    if (localStorage.getItem("citiesFiltered") === null || localStorage.getItem("citiesFiltered") == 'null') {
       this.citiesFiltered = [];
     } else {
       this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
@@ -138,7 +166,7 @@ export class ModalSearchPage {
 
   toggleCategoryLabel(category){
     console.log('togglecategory', category);
-    if (localStorage.getItem("categoriesFiltered") === null) {
+    if (localStorage.getItem("categoriesFiltered") === null || localStorage.getItem("categoriesFiltered") == 'null') {
       this.categoriesFiltered = [];
     } else {
       this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
@@ -163,32 +191,7 @@ export class ModalSearchPage {
     this.setCategoriesFiltered();
   }
 
-  toggleCity(city) {
-    console.log('toggleCity', city);
-    if (localStorage.getItem("citiesFiltered") === null) {
-      this.citiesFiltered = [];
-    } else {
-      this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
-      console.log('this.citiesFiltered', this.citiesFiltered);
-    }
-    if (city.isAssigned) {
-      console.log('city.isAssigned', city.isAssigned);
-      let a = this.citiesFiltered.indexOf(city.city_id);
-      console.log('aaaaaaaaaaa', a);
-      if (a != -1) {
-        this.citiesFiltered.splice(a, 1);
-      }
-    }
-    if (!city.isAssigned) {
-      console.log('!city.isAssigned', city.isAssigned);
-      this.citiesFiltered.push(city.city_id);
-      let b = this.citiesFiltered.indexOf(city.city_id);
-      if (b == -1) {
-        this.citiesFiltered.push(city.city_id);
-      }
-    }
-    this.setCitiesFiltered();
-  }
+  
 
   changeAmbientes() { }
   changeDormitorios() { }
@@ -196,7 +199,8 @@ export class ModalSearchPage {
   changePrice() { }
 
   getCitiesFiltered() {
-    if (localStorage.getItem("citiesFiltered") === null) {
+    console.log('typeof citiesFiltered', typeof localStorage.getItem("citiesFiltered") );
+    if (localStorage.getItem("citiesFiltered") === null || localStorage.getItem("citiesFiltered") == 'null') {
       this.citiesFiltered = [];
     } else {
       this.citiesFiltered = JSON.parse(localStorage.getItem("citiesFiltered"));
@@ -205,20 +209,30 @@ export class ModalSearchPage {
   }
 
   getCategoriesFiltered() {
-    if (localStorage.getItem("categoriesFiltered") === null) {
+    console.log('typeof categoriesFiltered', typeof localStorage.getItem("categoriesFiltered") );
+    if (localStorage.getItem("categoriesFiltered") === null || localStorage.getItem("categoriesFiltered") == 'null') {
       this.categoriesFiltered = [];
     } else {
+      console.log('JSON.parse(localStorage.getItem("categoriesFiltered")',localStorage.getItem("categoriesFiltered"));
       this.categoriesFiltered = JSON.parse(localStorage.getItem("categoriesFiltered"));
     }
     console.log('this.categoriesFiltered', this.categoriesFiltered);
   }
 
   setCitiesFiltered() {
+    if(this.citiesFiltered.length == 0){
+      this.citiesFiltered = [];
+    }
     localStorage.setItem("citiesFiltered", JSON.stringify(this.citiesFiltered))
+    console.log('this.citiesFiltered', this.citiesFiltered);
   }
 
-  setCategoriesFiltered() {
+  setCategoriesFiltered() {    
+    if(this.categoriesFiltered.length == 0){
+      this.categoriesFiltered = [];
+    }
     localStorage.setItem("categoriesFiltered", JSON.stringify(this.categoriesFiltered))
+    console.log('this.categoriesFiltered', this.categoriesFiltered);
   }
 
   getPriceRangeValue() {
