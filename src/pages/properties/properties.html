@@ -66,7 +66,9 @@
       </a>
 
       <div class="properties-list-favorite">
-        <ion-icon name="heart" isActive="false"></ion-icon>
+        <a (click)="addToFavorites(property)">
+          <ion-icon name="heart" isActive="false" [ngClass]="{'favorito':property.isFavorite, 'favorito':isFavorite(property.id)}"></ion-icon>
+        </a>
       </div>
       <div class="offer-list-icon-whatsapp">
         <ion-icon float-right>

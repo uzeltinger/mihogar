@@ -116,6 +116,13 @@ export class ServicioProvider {
     url = this.apiUrl + 'index.php?option=com_osproperty&task=json_cities';
     return this.httpClient.get(url);
   }
+
+  getFavorites(favorites) {    
+    this.httpOptions = this.getHeader();
+    let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_favorites&favoritos='+favorites;
+    console.log('url',url);
+    return this.httpClient.get(url);
+  }
   
   getHeader() {
     return {

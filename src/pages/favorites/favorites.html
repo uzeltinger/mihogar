@@ -1,18 +1,62 @@
-<!--
-  Generated template for the FavoritesPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>favorites</ion-title>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mis favoritos</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<div *ngIf="showSplash" class="splash">
+  <div class="spinner">
+    <ion-spinner></ion-spinner>
+  </div>
+</div>
 
-<ion-content padding>
 
+<ion-content class="ion-content-1rem darkbackground">
+
+  <div class="filtrosAplicados" *ngIf="filtrosAplicados"></div>
+  <div class="filtrosNoAplicados" *ngIf="!filtrosAplicados"></div>
+
+  <ion-card *ngFor="let property of items" class="offer-list-card">
+
+    <div class="offer-list-card-img">
+
+      <a (click)="navToPropertyPage($event, property)">
+        <img src="http://diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{property.image}}" />
+      </a>
+
+      <div class="properties-list-favorite">
+        <a (click)="addToFavorites(property)">
+          <ion-icon name="heart" isActive="false" class="favorito"></ion-icon>
+        </a>
+      </div>
+      <div class="offer-list-icon-whatsapp">
+        <ion-icon float-right>
+            <a target="_blank" (click)="increaseWhatsappClick(property)" href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{whatsappLink}}">
+              <img src="assets/imgs/whatsappicon.png">
+          </a>
+        </ion-icon>
+      </div>
+    </div>
+    <ion-card-content>
+      <ion-card-title>
+        {{property.city_name}}
+      </ion-card-title>
+
+      <p>{{property.category_name}}</p>
+      <ion-item class="item-price">
+
+        <span *ngIf="property.rooms>0">{{property.rooms}} Ambientes</span>
+
+        <ion-badge item-end class="badge-price" *ngIf="property.price>0">
+          <span>{{property.moneda}} {{property.price}}</span>
+        </ion-badge>
+
+      </ion-item>
+
+    </ion-card-content>
+
+  </ion-card>
 </ion-content>

@@ -158,7 +158,13 @@ export class PropertiesPage {
   }
 
   addToFavorites(property){
+    if(this.favoriteService.addFavorite(property.id)){
+      property.isFavorite = true;
+    }
+  }
 
+  isFavorite(id){
+    return this.favoriteService.isFavorite(id);
   }
 
   getFavorites(){

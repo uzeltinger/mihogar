@@ -16,8 +16,15 @@ export class FavoritesProvider {
     console.log('Hello FavoritesProvider Provider');
     this.favorites = [];
   }
+
   addFavorite(id: number): boolean {
-    this.favorites.push(id);
+    this.getStoredFavorites();
+    let b = this.favorites.indexOf(id);
+      if (b == -1) {
+        this.favorites.push(id);
+      }
+    localStorage.setItem("favorites", JSON.stringify(this.favorites));
+    console.log('this.favorites',this.favorites);    
     return true;
   }
 
@@ -28,5 +35,14 @@ export class FavoritesProvider {
   getFavorites(){
     return this.favorites;
   }
+
+  getStoredFavorites() {
+    if (localStorage.getItem("favorites") === null) {
+      this.favorites = [];
+    } else {
+      this.favorites = JSON.parse(localStorage.getItem("favorites"));
+    }
+    return this.favorites;
+  }  
 
 }
