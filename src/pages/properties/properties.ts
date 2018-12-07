@@ -5,7 +5,6 @@ import { AgentPropertiesListPage } from '../agent-properties-list/agent-properti
 import { PropertyPage } from '../property/property';
 import { ModalSearchPage } from '../modal-search/modal-search';
 import { SessionProvider } from '../../providers/session/session';
-import { SocialSharing } from '@ionic-native/social-sharing';
 import { FavoritesProvider } from '../../providers/favorites/favorites';
 
 @Component({
@@ -43,7 +42,6 @@ export class PropertiesPage {
     public modalCtrl: ModalController,
     private favoriteService: FavoritesProvider,
     public sessionData: SessionProvider,
-    private socialSharing: SocialSharing,
     public proveedor: ServicioProvider) {
     this.favorites = [];
   }

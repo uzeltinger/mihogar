@@ -35,7 +35,7 @@ export class HomePage {
     let url = 'https://inmobiliaria.diportal.com.ar/';
     console.log('url', url);    
     const browser = this.iab.create(url, '_blank', 'location=yes,toolbarcolor=#2196F3,closebuttoncolor=#FFFFFF,closebuttoncaption=Cerrar,hidenavigationbuttons=yes,hideurlbar=yes,footer=no');
-    
+    console.log('browser', browser);
 
   }
 
