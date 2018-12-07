@@ -1,30 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
-/*
-  Generated class for the FavoritesProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class FavoritesProvider {
 
   favorites: Array<any>;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,
+    private storage: Storage) {
     console.log('Hello FavoritesProvider Provider');
     this.favorites = [];
   }
 
-  addFavorite(id: number): boolean {
-    this.getStoredFavorites();
-    let b = this.favorites.indexOf(id);
-      if (b == -1) {
-        this.favorites.push(id);
-      }
+  addFavorite(id: number): boolean {    
+    this.favorites.push(id);    
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
-    console.log('this.favorites',this.favorites);    
+    console.log('this.favorites', this.favorites);
+    this.storage.set('favorites', JSON.stringify(this.favorites));         
+    return true;
+  }
+
+  removeFavorite(id: number): boolean {    
+    const index = this.favorites.indexOf(id);
+    if (index > -1) {
+      this.favorites.splice(index, 1);
+    }
     return true;
   }
 
@@ -32,17 +33,15 @@ export class FavoritesProvider {
     return this.favorites.some(el => el === id);
   }
 
-  getFavorites(){
+  getFavorites() {
     return this.favorites;
   }
 
   getStoredFavorites() {
-    if (localStorage.getItem("favorites") === null) {
-      this.favorites = [];
-    } else {
-      this.favorites = JSON.parse(localStorage.getItem("favorites"));
-    }
-    return this.favorites;
-  }  
-
+    console.log('getStoredFavorites');
+    this.storage.get('favorites').then((val) => {
+      console.log('Your favorites is', val);
+      this.favorites = JSON.parse(val);
+    });
+  }
 }

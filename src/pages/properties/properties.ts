@@ -157,18 +157,32 @@ export class PropertiesPage {
     }
   }
 
-  addToFavorites(property){
-    if(this.favoriteService.addFavorite(property.id)){
-      property.isFavorite = true;
-    }
+  addToFavorites(property): boolean{
+    console.log('property',property);
+    if(property.isFavorite===true){
+      console.log('property isFavorite',property);
+      this.favoriteService.removeFavorite(property.id);
+      property.isFavorite = false;
+      return  false;
+    }else{
+      console.log('property NO isFavorite',property);
+      if(this.favoriteService.addFavorite(property.id)){
+        property.isFavorite = true;
+        return  true;
+      }
+    }    
   }
 
-  isFavorite(id){
-    return this.favoriteService.isFavorite(id);
+  isFavorite(property){
+    let isFavorite = this.favoriteService.isFavorite(property.id);
+    property.isFavorite = isFavorite;
+    return isFavorite;
   }
 
   getFavorites(){
+    //this.favorites = this.favoriteService.getFavorites();
     this.favorites = this.favoriteService.getFavorites();
+    console.log('this.favorites',this.favorites);
   }
 
   getProperties() {
@@ -177,7 +191,7 @@ export class PropertiesPage {
       "limit": this.offersLimit,
       "limitstart": this.offersLimitStart,
       "agent_id": 0,
-      "isFeatured": 1,
+      "isFeatured": 0,
       "cities": null,
       "categories": null,
       "type": 0,

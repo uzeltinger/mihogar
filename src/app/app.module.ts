@@ -25,6 +25,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesProvider } from '../providers/favorites/favorites';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

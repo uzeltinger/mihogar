@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PropertiesPage } from '../properties/properties';
 import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp-properties-list';
-import { SocialSharing } from '@ionic-native/social-sharing';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -15,8 +14,7 @@ export class HomePage {
   
   constructor(public navCtrl: NavController,
     public proveedor: ServicioProvider, 
-    private iab: InAppBrowser,
-    private socialSharing: SocialSharing){
+    private iab: InAppBrowser){
 
   }
   ionViewDidLoad() {
@@ -36,7 +34,7 @@ export class HomePage {
     console.log('goMyCompanyPage');
     let url = 'https://inmobiliaria.diportal.com.ar/';
     console.log('url', url);    
-    const browser = this.iab.create(url, '_blank', 'location=yes,toolbarcolor=#FD0000,closebuttoncolor=#FFFFFF,closebuttoncaption=Cerrar,hidenavigationbuttons=yes,hideurlbar=yes,footer=no');
+    const browser = this.iab.create(url, '_blank', 'location=yes,toolbarcolor=#2196F3,closebuttoncolor=#FFFFFF,closebuttoncaption=Cerrar,hidenavigationbuttons=yes,hideurlbar=yes,footer=no');
     
 
   }

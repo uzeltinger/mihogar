@@ -10,6 +10,7 @@ import { Toast } from '@ionic-native/toast';
 import { HeaderColor } from '@ionic-native/header-color';
 import { ServicioProvider } from '../providers/servicio/servicio';
 import { FavoritesPage } from '../pages/favorites/favorites';
+import { FavoritesProvider } from '../providers/favorites/favorites';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,6 +26,7 @@ export class MyApp {
     public statusBar: StatusBar,
     private alertController: AlertController,
     public sessionProvider: SessionProvider,
+    private favoriteService: FavoritesProvider,
     public proveedor: ServicioProvider,
     private network: Network,
     public headerColor: HeaderColor,
@@ -48,6 +50,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       //this.statusBar.styleDefault();      
       this.headerColor.tint('#2196F3');
+      this.getStoredFavorites();
       this.listenConnection();
       this.getLastVersion();
       if (this.platform.is('android')) {
@@ -59,6 +62,10 @@ export class MyApp {
       }
 
     });
+  }
+
+  getStoredFavorites(){
+    this.favoriteService.getStoredFavorites();
   }
 
   getLastVersion() {

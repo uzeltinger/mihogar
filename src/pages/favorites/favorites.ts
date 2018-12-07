@@ -33,7 +33,7 @@ export class FavoritesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavoritesPage');
-    this.favoritosGuardados = this.favoriteService.getStoredFavorites();
+    this.favoritosGuardados = this.favoriteService.getFavorites();
     console.log('this.favoritosGuardados',this.favoritosGuardados);
     if(this.favoritosGuardados.length==0){
       this.showAlert('No hay favoritos', 'UPS! Parece que no hay propiedades guardadas en favoritos.');
@@ -43,9 +43,7 @@ export class FavoritesPage {
     
   }
 
-  getFavorites(favoritosGuardados){  
-
-    
+  getFavorites(favoritosGuardados){      
 
     this.showSplash = true;
   this.proveedor.getFavorites(favoritosGuardados)
@@ -89,6 +87,20 @@ export class FavoritesPage {
 
     }
   )
+}
+
+removeToFavorites(property): void{  
+  console.log('removeToFavorites');
+    this.favoriteService.removeFavorite(property.id);
+    property.isFavorite = false;
+    let index = 0;
+    console.log('index',index);
+    this.items.forEach(element => {
+      if(element.id === property.id){
+        this.items.splice(index, 1);    
+      }
+      index++;
+    });    
 }
 
 increaseWhatsappClick(property) {
