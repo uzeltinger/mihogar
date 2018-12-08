@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class FavoritesProvider {
 
-  favorites: Array<any>;
+  favorites: any = [];
 
   constructor(public http: HttpClient,
     private storage: Storage) {
@@ -30,7 +30,9 @@ export class FavoritesProvider {
   }
 
   isFavorite(id: number): boolean {
-    return this.favorites.some(el => el === id);
+    if(this.favorites!=null){
+      return this.favorites.some(el => el === id);
+    }    
   }
 
   getFavorites() {
@@ -40,8 +42,10 @@ export class FavoritesProvider {
   getStoredFavorites() {
     console.log('getStoredFavorites');
     this.storage.get('favorites').then((val) => {
-      console.log('Your favorites is', val);
-      this.favorites = JSON.parse(val);
+      if(val!=null){
+        this.favorites = JSON.parse(val);
+      }    
+      console.log('Your favorites is', val);  
     });
   }
 }

@@ -6,6 +6,7 @@ import { PropertyPage } from '../property/property';
 import { ModalSearchPage } from '../modal-search/modal-search';
 import { SessionProvider } from '../../providers/session/session';
 import { FavoritesProvider } from '../../providers/favorites/favorites';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-properties',
@@ -41,6 +42,7 @@ export class PropertiesPage {
     private alertController: AlertController,
     public modalCtrl: ModalController,
     private favoriteService: FavoritesProvider,
+    public socialSharing: SocialSharing,
     public sessionData: SessionProvider,
     public proveedor: ServicioProvider) {
     this.favorites = [];
@@ -342,7 +344,7 @@ export class PropertiesPage {
   }
 
   increaseWhatsappClick(property) {
-    //this.shareToWhatsapp(property);
+    this.shareToWhatsapp(property);
     console.log('increaseWhatsappClick');
     this.proveedor.increaseWhatsappClick(property)
       .subscribe(
@@ -363,7 +365,20 @@ export class PropertiesPage {
     this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, null, link);
     //this.socialSharing.share('',null,image,null);
     console.log('image', link);
-    */
+    */   
+    //this.whatsappText = offerToShare.subject + "\r\n" + offerToShare.description + "\r\n" + offerToShare.specialPriceFormated;
+    //this.whatsappImage = this.pictures_path + offerToShare.picture_path;
+    //this.whatsappUrl = "\r\n" + 'https://mioferta.com.ar/offer/' + offerToShare.id; 
+    //href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{property.whatsappLink}}"
+    let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.";
+    let whatsappImage = "http://diportal.com.ar/images/osproperty/properties/"+property.id+"/medium/"+property.image+"";
+    let whatsappUrl = "\r\nhttp://mihogar.net.ar/propiedad/" + property.id + ".html";
+    console.log('whatsappText', whatsappText);
+    console.log('whatsappImage', whatsappImage);
+    console.log('whatsappUrl', whatsappUrl);
+
+    //this.socialSharing.shareViaWhatsApp(whatsappText, whatsappImage, whatsappUrl)
+    this.socialSharing.shareViaWhatsAppToReceiver("+54"+property.mobile, whatsappText, whatsappImage, whatsappUrl)
   }
 
   doInfinite(): Promise<any> {
