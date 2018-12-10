@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the MyCompanyPage page.
@@ -14,14 +16,18 @@ import { ServicioProvider } from '../../providers/servicio/servicio';
   templateUrl: 'my-company.html',
 })
 export class MyCompanyPage {
+  login: any = {username:"",password:""};  
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public proveedor: ServicioProvider) {
+    public proveedor: ServicioProvider,
+    private iab: InAppBrowser,
+    private socialSharing: SocialSharing) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyCompanyPage');
+    
     this.addCompany();
   }
 
@@ -36,6 +42,40 @@ export class MyCompanyPage {
           console.log('addCompany error: ', error);
         }
       );
+  }
+
+  public goMyCompanyPage(){
+    console.log('goMyCompanyPage');
+    let url = 'https://inmobiliaria.diportal.com.ar/';
+    console.log('url', url);    
+    const browser = this.iab.create(url, '_blank', 'location=yes,toolbarcolor=#2196F3,closebuttoncolor=#FFFFFF,closebuttoncaption=Cerrar,hidenavigationbuttons=yes,hideurlbar=yes,footer=no');
+    console.log('browser', browser);
+
+  }
+
+  public sendWhatsapp(){
+    let mensaje: string = "Hola.\r\nEstoy interesado en agregar mi inmobiliaria.\r\nGracias.\r\n";
+    this.socialSharing.shareViaWhatsAppToReceiver("541130190242",mensaje, null, null);    
+  } 
+
+  onSubmitLogin(form){
+    console.log('form',form);
+    let dataSend = form.form.value;
+    let url = 'https://inmobiliaria.diportal.com.ar/index.php?option=com_osproperty&task=api_login&username='+dataSend.username+'&password='+dataSend.password;
+    console.log('url', url);    
+    const browser = this.iab.create(url, '_blank', 'location=yes,toolbarcolor=#2196F3,closebuttoncolor=#FFFFFF,closebuttoncaption=Cerrar,hidenavigationbuttons=yes,hideurlbar=yes,footer=no');
+   
+    /*
+    this.proveedor.login(dataSend)
+    .subscribe(
+      data => {
+        console.log('onSubmitLogin data: ', data);
+      },
+      error => {
+        console.log('onSubmitLogin error: ', error);
+      }
+    );
+    */
   }
 
 }

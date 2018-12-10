@@ -11,6 +11,7 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { ServicioProvider } from '../providers/servicio/servicio';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesProvider } from '../providers/favorites/favorites';
+import { MyCompanyPage } from '../pages/my-company/my-company';
 
 @Component({
   templateUrl: 'app.html'

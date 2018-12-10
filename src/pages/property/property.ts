@@ -151,7 +151,7 @@ export class PropertyPage {
   }
 
   increaseWhatsappClick(property) {
-    //this.shareToWhatsapp(property);
+    this.shareToWhatsapp(property);
     console.log('increaseWhatsappClick');
     this.proveedor.increaseWhatsappClick(property)
       .subscribe(

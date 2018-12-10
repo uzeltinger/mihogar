@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 export class ServicioProvider {
   //apiUrl: string = 'http://diportal.local/';
   apiUrl: string = 'http://diportal.com.ar/';
+  apiLoginUrl: string = 'http://inmobiliaria.diportal.com.ar/';
   httpOptions: any = {};
   constructor(public httpClient: HttpClient) {
     //console.log('Hello ProvidersServicioProvider Provider');
@@ -122,6 +123,14 @@ export class ServicioProvider {
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_favorites&favoritos='+favorites;
     console.log('url',url);
     return this.httpClient.get(url);
+  }
+
+  login(dateSend) {    
+    this.httpOptions = this.getHeader();
+    return this.httpClient.post<any>(this.apiLoginUrl + "index.php?option=com_osproperty&task=api_login", dateSend, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );    
   }
   
   getHeader() {
