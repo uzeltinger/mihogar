@@ -11,7 +11,6 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { ServicioProvider } from '../providers/servicio/servicio';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesProvider } from '../providers/favorites/favorites';
-import { MyCompanyPage } from '../pages/my-company/my-company';
 
 @Component({
   templateUrl: 'app.html'
@@ -70,7 +69,7 @@ export class MyApp {
   }
 
   getLastVersion() {
-    let version = "1.0.5"
+    let version = "1.0.6"
     this.proveedor.getLastVersion()
       .subscribe(
         (data) => {
