@@ -11,6 +11,7 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { ServicioProvider } from '../providers/servicio/servicio';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesProvider } from '../providers/favorites/favorites';
+import { AboutPage } from '../pages/about/about';
 
 @Component({
   templateUrl: 'app.html'
@@ -39,7 +40,8 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HomePage },
       { title: 'Propiedades', component: PropertiesPage },
-      { title: 'Mis favoritos', component: FavoritesPage }
+      { title: 'Mis favoritos', component: FavoritesPage },
+      { title: 'Información', component: AboutPage }
     ];
 
   }
@@ -69,7 +71,7 @@ export class MyApp {
   }
 
   getLastVersion() {
-    let version = "1.0.6"
+    let version = "1.0.7"
     this.proveedor.getLastVersion()
       .subscribe(
         (data) => {

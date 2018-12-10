@@ -5,6 +5,7 @@ import { HeaderColor } from '@ionic-native/header-color';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { AboutPage } from '../pages/about/about';
 import { ListPage } from '../pages/list/list';
 import { Network } from '@ionic-native/network';
 import { Toast } from '@ionic-native/toast';
@@ -33,7 +34,7 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     ListPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
-    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage
+    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +48,7 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     ListPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
-    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage
+    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage
   ],
   providers: [
     StatusBar,
