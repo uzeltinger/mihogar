@@ -8,4 +8,21 @@
 </ion-header>
 <ion-content class="darkbackground background">	
 
+    <div *ngIf="showSplash" class="splash">
+        <div class="spinner">
+          <ion-spinner></ion-spinner>
+        </div>
+      </div>
+      
+  <ion-list>
+    <ion-item *ngFor="let property of myProperties">
+      <ion-avatar item-start>  
+        <img src="http://inmobiliaria.diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{property.image}}" />  
+        
+      </ion-avatar>
+      <h2>{{property.category_name}} - {{property.city_name}}</h2>
+      <p>{{property.address}}</p>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

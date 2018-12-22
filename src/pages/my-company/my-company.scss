@@ -2,7 +2,17 @@ page-my-company {
     .background {
 		background-image: url('../assets/imgs/fondologin.jpg');
 	}
-
+	.darkbackground .item-md {
+        background-color: rgba(26, 24, 24, 0.6);
+		border-bottom: 1px solid #000;
+	}
+	.item-md ion-avatar img {
+		border-radius: 0;
+	}
+	.label-md {
+		margin: 4px 8px 8px 0;
+	}
+/*
 	.scroll-content {
 		align-content: center;
 		display: flex;
@@ -94,4 +104,5 @@ page-my-company {
 	.item-md .item-inner {
 		padding-right: 0!important;
 	}
+	*/
 }

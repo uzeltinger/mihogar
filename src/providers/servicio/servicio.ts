@@ -5,14 +5,25 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ServicioProvider {
+  token: string = null;
   //apiUrl: string = 'http://diportal.local/';
   apiUrl: string = 'http://diportal.com.ar/';
   apiLoginUrl: string = 'https://inmobiliaria.diportal.com.ar/';
-  //apiLoginUrl: string = 'http://joomla.local/';
+  //apiLoginUrl: string = 'http://inmobiliaria.diportal.local/';
   httpOptions: any = {};
   constructor(public httpClient: HttpClient) {
     //console.log('Hello ProvidersServicioProvider Provider');
   }
+
+  getMyProperties(user){
+    this.token = user.hash;
+    this.httpOptions = this.getHeader();
+    //return this.httpClient.post<any>(this.apiLoginUrl + "index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)
+    let url = this.apiLoginUrl + 'index.php?option=com_api&app=mihogar&resource=mispropiedades&format=raw';
+    console.log('url',url);
+    return this.httpClient.get(url, this.httpOptions);
+  }
+
   getPropertiesWhatsapp(){
     this.httpOptions = this.getHeader();
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties_whatsapp';
@@ -133,12 +144,20 @@ export class ServicioProvider {
         catchError(this.handleError)
       );    
   }
-  
+  logout() {
+    this.token = null;
+    this.httpOptions = this.getHeader();
+    return this.httpClient.get(this.apiLoginUrl + "index.php?option=com_api&app=mihogar&resource=logout&format=raw", this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );    
+  } 
   getHeader() {
+    console.log('token',this.token);
     return {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'/*,
-        'Authorization': this.user.token ? 'Bearer ' + this.user.token : ''*/
+        'Content-Type': 'application/json',
+        'Authorization': this.token ? 'Bearer ' + this.token : ''
       })
     };
   }

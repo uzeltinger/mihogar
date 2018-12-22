@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { isNullOrUndefined } from 'util';
 import { Subject } from 'rxjs/Subject';
+import { ServicioProvider } from '../servicio/servicio';
+
 
 @Injectable()
 export class SessionProvider {
@@ -23,6 +25,7 @@ export class SessionProvider {
   }
 
   constructor(public http: HttpClient,
+    private servicioProvider: ServicioProvider,
     private storage: Storage) {
     //console.log('Hello SessionProvider Provider');
   }
@@ -71,6 +74,14 @@ export class SessionProvider {
     console.log('setUserLogued user', user);
   }
   setUserLogout(){
+    this.servicioProvider.logout().subscribe(
+      (data) => {
+        console.log('setUserLogout data', data);
+      },
+      (error) => {
+        console.log('setUserLogout error', error);
+      }
+    )
     this.user = null;
     this.isUserLogued = false;
     this.userEmitChange(false);
