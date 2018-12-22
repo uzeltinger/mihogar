@@ -4,6 +4,7 @@ import { ServicioProvider } from '../../providers/servicio/servicio';
 //import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { SocialSharing } from '@ionic-native/social-sharing';
 import { SessionProvider } from '../../providers/session/session';
+import { PropertyEditPage } from '../property-edit/property-edit';
 
 @Component({
   selector: 'page-my-company',
@@ -48,6 +49,16 @@ export class MyCompanyPage {
           this.showSplash = false;
         }
       )
+  }
+
+  addProperty(){
+    this.navCtrl.push(PropertyEditPage);
+  }
+
+  navToPropertyPage(event, property) {
+    this.navCtrl.push(PropertyEditPage, {
+      property: property
+    });
   }
 
   /*
