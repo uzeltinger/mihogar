@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { SessionProvider } from '../../providers/session/session';
 import { MyCompanyPage } from '../my-company/my-company';
@@ -19,7 +18,6 @@ export class LoginPage {
     public servicioProvider: ServicioProvider,
     public sessionProvider: SessionProvider,
     private alertController: AlertController,
-    private iab: InAppBrowser,
     public loadingCtrl: LoadingController,
     private socialSharing: SocialSharing) {      
   }

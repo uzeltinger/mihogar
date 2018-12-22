@@ -4,7 +4,6 @@ import { PropertiesPage } from '../properties/properties';
 import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp-properties-list';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 /*import { InAppBrowser } from '@ionic-native/in-app-browser';*/
-import { MyCompanyPage } from '../my-company/my-company';
 import { LoginPage } from '../login/login';
 
 @Component({
