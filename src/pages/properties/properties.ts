@@ -52,7 +52,7 @@ export class PropertiesPage {
     this.proveedor.getCities()
       .subscribe(
         (data) => {
-          console.log('getCities', data);
+          //console.log('getCities', data);
           this.sessionData.setCiudades(data);
           let cities: any = data;
           let ciudadesById: any = [];
@@ -70,7 +70,7 @@ export class PropertiesPage {
     this.proveedor.getCategories()
       .subscribe(
         (data) => {
-          console.log('getCategories', data);
+          //console.log('getCategories', data);
           this.sessionData.setCategorias(data);
           let categories: any = data;
           let categoriasById: any = [];
@@ -182,7 +182,7 @@ export class PropertiesPage {
   getFavorites(){
     //this.favorites = this.favoriteService.getFavorites();
     this.favorites = this.favoriteService.getFavorites();
-    console.log('this.favorites',this.favorites);
+    //console.log('this.favorites',this.favorites);
   }
 
   getProperties() {

@@ -7,7 +7,8 @@ import { catchError } from 'rxjs/operators';
 export class ServicioProvider {
   //apiUrl: string = 'http://diportal.local/';
   apiUrl: string = 'http://diportal.com.ar/';
-  apiLoginUrl: string = 'http://inmobiliaria.diportal.com.ar/';
+  //apiLoginUrl: string = 'http://inmobiliaria.diportal.com.ar/';
+  apiLoginUrl: string = 'http://joomla.local/';
   httpOptions: any = {};
   constructor(public httpClient: HttpClient) {
     //console.log('Hello ProvidersServicioProvider Provider');
@@ -127,7 +128,7 @@ export class ServicioProvider {
 
   login(dateSend) {    
     this.httpOptions = this.getHeader();
-    return this.httpClient.post<any>(this.apiLoginUrl + "index.php?option=com_osproperty&task=api_login", dateSend, this.httpOptions)
+    return this.httpClient.post<any>(this.apiLoginUrl + "index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );    

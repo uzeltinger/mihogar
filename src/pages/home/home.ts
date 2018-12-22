@@ -5,6 +5,7 @@ import { WhatsappPropertiesListPage } from '../whatsapp-properties-list/whatsapp
 import { ServicioProvider } from '../../providers/servicio/servicio';
 /*import { InAppBrowser } from '@ionic-native/in-app-browser';*/
 import { MyCompanyPage } from '../my-company/my-company';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -26,7 +27,7 @@ export class HomePage {
   }
 
   public goMyCompanyPage(){
-    this.navCtrl.push(MyCompanyPage);
+    this.navCtrl.push(LoginPage);
     //let mensaje: string = "Hola.%0AEstoy%20interesado%20en%20agregar%20mi%20inmobiliaria.%0AGracias.%0A";
     //let mensaje: string = "Hola.\r\nEstoy interesado en agregar mi inmobiliaria.\r\nGracias.\r\n";
     //this.socialSharing.shareViaWhatsAppToReceiver("541130190242",mensaje, null, null);    

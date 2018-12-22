@@ -9,14 +9,14 @@ export class FavoritesProvider {
 
   constructor(public http: HttpClient,
     private storage: Storage) {
-    console.log('Hello FavoritesProvider Provider');
+    //console.log('Hello FavoritesProvider Provider');
     this.favorites = [];
   }
 
   addFavorite(id: number): boolean {    
     this.favorites.push(id);    
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
-    console.log('this.favorites', this.favorites);
+    //console.log('this.favorites', this.favorites);
     this.storage.set('favorites', JSON.stringify(this.favorites));         
     return true;
   }
@@ -30,6 +30,7 @@ export class FavoritesProvider {
   }
 
   isFavorite(id: number): boolean {
+    //console.log('this.favorites',this.favorites);
     if(this.favorites!=null){
       return this.favorites.some(el => el === id);
     }    
@@ -40,12 +41,12 @@ export class FavoritesProvider {
   }
 
   getStoredFavorites() {
-    console.log('getStoredFavorites');
+    //console.log('getStoredFavorites');
     this.storage.get('favorites').then((val) => {
       if(val!=null){
         this.favorites = JSON.parse(val);
       }    
-      console.log('Your favorites is', val);  
+      //console.log('Your favorites is', val);  
     });
   }
 }

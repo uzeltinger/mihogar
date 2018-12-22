@@ -1,78 +1,11 @@
-<!--
-  Generated template for the MyCompanyPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
     <ion-title>Mi Inmobiliaria</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-<ion-content class="darkbackground background">
-
-	<div style="text-align:center">    
-		<button ion-button class="seleccione" (click)="sendWhatsapp()">        
-			<span>Quiero agregar<br>mi inmobiliaria</span>
-		</button>
-</div>
-
-  
-
-  <br>
-	
-	<form (ngSubmit)="onSubmitLogin(loginForm)" #loginForm="ngForm">
-
-	
-	<ion-card>
-		<ion-card-header>
-			Ingresar a mi cuenta
-		</ion-card-header>
-		<ion-card-content>
-			<ion-list no-line>
-				<ion-item>						
-					<ion-input type="text" placeholder="Usuario" name="username" id="username" 
-					[(ngModel)]="username" required></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-input type="password" placeholder="Clave" name="password" id="password" 
-					[(ngModel)]="password" required></ion-input>
-				</ion-item>
-				<button ion-button block outline color="light" class="button-entrar">ENTRAR</button>				
-				
-			</ion-list>
-		</ion-card-content>
-	</ion-card>
-</form>
-	
+<ion-content class="darkbackground background">	
 
 </ion-content>
-<!--
-<ion-content class="background">
-	<ion-card>
-		<ion-card-header>
-			Login Form
-		</ion-card-header>
-		<ion-card-content>
-			<ion-list no-line>
-				<ion-item>
-					<ion-input type="text" placeholder="Username"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-input type="password" placeholder="Password"></ion-input>
-				</ion-item>
-				<a>Forgot your login detail? <b>Get help signing in</b></a>
-				<button ion-button block outline color="light">Log in</button>
-				<p>OR</p>
-				<button ion-button block color="facebook">
-					<ion-icon name="logo-facebook"></ion-icon> Login with facebook
-				</button>
-			</ion-list>
-		</ion-card-content>
-	</ion-card>
-	<button class="bottom" ion-button clear full color="light">Don't have an account? Sign up</button>
-</ion-content>
--->

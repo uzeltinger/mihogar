@@ -12,6 +12,8 @@ import { ServicioProvider } from '../providers/servicio/servicio';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesProvider } from '../providers/favorites/favorites';
 import { AboutPage } from '../pages/about/about';
+import { LogoutPage } from '../pages/logout/logout';
+import { MyCompanyPage } from '../pages/my-company/my-company';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,10 +35,9 @@ export class MyApp {
     public headerColor: HeaderColor,
     private toast: Toast,
     public splashScreen: SplashScreen) {
-    localStorage.clear();
+    //localStorage.clear();
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Inicio', component: HomePage },
       { title: 'Propiedades', component: PropertiesPage },
@@ -44,10 +45,30 @@ export class MyApp {
       { title: 'Información', component: AboutPage }
     ];
 
+    this.sessionProvider.userEmitter.subscribe(userIsLoggedIn => {
+      console.log('userIsLoggedIn',userIsLoggedIn);
+      if(userIsLoggedIn){      
+      this.pages = [
+        { title: 'Inicio', component: HomePage },
+        { title: 'Propiedades', component: PropertiesPage },
+        { title: 'Mis favoritos', component: FavoritesPage },
+        { title: 'Información', component: AboutPage },
+        { title: 'Inmobiliaria', component: MyCompanyPage },
+        { title: 'Salir', component: LogoutPage }      
+      ];
+    }else{
+      this.pages = [
+        { title: 'Inicio', component: HomePage },
+        { title: 'Propiedades', component: PropertiesPage },
+        { title: 'Mis favoritos', component: FavoritesPage },
+        { title: 'Información', component: AboutPage }
+      ];
+    }
+    });
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(() => {   
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       //this.statusBar.styleDefault();      
@@ -60,12 +81,15 @@ export class MyApp {
         this.statusBar.backgroundColorByHexString('#1565C0');
         this.statusBar.show();
         //this.splashScreen.hide();
-
       }
+
+      
+    let userLogued = this.sessionProvider.getUserLogued();
+    console.log('initializeApp ComponentPage userLogued',userLogued);    
 
     });
   }
-
+  
   getStoredFavorites(){
     this.favoriteService.getStoredFavorites();
   }

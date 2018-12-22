@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HeaderColor } from '@ionic-native/header-color';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
-import { ListPage } from '../pages/list/list';
+import { LoginPage } from '../pages/login/login';
+import { LogoutPage } from '../pages/logout/logout';
 import { Network } from '@ionic-native/network';
 import { Toast } from '@ionic-native/toast';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -32,9 +32,9 @@ import { IonicStorageModule } from '@ionic/storage';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
+    LoginPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
-    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage
+    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage
   ],
   imports: [
     BrowserModule,
@@ -46,9 +46,9 @@ import { IonicStorageModule } from '@ionic/storage';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
+    LoginPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
-    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage
+    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage
   ],
   providers: [
     StatusBar,
