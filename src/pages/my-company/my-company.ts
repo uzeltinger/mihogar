@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SocialSharing } from '@ionic-native/social-sharing';
+//import { InAppBrowser } from '@ionic-native/in-app-browser';
+//import { SocialSharing } from '@ionic-native/social-sharing';
 import { SessionProvider } from '../../providers/session/session';
 
 /**
@@ -23,8 +23,9 @@ export class MyCompanyPage {
     public navParams: NavParams,
     public servicioProvider: ServicioProvider,
     public sessionProvider: SessionProvider,
-    private iab: InAppBrowser,
-    private socialSharing: SocialSharing) {
+    //private iab: InAppBrowser,
+    //private socialSharing: SocialSharing
+    ) {
   }
 
   ionViewDidLoad() {

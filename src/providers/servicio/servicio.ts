@@ -7,8 +7,8 @@ import { catchError } from 'rxjs/operators';
 export class ServicioProvider {
   //apiUrl: string = 'http://diportal.local/';
   apiUrl: string = 'http://diportal.com.ar/';
-  //apiLoginUrl: string = 'http://inmobiliaria.diportal.com.ar/';
-  apiLoginUrl: string = 'http://joomla.local/';
+  apiLoginUrl: string = 'https://inmobiliaria.diportal.com.ar/';
+  //apiLoginUrl: string = 'http://joomla.local/';
   httpOptions: any = {};
   constructor(public httpClient: HttpClient) {
     //console.log('Hello ProvidersServicioProvider Provider');

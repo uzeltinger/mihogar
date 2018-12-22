@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Observable } from 'rxjs/Observable';
 import { isNullOrUndefined } from 'util';
 import { Subject } from 'rxjs/Subject';
 
@@ -80,8 +79,8 @@ export class SessionProvider {
   }
   getUserLogued() {
     if(!isNullOrUndefined(this.user)){
-      return this.user;
       console.log('isNullOrUndefined');
+      return this.user;
     }
     console.log('getUserLogued this.user', this.user);
     this.storage.get('user').then((val) => {
