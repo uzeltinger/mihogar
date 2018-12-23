@@ -28,6 +28,8 @@ import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesProvider } from '../providers/favorites/favorites';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicStorageModule } from '@ionic/storage';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { ImageResizer } from '@ionic-native/image-resizer';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,7 @@ import { IonicStorageModule } from '@ionic/storage';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicioProvider,GoogleMaps,
     SessionProvider,Network,Toast,HeaderColor,SocialSharing,
-    FavoritesProvider,InAppBrowser
+    FavoritesProvider,InAppBrowser,ImagePicker,ImageResizer
   ]
 })
 export class AppModule {}

@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Property } from '../../models/property';
 import { isNullOrUndefined } from 'util';
 import { SessionProvider } from '../../providers/session/session';
 import { ServicioProvider } from '../../providers/servicio/servicio';
-
-/**
- * Generated class for the PropertyEditPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ImagePicker } from '@ionic-native/image-picker';
+import { AlertController } from 'ionic-angular';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 
 @Component({
   selector: 'page-property-edit',
@@ -23,9 +19,16 @@ export class PropertyEditPage {
   ciudades: any;
   categories: any;
   showSplash: boolean = true;
+  galleryPhoto: any;
+  newPhoto: any;
+  base64Image: string;
 
   constructor(public navCtrl: NavController,
     public formBuilder: FormBuilder,
+    private imageResizer: ImageResizer,
+    public platform: Platform,
+    private alertController: AlertController,
+    private imagePicker: ImagePicker,
     public sessionData: SessionProvider,
     public toastCtrl: ToastController,
     public servicioProvider: ServicioProvider,
@@ -39,7 +42,7 @@ export class PropertyEditPage {
     if (isNullOrUndefined(this.property)) {
       this.property = new Property({});
     } else {
-      let bath_room:string = this.property.bath_room.toString();
+      let bath_room: string = this.property.bath_room.toString();
       this.property.bath_room = parseInt(bath_room);
       if (this.property.mobile == '') {
         this.property.mobile = "1130190242";
@@ -47,9 +50,7 @@ export class PropertyEditPage {
       this.property.link = "http://diportal.com.ar/component/osproperty/" + this.property.ref + "-" + this.property.pro_alias + "-" + this.property.id + ".html"
       this.property.whatsappLink = "http://mihogar.net.ar/propiedad/" + this.property.id + ".html";
       this.property.price = parseInt(this.property.price.toString());
-      
-      
-
+      this.property.picture_path = 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/'+ this.property.id +'/medium/' + this.property.image;
     }
 
     console.log('this.property', this.property);
@@ -64,7 +65,7 @@ export class PropertyEditPage {
     //agent_id
     console.log('this.property', this.property);
     return this.formBuilder.group({
-      id: [this.property.id, Validators.required],
+      id: [this.property.id || 0, Validators.required],
       pro_name: [this.property.pro_name, Validators.required],
       category_id: [this.property.category_id, Validators.required],
       pro_type: [this.property.pro_type, Validators.required],
@@ -85,19 +86,22 @@ export class PropertyEditPage {
 
   saveData() {
     this.showSplash = true;
-    console.log('this.myForm.value',this.myForm.value);
-    let dataSend = this.myForm.value;
+    console.log('this.myForm.value', this.myForm.value);
+    let dataSend = this.myForm.value;    
+    if (this.base64Image != '') {
+      dataSend.base64Image = this.base64Image;
+    }
     console.log('dataSend: ', dataSend);
     this.servicioProvider.saveProperty(dataSend)
       .subscribe(
         data => {
-          if(data.data == 'saved'){
+          if (data.data == 'saved') {
             this.showToast('Guardada');
-          }else{
+          } else {
             this.showToast('Error guardando');
           }
           this.showSplash = false;
-          
+
           console.log('saveProperty data: ', data);
         },
         error => {
@@ -130,6 +134,142 @@ export class PropertyEditPage {
     });
 
     toast.present(toast);
+  }
+
+  takePicture() {
+    if (this.platform.is('core')) {
+
+      let image = 'http://localhost:8100/1.jpg';
+      //this.getBase64String(image);
+      this.galleryPhoto = image;
+
+        var img = document.createElement("img");
+        img.src = image;
+        this.resize(img, 800, 800, (resized_jpeg) => {
+          this.base64Image = resized_jpeg;
+          console.log('this.base64Image', this.base64Image);
+        });
+
+    } else {
+
+      let options = {
+        maximumImagesCount: 1,
+        outType: 0,
+        title: 'titulo',
+        message: 'mensaje',
+        quality: 90
+      };
+      this.imagePicker.getPictures(options).then((results) => {
+        for (var i = 0; i < results.length; i++) {
+          console.log('Image URI: ' + results[i]);
+          this.galleryPhoto = results[i];
+        }
+        this.getBase64String(this.galleryPhoto);
+      }, (err) => { });      
+    }
+  }
+
+  getBase64String(filePath: string) {
+    let options = {
+      uri: filePath,
+      folderName: 'Protonet',
+      quality: 90,
+      width: 1280,
+      height: 1280
+     } as ImageResizerOptions;
+     
+     this.imageResizer
+       .resize(options)
+       .then((filePath: string) => {
+         console.log('FilePath', filePath);
+         this.base64Image = filePath;
+       })
+       .catch(e => console.log(e));
+  }
+
+  resize(img, MAX_WIDTH: number, MAX_HEIGHT: number, callback) {
+    // This will wait until the img is loaded before calling this function
+    //https://jinalshahblog.wordpress.com/2017/01/10/how-to-upload-imageangular2/
+    return img.onload = () => {
+      // Get the images current width and height
+      var width = img.width;
+      var height = img.height;
+      console.log('width: ', img.width);
+      console.log('height: ', img.height);
+      // Set the WxH to fit the Max values (but maintain proportions)
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+      // create a canvas object
+      var canvas = document.createElement("canvas");
+      // Set the canvas to the new calculated dimensions
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+      // Get this encoded as a jpeg
+      // IMPORTANT: 'jpeg' NOT 'jpg'
+      var dataUrl = canvas.toDataURL('image/jpeg');
+      // callback with the results
+      callback(dataUrl, img.src.length, dataUrl.length);
+    };
+  }
+
+  deleteOldImage() {    
+    const confirm = this.alertController.create({
+      title: 'Eliminar?',
+      message: 'Desea eliminar esta imagen de su propiedad?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Agree clicked');
+            this.newPhoto = '';
+            this.galleryPhoto = '';
+            this.property.picture_path = '';
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  deletePhoto() {
+    const confirm = this.alertController.create({
+      title: 'Eliminar?',
+      message: 'Desea eliminar esta imagen de su propiedad?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Agree clicked');
+            this.newPhoto = '';
+            this.galleryPhoto = '';
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

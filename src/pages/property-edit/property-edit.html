@@ -19,14 +19,85 @@
 </div>
 
 <ion-content>
+
+
+  <div class="images-container">
+      <ion-item>
+          <ion-label stacked>Imagen:</ion-label>
+        </ion-item>
+  
+        <div *ngIf="!property.picture_path && !newPhoto" class="divNewImage">
+            <div class="newImageCenteredIcon">
+                <ion-icon name="camera"></ion-icon>
+            </div>
+            <div class="newImageActions">
+                <ion-grid>
+                    <ion-row align-items-center>                      
+                        <ion-col col-4 text-center>
+                            <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="takePicture()">
+                                <ion-icon name="images"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+  
+  
+        <div *ngIf="property.picture_path" class="divOldImage">
+            <ion-grid>
+                <div class="oldImageCentered">
+                    <ion-row align-items-center>
+                        <img src="{{property.picture_path}}">
+                    </ion-row>
+                    <div class="oldImageActions">
+                        <ion-grid>
+                            <ion-row align-items-center>
+                                <ion-col col-4></ion-col>
+                                <ion-col col-4 text-center>
+                                </ion-col>
+                                <ion-col col-4 text-center>
+                                    <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="deleteOldImage()">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </button>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </div>
+            </ion-grid>
+        </div>
+  
+  
+        <div *ngIf="galleryPhoto" class="divGalleryPhoto">
+            <ion-grid>
+                <div class="newGalleryCentered">
+                    <ion-row align-items-center>
+                        <img [src]=galleryPhoto *ngIf="galleryPhoto" />
+                    </ion-row>
+                    <div class="newGalleryActions">
+                        <ion-grid>
+                            <ion-row align-items-center>
+                                <ion-col col-4></ion-col>
+                                <ion-col col-4 text-center>
+                                </ion-col>
+                                <ion-col col-4 text-center>
+                                    <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="deletePhoto()">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </button>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </div>
+            </ion-grid>
+        </div>
+  </div>
+
+  
   <form [formGroup]="myForm" (ngSubmit)="saveData()">
     <ion-list>
 
-
-      <ion-item>
-        <ion-label stacked>Imagen:</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
 
 
       <ion-item>

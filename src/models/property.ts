@@ -20,6 +20,8 @@ export class Property {
     link: string;
     whatsappLink: string;
     address: string;
+    picture_path: string;
+    base64Image: string;
 
     constructor(property) {
         {
@@ -40,6 +42,8 @@ export class Property {
             this.ref = property.ref || null;
             this.rooms = property.rooms || null;
             this.address = property.address || null;
+            this.picture_path = property.picture_path || null;
+            this.base64Image = property.base64Image || null;
         }
     }
 
