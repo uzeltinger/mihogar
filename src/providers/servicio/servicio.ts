@@ -137,6 +137,13 @@ export class ServicioProvider {
     return this.httpClient.get(url);
   }
 
+  saveProperty(property: any): Observable<any> {
+    this.httpOptions = this.getHeader();
+    return this.httpClient.post(this.apiLoginUrl + "index.php?option=com_api&app=mihogar&resource=property&format=raw", property, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
   login(dateSend) {    
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>(this.apiLoginUrl + "index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)

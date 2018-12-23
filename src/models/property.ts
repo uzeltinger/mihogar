@@ -1,20 +1,25 @@
 export class Property {
     id: string;
     pro_name: string;
+    pro_alias: string;
     published: string;
-    category_id: string;
-    pro_type: string;
-    bath_room:string;
-    bed_room: string;
-    city: string;
-    curr: string;
-    price: string;
+    category_id: number;
+    pro_type: number;
+    bath_room:number;
+    bed_room: number;
+    city: number;
+    curr: number;
+    price: number;
     image: string;
-    parking: string;
+    parking: number;
     pro_full_desc: string;
     pro_small_desc: string;
     ref: string;
-    rooms: string;
+    rooms: number;
+    mobile: string;
+    link: string;
+    whatsappLink: string;
+    address: string;
 
     constructor(property) {
         {
@@ -34,6 +39,7 @@ export class Property {
             this.pro_small_desc = property.pro_small_desc || null;
             this.ref = property.ref || null;
             this.rooms = property.rooms || null;
+            this.address = property.address || null;
         }
     }
 

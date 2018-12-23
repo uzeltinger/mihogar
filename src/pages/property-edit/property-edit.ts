@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Property } from '../../models/property';
 import { isNullOrUndefined } from 'util';
 import { SessionProvider } from '../../providers/session/session';
+import { ServicioProvider } from '../../providers/servicio/servicio';
 
 /**
  * Generated class for the PropertyEditPage page.
@@ -17,63 +18,89 @@ import { SessionProvider } from '../../providers/session/session';
   templateUrl: 'property-edit.html',
 })
 export class PropertyEditPage {
-  property:Property;
+  property: Property;
   myForm: FormGroup;
-  cities: any;
+  ciudades: any;
   categories: any;
   showSplash: boolean = true;
 
   constructor(public navCtrl: NavController,
-    public formBuilder: FormBuilder, 
+    public formBuilder: FormBuilder,
     public sessionData: SessionProvider,
+    public servicioProvider: ServicioProvider,
     public navParams: NavParams) {
-      this.getCategories();
-      this.getCities();
-      this.property = navParams.data.property;
+    this.getCategories();
+    this.getCities();
+    this.property = navParams.data.property;
 
-      if(isNullOrUndefined(this.property)){
-        this.property = new Property({});
-      }    
+
+
+    if (isNullOrUndefined(this.property)) {
+      this.property = new Property({});
+    } else {
+      let bath_room:string = this.property.bath_room.toString();
+      this.property.bath_room = parseInt(bath_room);
+      if (this.property.mobile == '') {
+        this.property.mobile = "1130190242";
+      }
+      this.property.link = "http://diportal.com.ar/component/osproperty/" + this.property.ref + "-" + this.property.pro_alias + "-" + this.property.id + ".html"
+      this.property.whatsappLink = "http://mihogar.net.ar/propiedad/" + this.property.id + ".html";
+      this.property.price = parseInt(this.property.price.toString());
+      
+      
+
+    }
 
     console.log('this.property', this.property);
-    this.myForm = this.createMyForm();    
+    this.myForm = this.createMyForm();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PropertyEditPage');
   }
 
-  private createMyForm(){
+  private createMyForm() {
     //agent_id
-    console.log('this.property',this.property);
+    console.log('this.property', this.property);
     return this.formBuilder.group({
+      id: [this.property.id, Validators.required],
       pro_name: [this.property.pro_name, Validators.required],
       category_id: [this.property.category_id, Validators.required],
       pro_type: [this.property.pro_type, Validators.required],
-      lastName: ['', Validators.required],
       published: [this.property.published, Validators.required],
       bath_room: [this.property.bath_room, Validators.required],
       bed_room: [this.property.bed_room, Validators.required],
       city: [this.property.city, Validators.required],
       curr: [this.property.curr, Validators.required],
       price: [this.property.price, Validators.required],
-      image: [this.property.image, Validators.required],
+      //image: [this.property.image],
       parking: [this.property.parking, Validators.required],
-      pro_full_desc: [this.property.pro_full_desc, Validators.required],
-      pro_small_desc: [this.property.pro_small_desc, Validators.required],
+      pro_small_desc: [this.property.pro_small_desc],
       ref: [this.property.ref, Validators.required],
       rooms: [this.property.rooms, Validators.required],
+      address: [this.property.address, Validators.required],
     });
   }
 
-  saveData(){
-    console.log(this.myForm.value);
+  saveData() {
+    console.log('this.myForm.value',this.myForm.value);
+    let dataSend = this.myForm.value;
+    console.log('dataSend: ', dataSend);
+    this.servicioProvider.saveProperty(dataSend)
+      .subscribe(
+        data => {
+          console.log('saveProperty data: ', data);
+        },
+        error => {
+          console.log('saveProperty error: ', error);
+        }
+      );
   }
 
   getCities() {
-    this.cities = this.sessionData.getCiudades();
+    this.ciudades = this.sessionData.getCiudades();
     //this.cities.forEach((valor: any) => {    });    
-    console.log('this.cities', this.cities);
+    console.log('this.ciudades', this.ciudades);
     this.showSplash = false;
   }
 

@@ -15,88 +15,127 @@
 
 
 <ion-content>
-    <form [formGroup]="myForm" (ngSubmit)="saveData()">
-      <ion-list>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+    <ion-list>
+
+      
         <ion-item>
-          <ion-label stacked>Título:</ion-label>
-          <ion-input formControlName="pro_name" type="text"></ion-input>
-        </ion-item>
-
-
-
-        <ion-item>
-            <ion-label>Categoría</ion-label>
-            <ion-select formControlName="category_id">              
-                <ion-option *ngFor="let category of categories" [value]="category.id">{{category.category_name}}</ion-option>
-            </ion-select>
+            <ion-label stacked>Imagen:</ion-label>
+            <ion-input  type="text"></ion-input>
           </ion-item>
 
-
-          <ion-row radio-group formControlName="pro_type">
-              <ion-col>
-                <ion-item>
-                  <ion-label>Venta</ion-label>
-                  <ion-radio value="1" [value]="1"></ion-radio>
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-label>Alquiler</ion-label>
-                  <ion-radio value="3" [value]="3"></ion-radio>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-
-
+      
         <ion-item>
-          <ion-label stacked>Apellidos:</ion-label>
-          <ion-input formControlName="lastName" type="text"></ion-input>
+            <ion-label stacked>Referencia:</ion-label>
+            <ion-input formControlName="ref" type="text"></ion-input>
+          </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Título:</ion-label>
+        <ion-input formControlName="pro_name" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label stacked>Dirección:</ion-label>
+          <ion-input formControlName="address" type="text"></ion-input>
         </ion-item>
-        
-        <ion-row radio-group formControlName="published">
+
+      <ion-item>
+        <ion-label>Categoría</ion-label>
+        <ion-select formControlName="category_id">
+          <ion-option *ngFor="let category of categories" [value]="category.id">{{category.category_name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ciudad</ion-label>
+        <ion-select formControlName="city">
+          <ion-option *ngFor="let ciudad of ciudades" [value]="ciudad.city_id">{{ciudad.city_name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-row radio-group formControlName="pro_type">
+        <ion-col>
+          <ion-item>
+            <ion-label>Venta</ion-label>
+            <ion-radio value="1" [value]="1"></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Alquiler</ion-label>
+            <ion-radio value="3" [value]="3"></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-item>
+        <ion-label stacked>Dormitorios:</ion-label>
+        <ion-input formControlName="bath_room" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Baños:</ion-label>
+        <ion-input formControlName="bed_room" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Ambientes:</ion-label>
+        <ion-input formControlName="rooms" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Moneda</ion-label>
+          <ion-select formControlName="curr">
+            <ion-option value="1">$</ion-option>
+            <ion-option value="57">u$s</ion-option>
+          </ion-select>
+        </ion-item>
+
+      
+      <ion-item>
+        <ion-label stacked>Precio:</ion-label>
+        <ion-input formControlName="price" type="number"></ion-input>
+      </ion-item>
+
+      <ion-row radio-group formControlName="parking">
           <ion-col>
             <ion-item>
-              <ion-label>Ocultar</ion-label>
-              <ion-radio value="2" [value]="2"></ion-radio>
+              <ion-label>Garage</ion-label>
+              <ion-radio value="2" [value]="1"></ion-radio>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item>
-              <ion-label>Publicar</ion-label>
-              <ion-radio value="1" [value]="1"></ion-radio>
+              <ion-label>Sin garage</ion-label>
+              <ion-radio value="1" [value]="0"></ion-radio>
             </ion-item>
           </ion-col>
         </ion-row>
 
+        <ion-item>
+            <ion-textarea formControlName="pro_small_desc" placeholder="Descripcion"></ion-textarea>
+          </ion-item>
+
+      <ion-row radio-group formControlName="published">
+        <ion-col>
+          <ion-item>
+            <ion-label>Ocultar</ion-label>
+            <ion-radio value="2" [value]="2"></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Publicar</ion-label>
+            <ion-radio value="1" [value]="1"></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
 
 
 
-
-
-
-        id: string;
-    pro_name: string;
-    published: string;
-    category_id: string;
-    pro_type: string;
-    bath_room:string;
-    bed_room: string;
-    city: string;
-    curr: string;
-    price: string;
-    image: string;
-    parking: string;
-    pro_full_desc: string;
-    pro_small_desc: string;
-    ref: string;
-    rooms: string;
-
-
-    
-      </ion-list>
-      <div padding>
-        <button ion-button block type="submit" [disabled]="!myForm.valid">Guardar</button>
-      </div>
-    </form>
-  </ion-content>
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!myForm.valid">Guardar</button>
+    </div>
+  </form>
+</ion-content>

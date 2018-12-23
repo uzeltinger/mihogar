@@ -26,14 +26,16 @@ export class MyCompanyPage {
     this.getCategories();
     this.getCities();
   }
-
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     let userLogued = this.sessionProvider.getUserLogued();
     this.showSplash = true;
     if (userLogued != null && userLogued.userid != null) {
       this.getMyProperties(userLogued);
     }
     console.log('ionViewDidLoad MyCompanyPage userLogued', userLogued);
+  }
+  ionViewDidLoad() {
+    
   }
 
   getMyProperties(user) {
