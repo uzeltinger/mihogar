@@ -13,6 +13,8 @@ import { PropertyEditPage } from '../property-edit/property-edit';
 export class MyCompanyPage {
   login: any = { username: "", password: "" };
   myProperties: any = [];
+  cities: any = [];
+  categories: any = [];
   showSplash: boolean;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -21,6 +23,8 @@ export class MyCompanyPage {
     //private iab: InAppBrowser,
     //private socialSharing: SocialSharing
   ) {
+    this.getCategories();
+    this.getCities();
   }
 
   ionViewDidLoad() {
@@ -60,6 +64,33 @@ export class MyCompanyPage {
       property: property
     });
   }
+
+
+
+  getCities() {
+    this.servicioProvider.getCities()
+      .subscribe(
+        (data) => {
+          console.log('getCities', data);
+          this.sessionProvider.setCiudades(data);
+          this.cities = data;
+        },
+        (error) => { console.log('error', error); }
+      )
+  }
+
+  getCategories() {
+    this.servicioProvider.getCategories()
+      .subscribe(
+        (data) => {
+          console.log('getCategories', data);
+          this.sessionProvider.setCategorias(data);
+          this.categories = data;
+        },
+        (error) => { console.log('error', error); }
+      )
+  }
+
 
   /*
     addCompany(){
