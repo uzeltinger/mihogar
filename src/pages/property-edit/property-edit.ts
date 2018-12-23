@@ -7,7 +7,6 @@ import { SessionProvider } from '../../providers/session/session';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { AlertController } from 'ionic-angular';
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 
 @Component({
   selector: 'page-property-edit',
@@ -25,7 +24,6 @@ export class PropertyEditPage {
 
   constructor(public navCtrl: NavController,
     public formBuilder: FormBuilder,
-    private imageResizer: ImageResizer,
     public platform: Platform,
     private alertController: AlertController,
     private imagePicker: ImagePicker,
@@ -75,7 +73,8 @@ export class PropertyEditPage {
       city: [this.property.city, Validators.required],
       curr: [this.property.curr, Validators.required],
       price: [this.property.price, Validators.required],
-      //image: [this.property.image],
+      image: [this.property.image],
+      image_id: [this.property.image_id],
       parking: [this.property.parking, Validators.required],
       pro_small_desc: [this.property.pro_small_desc],
       ref: [this.property.ref, Validators.required],
@@ -90,6 +89,7 @@ export class PropertyEditPage {
     let dataSend = this.myForm.value;    
     if (this.base64Image != '') {
       dataSend.base64Image = this.base64Image;
+      dataSend.image = '';
     }
     console.log('dataSend: ', dataSend);
     this.servicioProvider.saveProperty(dataSend)
@@ -159,17 +159,26 @@ export class PropertyEditPage {
         message: 'mensaje',
         quality: 90
       };
+
       this.imagePicker.getPictures(options).then((results) => {
-        for (var i = 0; i < results.length; i++) {
-          console.log('Image URI: ' + results[i]);
-          this.galleryPhoto = results[i];
-        }
-        this.getBase64String(this.galleryPhoto);
+        //for (var i = 0; i < results.length; i++) {
+          console.log('Image URI: ' + results[0]);
+          this.galleryPhoto = results[0];
+
+          var img = document.createElement("img");
+        img.src = results[0];
+        this.resize(img, 800, 800, (resized_jpeg) => {
+          this.base64Image = resized_jpeg;
+          console.log('this.base64Image', this.base64Image);
+        });
+
+        //}
+        //this.getBase64String(this.galleryPhoto);
       }, (err) => { });      
     }
   }
 
-  getBase64String(filePath: string) {
+  /*getBase64String(filePath: string) {
     let options = {
       uri: filePath,
       folderName: 'Protonet',
@@ -185,7 +194,7 @@ export class PropertyEditPage {
          this.base64Image = filePath;
        })
        .catch(e => console.log(e));
-  }
+  }*/
 
   resize(img, MAX_WIDTH: number, MAX_HEIGHT: number, callback) {
     // This will wait until the img is loaded before calling this function
@@ -238,6 +247,7 @@ export class PropertyEditPage {
           text: 'Aceptar',
           handler: () => {
             console.log('Agree clicked');
+            this.property.image = null;
             this.newPhoto = '';
             this.galleryPhoto = '';
             this.property.picture_path = '';

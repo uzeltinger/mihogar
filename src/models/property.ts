@@ -11,6 +11,7 @@ export class Property {
     curr: number;
     price: number;
     image: string;
+    image_id: string;
     parking: number;
     pro_full_desc: string;
     pro_small_desc: string;
@@ -36,6 +37,7 @@ export class Property {
             this.curr = property.curr || null;
             this.price = property.price || null;
             this.image = property.image || null;
+            this.image_id = property.image_id || null;            
             this.parking = property.parking || null;
             this.pro_full_desc = property.pro_full_desc || null;
             this.pro_small_desc = property.pro_small_desc || null;
