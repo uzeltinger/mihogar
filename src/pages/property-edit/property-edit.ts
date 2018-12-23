@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Property } from '../../models/property';
 import { isNullOrUndefined } from 'util';
@@ -27,6 +27,7 @@ export class PropertyEditPage {
   constructor(public navCtrl: NavController,
     public formBuilder: FormBuilder,
     public sessionData: SessionProvider,
+    public toastCtrl: ToastController,
     public servicioProvider: ServicioProvider,
     public navParams: NavParams) {
     this.getCategories();
@@ -83,15 +84,25 @@ export class PropertyEditPage {
   }
 
   saveData() {
+    this.showSplash = true;
     console.log('this.myForm.value',this.myForm.value);
     let dataSend = this.myForm.value;
     console.log('dataSend: ', dataSend);
     this.servicioProvider.saveProperty(dataSend)
       .subscribe(
         data => {
+          if(data.data == 'saved'){
+            this.showToast('Guardada');
+          }else{
+            this.showToast('Error guardando');
+          }
+          this.showSplash = false;
+          
           console.log('saveProperty data: ', data);
         },
         error => {
+          this.showToast('Error guardando');
+          this.showSplash = false;
           console.log('saveProperty error: ', error);
         }
       );
@@ -109,6 +120,16 @@ export class PropertyEditPage {
     //this.categories.forEach((valor: any) => {    });
     console.log('this.categories', this.categories);
     this.showSplash = false;
+  }
+
+  showToast(message: string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.present(toast);
   }
 
 }

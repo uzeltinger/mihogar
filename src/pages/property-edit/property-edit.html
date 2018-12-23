@@ -12,23 +12,27 @@
 
 </ion-header>
 
-
+<div *ngIf="showSplash" class="splash">
+  <div class="spinner">
+    <ion-spinner></ion-spinner>
+  </div>
+</div>
 
 <ion-content>
   <form [formGroup]="myForm" (ngSubmit)="saveData()">
     <ion-list>
 
-      
-        <ion-item>
-            <ion-label stacked>Imagen:</ion-label>
-            <ion-input  type="text"></ion-input>
-          </ion-item>
 
-      
-        <ion-item>
-            <ion-label stacked>Referencia:</ion-label>
-            <ion-input formControlName="ref" type="text"></ion-input>
-          </ion-item>
+      <ion-item>
+        <ion-label stacked>Imagen:</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label stacked>Referencia:</ion-label>
+        <ion-input formControlName="ref" type="text"></ion-input>
+      </ion-item>
 
       <ion-item>
         <ion-label stacked>Título:</ion-label>
@@ -36,9 +40,9 @@
       </ion-item>
 
       <ion-item>
-          <ion-label stacked>Dirección:</ion-label>
-          <ion-input formControlName="address" type="text"></ion-input>
-        </ion-item>
+        <ion-label stacked>Dirección:</ion-label>
+        <ion-input formControlName="address" type="text"></ion-input>
+      </ion-item>
 
       <ion-item>
         <ion-label>Categoría</ion-label>
@@ -83,37 +87,37 @@
       </ion-item>
 
       <ion-item>
-          <ion-label>Moneda</ion-label>
-          <ion-select formControlName="curr">
-            <ion-option value="1">$</ion-option>
-            <ion-option value="57">u$s</ion-option>
-          </ion-select>
-        </ion-item>
+        <ion-label>Moneda</ion-label>
+        <ion-select formControlName="curr">
+          <ion-option value="1">$</ion-option>
+          <ion-option value="57">u$s</ion-option>
+        </ion-select>
+      </ion-item>
 
-      
+
       <ion-item>
         <ion-label stacked>Precio:</ion-label>
         <ion-input formControlName="price" type="number"></ion-input>
       </ion-item>
 
       <ion-row radio-group formControlName="parking">
-          <ion-col>
-            <ion-item>
-              <ion-label>Garage</ion-label>
-              <ion-radio value="2" [value]="1"></ion-radio>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Sin garage</ion-label>
-              <ion-radio value="1" [value]="0"></ion-radio>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-item>
-            <ion-textarea formControlName="pro_small_desc" placeholder="Descripcion"></ion-textarea>
+        <ion-col>
+          <ion-item>
+            <ion-label>Garage</ion-label>
+            <ion-radio value="2" [value]="1"></ion-radio>
           </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Sin garage</ion-label>
+            <ion-radio value="1" [value]="0"></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-item>
+        <ion-textarea formControlName="pro_small_desc" placeholder="Descripcion"></ion-textarea>
+      </ion-item>
 
       <ion-row radio-group formControlName="published">
         <ion-col>
