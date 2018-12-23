@@ -95,7 +95,7 @@ export class PropertyEditPage {
     this.servicioProvider.saveProperty(dataSend)
       .subscribe(
         data => {
-          if (data.data == 'saved') {
+          if (data.data['guardado'] == true) {
             this.showToast('Guardada');
           } else {
             this.showToast('Error guardando');

@@ -8,8 +8,8 @@ export class ServicioProvider {
   token: string = null;
   //apiUrl: string = 'http://diportal.local/';
   apiUrl: string = 'http://diportal.com.ar/';
-  //apiLoginUrl: string = 'https://inmobiliaria.diportal.com.ar/';
-  apiLoginUrl: string = 'http://inmobiliaria.diportal.local/';
+  apiLoginUrl: string = 'https://inmobiliaria.diportal.com.ar/';
+  //apiLoginUrl: string = 'http://inmobiliaria.diportal.local/';
   httpOptions: any = {};
   constructor(public httpClient: HttpClient) {
     //console.log('Hello ProvidersServicioProvider Provider');
