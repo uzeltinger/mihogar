@@ -26,7 +26,7 @@
           <ion-label stacked>Imagen:</ion-label>
         </ion-item>
   
-        <div *ngIf="!property.picture_path && !newPhoto" class="divNewImage">
+        <div *ngIf="!property.picture_path && !galleryPhoto" class="divNewImage">
             <div class="newImageCenteredIcon">
                 <ion-icon name="camera"></ion-icon>
             </div>
@@ -34,7 +34,7 @@
                 <ion-grid>
                     <ion-row align-items-center>                      
                         <ion-col col-4 text-center>
-                            <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="takePicture()">
+                            <button ion-button icon-only class="button-link" color="colorTextGrey" (click)="takeCameraPicture()">
                                 <ion-icon name="images"></ion-icon>
                             </button>
                         </ion-col>
@@ -42,8 +42,8 @@
                 </ion-grid>
             </div>
         </div>
-  
-  
+         
+
         <div *ngIf="property.picture_path" class="divOldImage">
             <ion-grid>
                 <div class="oldImageCentered">
@@ -67,7 +67,7 @@
                 </div>
             </ion-grid>
         </div>
-  
+          
   
         <div *ngIf="galleryPhoto" class="divGalleryPhoto">
             <ion-grid>

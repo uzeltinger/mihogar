@@ -14,7 +14,6 @@ import { FavoritesProvider } from '../providers/favorites/favorites';
 import { AboutPage } from '../pages/about/about';
 import { LogoutPage } from '../pages/logout/logout';
 import { MyCompanyPage } from '../pages/my-company/my-company';
-import { PropertyEditPage } from '../pages/property-edit/property-edit';
 
 @Component({
   templateUrl: 'app.html'

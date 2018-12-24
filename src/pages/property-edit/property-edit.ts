@@ -5,6 +5,7 @@ import { Property } from '../../models/property';
 import { isNullOrUndefined } from 'util';
 import { SessionProvider } from '../../providers/session/session';
 import { ServicioProvider } from '../../providers/servicio/servicio';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { AlertController } from 'ionic-angular';
 
@@ -21,11 +22,14 @@ export class PropertyEditPage {
   galleryPhoto: any;
   newPhoto: any;
   base64Image: string;
+  pictures_path: string;
+  private win: any = window;
 
   constructor(public navCtrl: NavController,
     public formBuilder: FormBuilder,
     public platform: Platform,
     private alertController: AlertController,
+    private camera: Camera,
     private imagePicker: ImagePicker,
     public sessionData: SessionProvider,
     public toastCtrl: ToastController,
@@ -48,7 +52,8 @@ export class PropertyEditPage {
       this.property.link = "http://diportal.com.ar/component/osproperty/" + this.property.ref + "-" + this.property.pro_alias + "-" + this.property.id + ".html"
       this.property.whatsappLink = "http://mihogar.net.ar/propiedad/" + this.property.id + ".html";
       this.property.price = parseInt(this.property.price.toString());
-      this.property.picture_path = 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/'+ this.property.id +'/medium/' + this.property.image;
+      this.property.picture_path = 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/' + this.property.id + '/medium/' + this.property.image;
+      this.pictures_path = '';
     }
 
     console.log('this.property', this.property);
@@ -86,7 +91,7 @@ export class PropertyEditPage {
   saveData() {
     this.showSplash = true;
     console.log('this.myForm.value', this.myForm.value);
-    let dataSend = this.myForm.value;    
+    let dataSend = this.myForm.value;
     if (this.base64Image != '') {
       dataSend.base64Image = this.base64Image;
       dataSend.image = '';
@@ -140,61 +145,85 @@ export class PropertyEditPage {
     if (this.platform.is('core')) {
 
       let image = 'http://localhost:8100/1.jpg';
-      //this.getBase64String(image);
       this.galleryPhoto = image;
-
-        var img = document.createElement("img");
-        img.src = image;
-        this.resize(img, 800, 800, (resized_jpeg) => {
-          this.base64Image = resized_jpeg;
-          console.log('this.base64Image', this.base64Image);
-        });
+      var img = document.createElement("img");
+      img.src = image;
+      this.resize(img, 800, 800, (resized_jpeg) => {
+        this.base64Image = resized_jpeg;
+        console.log('this.base64Image', this.base64Image);
+      });
 
     } else {
 
-      let options = {
-        maximumImagesCount: 1,
-        outType: 0,
-        title: 'titulo',
-        message: 'mensaje',
-        quality: 90
-      };
+      if (this.platform.is('android')) {
+        let options = {
+          maximumImagesCount: 1,
+          outType: 0,
+          title: 'titulo',
+          message: 'mensaje',
+          quality: 100
+        };
 
-      this.imagePicker.getPictures(options).then((results) => {
-        //for (var i = 0; i < results.length; i++) {
-          console.log('Image URI: ' + results[0]);
-          this.galleryPhoto = results[0];
+        this.imagePicker.getPictures(options).then((results) => {
 
-          var img = document.createElement("img");
-        img.src = results[0];
-        this.resize(img, 800, 800, (resized_jpeg) => {
-          this.base64Image = resized_jpeg;
-          console.log('this.base64Image', this.base64Image);
-        });
+          console.log('imagePicker results: ' + results);
 
-        //}
-        //this.getBase64String(this.galleryPhoto);
-      }, (err) => { });      
+          /*for (var i = 0; i < results.length; i++) {
+            console.log('Image URI: ' + results[i]);
+            this.galleryPhoto = results[i];
+          }
+          this.getBase64String(this.galleryPhoto);*/
+        }, (err) => { console.log('getPictures err: ' + err); });
+      }
     }
   }
 
-  /*getBase64String(filePath: string) {
-    let options = {
-      uri: filePath,
-      folderName: 'Protonet',
-      quality: 90,
-      width: 1280,
-      height: 1280
-     } as ImageResizerOptions;
-     
-     this.imageResizer
-       .resize(options)
-       .then((filePath: string) => {
-         console.log('FilePath', filePath);
-         this.base64Image = filePath;
-       })
-       .catch(e => console.log(e));
-  }*/
+
+  takeCameraPicture() {
+    if (this.platform.is('core')) {
+
+      let image = 'http://localhost:8100/1.jpg';
+      this.galleryPhoto = image;
+      var img = document.createElement("img");
+      img.src = image;
+      this.resize(img, 800, 800, (resized_jpeg) => {
+        this.base64Image = resized_jpeg;
+        console.log('this.base64Image', this.base64Image);
+      });
+
+    } else {
+
+      const options: CameraOptions = {
+        quality: 50,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        //destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        //mediaType: this.camera.MediaType.PICTURE,
+        saveToPhotoAlbum: false,
+        correctOrientation: true,
+        allowEdit: true
+      }
+      this.camera.getPicture(options).then((imageData) => {
+        let newUrl = this.win.Ionic.WebView.convertFileSrc(imageData);
+        console.log('newUrl 213', newUrl);
+        console.log('imageData 214', imageData);
+        this.getBase64String(newUrl);        
+        this.galleryPhoto = newUrl;
+      }, (err) => {
+        console.log('err', err);
+      });
+    }
+  }
+  
+  getBase64String(filePath: string) {
+    var img = document.createElement("img");
+    img.src = filePath;
+    this.resize(img, 800, 800, (resized_jpeg) => {
+      this.base64Image = resized_jpeg;
+      console.log('this.base64Image', this.base64Image);
+    });
+  }  
 
   resize(img, MAX_WIDTH: number, MAX_HEIGHT: number, callback) {
     // This will wait until the img is loaded before calling this function
@@ -232,7 +261,7 @@ export class PropertyEditPage {
     };
   }
 
-  deleteOldImage() {    
+  deleteOldImage() {
     const confirm = this.alertController.create({
       title: 'Eliminar?',
       message: 'Desea eliminar esta imagen de su propiedad?',
