@@ -72,7 +72,7 @@ export class PropertyEditPage {
       pro_name: [this.property.pro_name, Validators.required],
       category_id: [this.property.category_id, Validators.required],
       pro_type: [this.property.pro_type, Validators.required],
-      published: [this.property.published, Validators.required],
+      published: [this.property.published],
       bath_room: [this.property.bath_room, Validators.required],
       bed_room: [this.property.bed_room, Validators.required],
       city: [this.property.city, Validators.required],
@@ -82,7 +82,7 @@ export class PropertyEditPage {
       image_id: [this.property.image_id],
       parking: [this.property.parking],
       pro_small_desc: [this.property.pro_small_desc],
-      ref: [this.property.ref, Validators.required],
+      ref: [this.property.ref],
       rooms: [this.property.rooms, Validators.required],
       address: [this.property.address, Validators.required],
     });
@@ -105,6 +105,7 @@ export class PropertyEditPage {
           } else {
             this.showToast('Error guardando');
           }
+          this.navCtrl.pop();
           this.showSplash = false;
 
           console.log('saveProperty data: ', data);
@@ -135,7 +136,7 @@ export class PropertyEditPage {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 2000,
-      position: 'middle'
+      position: 'bottom'
     });
 
     toast.present(toast);

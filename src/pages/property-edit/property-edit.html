@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>property-edit</ion-title>
+    <ion-title>{{property.id}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,17 +18,14 @@
   </div>
 </div>
 
-<ion-content>
+<ion-content class="darkbackground background">
 
 
   <div class="images-container">
-      <ion-item>
-          <ion-label stacked>Imagen:</ion-label>
-        </ion-item>
-  
+        
         <div *ngIf="!property.picture_path && !galleryPhoto" class="divNewImage">
             <div class="newImageCenteredIcon">
-                <ion-icon name="camera"></ion-icon>
+                <ion-icon name="camera"  (click)="takeCameraPicture()"></ion-icon>
             </div>
             <div class="newImageActions">
                 <ion-grid>
@@ -102,34 +99,37 @@
 
       <ion-item>
         <ion-label stacked>Referencia:</ion-label>
-        <ion-input formControlName="ref" type="text"></ion-input>
+        <ion-input class="ion-input-trans" formControlName="ref" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Título:</ion-label>
-        <ion-input formControlName="pro_name" type="text"></ion-input>
+        <ion-label stacked>Título *:</ion-label>
+        <ion-input class="ion-input-trans" formControlName="pro_name" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Dirección:</ion-label>
-        <ion-input formControlName="address" type="text"></ion-input>
+        <ion-label stacked>Dirección *:</ion-label>
+        <ion-input class="ion-input-trans" formControlName="address" type="text"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-label stacked>Categoría *:</ion-label>
+      <ion-item class="ion-item-trans">
         <ion-label>Categoría</ion-label>
         <ion-select formControlName="category_id">
           <ion-option *ngFor="let category of categories" [value]="category.id">{{category.category_name}}</ion-option>
         </ion-select>
       </ion-item>
 
-      <ion-item>
+      <ion-label stacked>Ciudad *:</ion-label>
+      <ion-item class="ion-item-trans">
         <ion-label>Ciudad</ion-label>
         <ion-select formControlName="city">
           <ion-option *ngFor="let ciudad of ciudades" [value]="ciudad.city_id">{{ciudad.city_name}}</ion-option>
         </ion-select>
       </ion-item>
 
-      <ion-row radio-group formControlName="pro_type">
+      <ion-label stacked>Tipo *:</ion-label>
+      <ion-row radio-group formControlName="pro_type" class="ion-row-trans">
         <ion-col>
           <ion-item>
             <ion-label>Venta</ion-label>
@@ -144,20 +144,35 @@
         </ion-col>
       </ion-row>
 
-      <ion-item>
-        <ion-label stacked>Dormitorios:</ion-label>
-        <ion-input formControlName="bath_room" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label stacked>Baños:</ion-label>
-        <ion-input formControlName="bed_room" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label stacked>Ambientes:</ion-label>
-        <ion-input formControlName="rooms" type="number"></ion-input>
-      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>Dormitorios *:</ion-label>
+              <ion-input class="ion-input-trans" formControlName="bath_room" type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>Baños *:</ion-label>
+              <ion-input class="ion-input-trans" formControlName="bed_room" type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>Ambientes *:</ion-label>
+              <ion-input class="ion-input-trans" formControlName="rooms" type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        </ion-grid>
 
-      <ion-item>
+      
+      
+      
+
+      <ion-label stacked>Moneda *:</ion-label>
+      <ion-item class="ion-item-trans">
         <ion-label>Moneda</ion-label>
         <ion-select formControlName="curr">
           <ion-option value="1">$</ion-option>
@@ -167,11 +182,12 @@
 
 
       <ion-item>
-        <ion-label stacked>Precio:</ion-label>
-        <ion-input formControlName="price" type="number"></ion-input>
+        <ion-label stacked>Precio *:</ion-label>
+        <ion-input class="ion-input-trans" formControlName="price" type="number"></ion-input>
       </ion-item>
 
-      <ion-row radio-group formControlName="parking">
+      <ion-label stacked>Garage:</ion-label>
+      <ion-row radio-group formControlName="parking" class="ion-row-trans">
         <ion-col>
           <ion-item>
             <ion-label>Garage</ion-label>
@@ -187,10 +203,12 @@
       </ion-row>
 
       <ion-item>
-        <ion-textarea formControlName="pro_small_desc" placeholder="Descripcion"></ion-textarea>
+        <ion-label stacked>Descripcion *:</ion-label>
+        <ion-textarea class="ion-textarea-trans" formControlName="pro_small_desc" placeholder="Descripcion"></ion-textarea>
       </ion-item>
 
-      <ion-row radio-group formControlName="published">
+      <ion-label stacked>Publicar *:</ion-label>
+      <ion-row radio-group formControlName="published" class="ion-row-trans">
         <ion-col>
           <ion-item>
             <ion-label>Ocultar</ion-label>
@@ -206,11 +224,14 @@
       </ion-row>
 
 
-
+      <ion-item>
+        <ion-label stacked>Los campos marcados con * son obligatorios.</ion-label>
+        </ion-item>
 
     </ion-list>
     <div padding>
       <button ion-button block type="submit" [disabled]="!myForm.valid">Guardar</button>
     </div>
+
   </form>
 </ion-content>

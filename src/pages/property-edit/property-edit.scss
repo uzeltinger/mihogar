@@ -2,4 +2,107 @@ page-property-edit {
     .list-md .item-block .item-inner {
         border-bottom: 1px solid #dedede;
     }
+    .background {
+		background-image: url('../assets/imgs/fondologin.jpg');
+    }
+    .darkbackground .scroll-content {        
+        background-color: rgba(26, 24, 24, 0.3);
+    }
+    .divNewImage {
+        width: 100%;
+        min-height: 300px;
+        position: relative;
+        border: 1px solid rgb(255, 255, 255);
+        border: 1px solid rgba(255, 255, 255, .5);
+        -webkit-background-clip: padding-box; /* for Safari */
+        background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+    }
+    .newImageActions {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .newImageCenteredIcon {
+        position: absolute;
+        bottom: 40%;
+        left: 40%;
+        right: 40%;
+        width: 100%;
+        opacity: .5;
+    }
+    .newImageCenteredIcon .icon{
+        font-size: 5em;
+        color: #fff;
+    }
+
+    .bg-image.content-md {
+        color: #fff;
+      }
+      .bg-image .item-md{
+        background: none;
+        color: #fff;
+      }
+form {
+    padding: 1rem;
+  }
+  form .ion-input-trans {
+    border-bottom: none;
+    background-color: rgba(26, 24, 24, 0.6);
+    padding-left: 1rem; 
+    border-radius: .5rem;
+  }
+  form .ion-item-trans {
+    background-color: rgba(26, 24, 24, 0.6)!important;
+    padding-left: 1rem!important;
+    border-radius: .5rem;
+  }
+  .select-text {
+    color: #fff;
+  }
+  form .ion-row-trans {
+    /*margin-top: 2rem;*/
+
+    background-color: rgba(26, 24, 24, 0.6)!important;
+    padding-left: 1rem!important;
+    border-radius: .5rem;
+  }
+  .ion-input-trans input {
+      color: #fff;
+  }
+  .ion-textarea-trans {
+    border-bottom: none;
+    background-color: rgba(26, 24, 24, 0.6);
+    padding-left: 1rem; 
+    border-radius: .5rem;
+  }
+  .ion-textarea-trans textarea{
+    color: #fff;
+}
+  form .item-md.item-block .item-inner {
+    padding-right: 0;
+  }
+  form .item-md {
+    padding-left: 0;
+  }
+  .label-md[stacked] {
+    padding-bottom: .5rem;    
+    font-size: 1.4rem;
+  }
+  .item-md.item-input .item-inner {
+     border-bottom: none!important; 
+    -webkit-box-shadow: none!important; 
+    box-shadow: none!important; 
+  }
+  .item-input-has-focus .label-md[stacked]{
+    color: #fff;
+  }
+  .list-md .item-block .item-inner {
+      border: none;
+  }
+  .grid {
+      padding:0;
+  }
+  .list-md .item-input:last-child {
+      border: none;
+  }
 }
