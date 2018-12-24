@@ -7,6 +7,7 @@ import { ModalSearchPage } from '../modal-search/modal-search';
 import { SessionProvider } from '../../providers/session/session';
 import { FavoritesProvider } from '../../providers/favorites/favorites';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { FavoritesPage } from '../favorites/favorites';
 
 @Component({
   selector: 'page-properties',
@@ -37,6 +38,7 @@ export class PropertiesPage {
   favorites: Array<any>;
   whatsappText: string = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0A";
   whatsappLink: string = "";
+  haveFavorites: boolean = false;
 
   constructor(public navCtrl: NavController,
     private alertController: AlertController,
@@ -158,19 +160,22 @@ export class PropertiesPage {
   }
 
   addToFavorites(property): boolean {
-    console.log('property', property);
     if (property.isFavorite === true) {
-      console.log('property isFavorite', property);
       this.favoriteService.removeFavorite(property.id);
       property.isFavorite = false;
+      setTimeout(() => {
+        this.getFavorites();
+      }, 100);      
       return false;
     } else {
-      console.log('property NO isFavorite', property);
       if (this.favoriteService.addFavorite(property.id)) {
         property.isFavorite = true;
+        setTimeout(() => {
+        this.getFavorites();
+      }, 100);
         return true;
       }
-    }
+    }    
   }
 
   isFavorite(property) {
@@ -182,6 +187,12 @@ export class PropertiesPage {
   getFavorites() {
     //this.favorites = this.favoriteService.getFavorites();
     this.favorites = this.favoriteService.getFavorites();
+    if(this.favorites!=null && this.favorites.length!=0){
+      this.haveFavorites = true;
+      console.log('this.haveFavorites',this.haveFavorites);
+    }else{
+      this.haveFavorites = false;
+    }
     //console.log('this.favorites',this.favorites);
   }
 
@@ -535,5 +546,8 @@ export class PropertiesPage {
 
   showNoResults() {
 
+  }
+  goMyFavorites(){
+    this.navCtrl.setRoot(FavoritesPage);
   }
 }

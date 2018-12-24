@@ -76,15 +76,15 @@ export class PropertyEditPage {
       bath_room: [this.property.bath_room, Validators.required],
       bed_room: [this.property.bed_room, Validators.required],
       city: [this.property.city, Validators.required],
-      curr: [this.property.curr, Validators.required],
-      price: [this.property.price, Validators.required],
+      curr: [this.property.curr],
+      price: [this.property.price],
       image: [this.property.image],
       image_id: [this.property.image_id],
       parking: [this.property.parking],
       pro_small_desc: [this.property.pro_small_desc],
       ref: [this.property.ref],
       rooms: [this.property.rooms, Validators.required],
-      address: [this.property.address, Validators.required],
+      address: [this.property.address],
     });
   }
 

@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Mi Hogar</ion-title>
+    <ion-buttons end *ngIf="haveFavorites">
+      <button (click)="goMyFavorites()" ion-button icon-only>
+          <ion-icon name="heart" isActive="true" class="favorite"></ion-icon>
+      </button>
+  </ion-buttons>
   </ion-navbar>
 </ion-header>
 
