@@ -80,7 +80,7 @@ export class PropertyEditPage {
       price: [this.property.price, Validators.required],
       image: [this.property.image],
       image_id: [this.property.image_id],
-      parking: [this.property.parking, Validators.required],
+      parking: [this.property.parking],
       pro_small_desc: [this.property.pro_small_desc],
       ref: [this.property.ref, Validators.required],
       rooms: [this.property.rooms, Validators.required],

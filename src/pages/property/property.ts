@@ -27,6 +27,7 @@ export class PropertyPage {
   agentFiltered: any = { agent_id: 0, agent_name: "" };
   whatsappText: string;
   whatsappLink: string;
+  propertyShowMap: boolean = false;
 
   constructor(public navCtrl: NavController,
     //public googleMaps: GoogleMaps,
@@ -65,6 +66,11 @@ export class PropertyPage {
       console.log('src', src);
       this.property.pro_video_url = this.sanitizer.bypassSecurityTrustResourceUrl(src);
     }
+
+    if (this.property.lat_add != null && this.property.long_add != null) {
+      this.propertyShowMap = true;
+    }
+    console.log('this.propertyShowMap',this.propertyShowMap);
   }
 
 

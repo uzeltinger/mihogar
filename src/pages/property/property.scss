@@ -8,10 +8,7 @@ page-property {
     .property-top-slide {
         position: relative;
     }    
-    #map_property {
-        width: 100%;
-        height: 80%;
-    }
+    
     .parafondo.darkbackground {
         background: #263134;
         float: left;
@@ -27,5 +24,12 @@ page-property {
     }
     .video-container {
 
+    }
+    .map_property {
+        width: 100%; 
+        height: 400px;
+    }
+    .map_property-hide {
+        height: 1px;;
     }
 }

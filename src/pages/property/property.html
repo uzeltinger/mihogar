@@ -108,7 +108,7 @@
 
 
   <ion-card class="property-map-card">
-    <div id="map_property" style="width: 100%; height: 400px;"></div>
+    <div id="map_property" class="map_property" [ngClass]="{'map_property-hide':!propertyShowMap}"></div>
   </ion-card>
 
 </ion-content>

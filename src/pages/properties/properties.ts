@@ -20,7 +20,7 @@ export class PropertiesPage {
   offersLimit: number = 10;
   offersShowAll: boolean = false;
   filtrosAplicados: boolean = false;
-  agentFiltered:any = { agent_id: 0, agent_name: "" };
+  agentFiltered: any = { agent_id: 0, agent_name: "" };
   agentSelected: boolean = false;
   categoriesFiltered: any = [];
   citiesFiltered: any = [];
@@ -33,10 +33,10 @@ export class PropertiesPage {
   alquilerRangeValueApplied: boolean = false;
   ciudadesById: any = [];
   categoriasById: any = [];
-  firstSearch:boolean = true;
+  firstSearch: boolean = true;
   favorites: Array<any>;
-  whatsappText:string = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0A";
-  whatsappLink:string = "";
+  whatsappText: string = "Hola.%0AEstoy%20interesado%20en%20esta%20propiedad.%0A";
+  whatsappLink: string = "";
 
   constructor(public navCtrl: NavController,
     private alertController: AlertController,
@@ -119,7 +119,7 @@ export class PropertiesPage {
         console.log('this.ambientesValue',this.ambientesValue);
     */
     if (this.agentFiltered != null && this.agentFiltered.agent_id > 0) {
-      this.filtrosAplicados = true; console.log('agentFiltered',this.agentFiltered);
+      this.filtrosAplicados = true; console.log('agentFiltered', this.agentFiltered);
       this.agentSelected = true;
     }
     if (this.citiesFiltered != null && this.citiesFiltered.length > 0) {
@@ -157,29 +157,29 @@ export class PropertiesPage {
     }
   }
 
-  addToFavorites(property): boolean{
-    console.log('property',property);
-    if(property.isFavorite===true){
-      console.log('property isFavorite',property);
+  addToFavorites(property): boolean {
+    console.log('property', property);
+    if (property.isFavorite === true) {
+      console.log('property isFavorite', property);
       this.favoriteService.removeFavorite(property.id);
       property.isFavorite = false;
-      return  false;
-    }else{
-      console.log('property NO isFavorite',property);
-      if(this.favoriteService.addFavorite(property.id)){
+      return false;
+    } else {
+      console.log('property NO isFavorite', property);
+      if (this.favoriteService.addFavorite(property.id)) {
         property.isFavorite = true;
-        return  true;
+        return true;
       }
-    }    
+    }
   }
 
-  isFavorite(property){
+  isFavorite(property) {
     let isFavorite = this.favoriteService.isFavorite(property.id);
     property.isFavorite = isFavorite;
     return isFavorite;
   }
 
-  getFavorites(){
+  getFavorites() {
     //this.favorites = this.favoriteService.getFavorites();
     this.favorites = this.favoriteService.getFavorites();
     //console.log('this.favorites',this.favorites);
@@ -233,34 +233,37 @@ export class PropertiesPage {
         (data) => {
           console.log('getProperties', data);
           this.properties = data;
-          console.log('getProperties total', this.properties.lenght);
+          if (this.properties != null) {
+            console.log('getProperties total', this.properties.lenght);
 
-          
-          if(this.firstSearch && this.properties.length==0){
-            this.showAlert('No hay resultados', 'UPS! Parece que no hay resultados con esos criterios de búsqueda.');
-          }
 
-          if (this.properties.length < this.offersLimit) {
-            this.offersShowAll = true;
-          }
 
-          this.properties.forEach(element => {
-            element.bath_room = parseInt(element.bath_room);
-            if (element.mobile == '') {
-              element.mobile = "1130190242";
+
+            if (this.firstSearch && this.properties.length == 0) {
+              this.showAlert('No hay resultados', 'UPS! Parece que no hay resultados con esos criterios de búsqueda.');
             }
-            element.link = "http://diportal.com.ar/component/osproperty/" + element.ref + "-" + element.pro_alias + "-" + element.id + ".html"
-            element.whatsappLink = "http://mihogar.net.ar/propiedad/" + element.id + ".html";
-            element.price = parseInt(element.price);
-            element.price = element.price.toLocaleString('es-AR');
-            if (element.curr == 1) {
-              element.moneda = "$";
-            } else {
-              element.moneda = "u$s";
-            }
-            this.items.push(element);
-          });
 
+            if (this.properties.length < this.offersLimit) {
+              this.offersShowAll = true;
+            }
+
+            this.properties.forEach(element => {
+              element.bath_room = parseInt(element.bath_room);
+              if (element.mobile == '') {
+                element.mobile = "1130190242";
+              }
+              element.link = "http://diportal.com.ar/component/osproperty/" + element.ref + "-" + element.pro_alias + "-" + element.id + ".html"
+              element.whatsappLink = "http://mihogar.net.ar/propiedad/" + element.id + ".html";
+              element.price = parseInt(element.price);
+              element.price = element.price.toLocaleString('es-AR');
+              if (element.curr == 1) {
+                element.moneda = "$";
+              } else {
+                element.moneda = "u$s";
+              }
+              this.items.push(element);
+            });
+          }
           this.properties = data;
           this.showSplash = false;
         },
@@ -284,7 +287,7 @@ export class PropertiesPage {
     switch (tipo) {
 
       case 'agentFiltered':
-      this.agentSelected = false;
+        this.agentSelected = false;
         this.agentFiltered.agent_id = 0;
         this.agentFiltered.agent_name = "";
         this.items = [];
@@ -365,20 +368,20 @@ export class PropertiesPage {
     this.socialSharing.shareViaWhatsAppToReceiver("54" + property.mobile, whatsappText, null, link);
     //this.socialSharing.share('',null,image,null);
     console.log('image', link);
-    */   
+    */
     //this.whatsappText = offerToShare.subject + "\r\n" + offerToShare.description + "\r\n" + offerToShare.specialPriceFormated;
     //this.whatsappImage = this.pictures_path + offerToShare.picture_path;
     //this.whatsappUrl = "\r\n" + 'https://mioferta.com.ar/offer/' + offerToShare.id; 
     //href="https://api.whatsapp.com/send?phone=54{{property.mobile}}&text={{whatsappText}} {{property.whatsappLink}}"
     let whatsappText = "Hola.\r\nEstoy interesado en esta propiedad.";
-    let whatsappImage = "http://diportal.com.ar/images/osproperty/properties/"+property.id+"/medium/"+property.image+"";
+    let whatsappImage = "http://diportal.com.ar/images/osproperty/properties/" + property.id + "/medium/" + property.image + "";
     let whatsappUrl = "\r\nhttp://mihogar.net.ar/propiedad/" + property.id + ".html";
     console.log('whatsappText', whatsappText);
     console.log('whatsappImage', whatsappImage);
     console.log('whatsappUrl', whatsappUrl);
 
     //this.socialSharing.shareViaWhatsApp(whatsappText, whatsappImage, whatsappUrl)
-    this.socialSharing.shareViaWhatsAppToReceiver("+54"+property.mobile, whatsappText, whatsappImage, whatsappUrl)
+    this.socialSharing.shareViaWhatsAppToReceiver("+54" + property.mobile, whatsappText, whatsappImage, whatsappUrl)
   }
 
   doInfinite(): Promise<any> {
@@ -530,7 +533,7 @@ export class PropertiesPage {
     localStorage.setItem("typeSelected", JSON.stringify(this.typeSelected));
   }
 
-  showNoResults(){
+  showNoResults() {
 
   }
 }
