@@ -95,7 +95,7 @@ export class MyApp {
   }
 
   getLastVersion() {
-    let version = "1.0.7"
+    let version = "1.0.8"
     this.proveedor.getLastVersion()
       .subscribe(
         (data) => {
