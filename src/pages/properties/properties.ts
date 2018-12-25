@@ -245,7 +245,7 @@ export class PropertiesPage {
           console.log('getProperties', data);
           this.properties = data;
           if (this.properties != null) {
-            console.log('getProperties total', this.properties.lenght);
+            console.log('getProperties total', this.properties.length);
 
 
 

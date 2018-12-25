@@ -30,7 +30,7 @@ export class WhatsappPropertiesListPage {
   }
 
   getPropertiesWhatsapp() {    
-    this.proveedor.getPropertiesWhatsapp()
+    this.proveedor.getPropertiesWhatsapp(0)
     .subscribe(
       (data) => {
         console.log('getPropertiesWhatsapp', data);

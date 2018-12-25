@@ -4,6 +4,7 @@ export class Property {
     pro_alias: string;
     published: string;
     category_id: number;
+    categoryIds: number[];
     pro_type: number;
     bath_room:number;
     bed_room: number;
@@ -29,6 +30,7 @@ export class Property {
             this.id = property.id;
             this.pro_name = property.pro_name || null;
             this.published = property.habilitado || null;
+            this.categoryIds = property.categoryIds || null;
             this.category_id = property.category_id || null;
             this.pro_type = property.pro_type || null;
             this.bath_room = property.bath_room || null;

@@ -51,7 +51,7 @@ export class FavoritesPage {
     (data) => {
       console.log('getProperties', data);
       this.properties = data;
-      console.log('getProperties total', this.properties.lenght);
+      console.log('getProperties total', this.properties.length);
       
       if(this.properties.length==0){
         this.showAlert('No hay resultados', 'UPS! Parece que no hay resultados con esos criterios de búsqueda.');

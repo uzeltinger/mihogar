@@ -115,8 +115,8 @@
       <ion-label stacked>Categoría *:</ion-label>
       <ion-item class="ion-item-trans">
         <ion-label>Categoría</ion-label>
-        <ion-select formControlName="category_id">
-          <ion-option *ngFor="let category of categories" [value]="category.id">{{category.category_name}}</ion-option>
+        <ion-select formControlName="categoryIds" multiple="true" [compareWith]="compareWithCategories" [(ngModel)]="categoryIdsArray">
+          <ion-option *ngFor="let category of categories" [value]="category">{{category.category_name}}</ion-option>
         </ion-select>
       </ion-item>
 
@@ -212,7 +212,7 @@
         <ion-col>
           <ion-item>
             <ion-label>Ocultar</ion-label>
-            <ion-radio value="2" [value]="2"></ion-radio>
+            <ion-radio value="0" [value]="0"></ion-radio>
           </ion-item>
         </ion-col>
         <ion-col>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
 //import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { SocialSharing } from '@ionic-native/social-sharing';
@@ -16,9 +16,16 @@ export class MyCompanyPage {
   cities: any = [];
   categories: any = [];
   showSplash: boolean;
+  user: any;
+  propertiesWhatsapps: any;
+  agentId: number = 0;
+  agentTotals: any = [];
+  propertiesWhatsappsById: any= [];
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public servicioProvider: ServicioProvider,
+    private alertController: AlertController,
     public sessionProvider: SessionProvider,
     //private iab: InAppBrowser,
     //private socialSharing: SocialSharing
@@ -27,9 +34,11 @@ export class MyCompanyPage {
     this.getCities();
   }
   ionViewWillEnter() {
+    this.agentTotals = {"totalPropiedades":0,"totalWhatsapps":0};
     let userLogued = this.sessionProvider.getUserLogued();
     this.showSplash = true;
     if (userLogued != null && userLogued.userid != null) {
+      this.user = userLogued;
       this.getMyProperties(userLogued);
     }
     console.log('ionViewDidLoad MyCompanyPage userLogued', userLogued);
@@ -44,10 +53,14 @@ export class MyCompanyPage {
         (data) => {
           this.myProperties = data;
           this.myProperties.forEach(property => {
+            this.agentId = property.agent_id;
             console.log('img', 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/' + property.id + '/medium/' + property.image);
           });
           console.log('this.myProperties', this.myProperties);
           this.showSplash = false;
+          
+          this.getPropertiesWhatsapp();
+
           //this.sessionProvider.setMyProperties(this.myProperties);
         },
         (error) => {
@@ -62,6 +75,9 @@ export class MyCompanyPage {
   }
 
   navToPropertyPage(event, property) {
+    /*this.navCtrl.setRoot(PropertyEditPage, {
+      property: property
+    });*/
     this.navCtrl.push(PropertyEditPage, {
       property: property
     });
@@ -93,6 +109,60 @@ export class MyCompanyPage {
       )
   }
 
+  getPropertiesWhatsapp() {    
+    console.log('this.agentId', this.agentId);
+    this.servicioProvider.getPropertiesWhatsapp(this.agentId)
+    .subscribe(
+      (data) => {
+        console.log('getPropertiesWhatsapp', data);
+        this.propertiesWhatsapps = data;
+        let totalPropiedades: number = 0;
+        let totalWhatsapps: number = 0;
+
+        this.agentTotals = {"totalPropiedades":0,"totalWhatsapps":0};
+
+        this.propertiesWhatsapps.forEach(element => {
+          this.propertiesWhatsappsById[element.imported_property_id] = parseInt(element.total_pro_id);
+          totalPropiedades++;
+          totalWhatsapps = totalWhatsapps + parseInt(element.total_pro_id);
+        });
+
+        this.agentTotals.totalPropiedades = this.myProperties.length;
+        this.agentTotals.totalWhatsapps = totalWhatsapps;
+
+        console.log('this.agentTotals', this.agentTotals);
+        console.log('this.propertiesWhatsappsById', this.propertiesWhatsappsById);
+      },
+      (error) => {
+        console.log('error', error);
+        this.showSplash = false;
+        if(error.status==0){
+          this.showAlert('Ocurrió un error', 'UPS! Parece que no hay conexión a internet.');
+        }else{
+          this.showAlert('Ocurrió un error', error.message);
+        }
+        
+      }
+    )
+
+  }
+
+  getPropertiesWhatsappsById(id){
+    //console.log('id',id);
+//console.log('this.propertiesWhatsappsById[id]',this.propertiesWhatsappsById[id]);
+    if(this.propertiesWhatsappsById[id]){
+      return this.propertiesWhatsappsById[id];
+    }
+    return 0;
+  }
+  showAlert(title_: string, subTitle_: string) {
+    const alert = this.alertController.create({
+      title: title_,
+      subTitle: subTitle_,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
   /*
     addCompany(){

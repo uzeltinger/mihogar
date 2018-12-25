@@ -24,9 +24,12 @@ export class ServicioProvider {
     return this.httpClient.get(url, this.httpOptions);
   }
 
-  getPropertiesWhatsapp(){
+  getPropertiesWhatsapp(agent_id){
     this.httpOptions = this.getHeader();
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_properties_whatsapp';
+    if(agent_id>0){
+      url = url + "&agent_id=" + agent_id;
+    }
     console.log('url',url);
     return this.httpClient.get(url);
   }

@@ -23,6 +23,7 @@ export class PropertyEditPage {
   newPhoto: any;
   base64Image: string;
   pictures_path: string;
+  categoryIdsArray: any;
   private win: any = window;
 
   constructor(public navCtrl: NavController,
@@ -51,7 +52,9 @@ export class PropertyEditPage {
       }
       this.property.link = "http://diportal.com.ar/component/osproperty/" + this.property.ref + "-" + this.property.pro_alias + "-" + this.property.id + ".html"
       this.property.whatsappLink = "http://mihogar.net.ar/propiedad/" + this.property.id + ".html";
-      this.property.price = parseInt(this.property.price.toString());
+      if(!isNullOrUndefined(this.property.price)){
+        this.property.price = parseInt(this.property.price.toString());
+      }
       this.property.picture_path = 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/' + this.property.id + '/medium/' + this.property.image;
       this.pictures_path = '';
     }
@@ -67,10 +70,12 @@ export class PropertyEditPage {
   private createMyForm() {
     //agent_id
     console.log('this.property', this.property);
+    this.categoryIdsArray = this.property.categoryIds;
+    console.log('this.categoryIdsArray', this.categoryIdsArray);
     return this.formBuilder.group({
       id: [this.property.id || 0, Validators.required],
       pro_name: [this.property.pro_name, Validators.required],
-      category_id: [this.property.category_id, Validators.required],
+      categoryIds: [this.property.categoryIds, Validators.required],
       pro_type: [this.property.pro_type, Validators.required],
       published: [this.property.published],
       bath_room: [this.property.bath_room, Validators.required],
@@ -88,6 +93,10 @@ export class PropertyEditPage {
     });
   }
 
+  compareWithCategories(ca1: any, ca2: any): boolean {
+    //console.log('ca1',ca1);    console.log('ca2',ca2);
+    return ca1 && ca2 ? ca1.id === ca2.id : false;
+  }
   saveData() {
     this.showSplash = true;
     console.log('this.myForm.value', this.myForm.value);

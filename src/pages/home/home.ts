@@ -216,7 +216,7 @@ export class HomePage {
         (data) => {
           console.log('getProperties', data);
           this.properties = data;
-          console.log('getProperties total', this.properties.lenght);
+          console.log('getProperties total', this.properties.length);
 
           if (this.properties.length < this.offersLimit) {
             this.offersShowAll = true;
