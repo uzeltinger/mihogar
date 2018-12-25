@@ -190,6 +190,7 @@ export class PropertiesPage {
     if(this.favorites!=null && this.favorites.length!=0){
       this.haveFavorites = true;
       console.log('this.haveFavorites',this.haveFavorites);
+      console.log('this.favorites',this.favorites);
     }else{
       this.haveFavorites = false;
     }

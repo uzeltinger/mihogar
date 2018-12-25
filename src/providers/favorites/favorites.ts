@@ -15,7 +15,7 @@ export class FavoritesProvider {
 
   addFavorite(id: number): boolean {    
     this.favorites.push(id);    
-    localStorage.setItem("favorites", JSON.stringify(this.favorites));
+    //localStorage.setItem("favorites", JSON.stringify(this.favorites));
     //console.log('this.favorites', this.favorites);
     this.storage.set('favorites', JSON.stringify(this.favorites));         
     return true;

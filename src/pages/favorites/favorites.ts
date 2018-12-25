@@ -4,6 +4,7 @@ import { ServicioProvider } from '../../providers/servicio/servicio';
 import { FavoritesProvider } from '../../providers/favorites/favorites';
 import { PropertyPage } from '../property/property';
 import { AgentPropertiesListPage } from '../agent-properties-list/agent-properties-list';
+import { PropertiesPage } from '../properties/properties';
 
 /**
  * Generated class for the FavoritesPage page.
@@ -101,6 +102,10 @@ removeToFavorites(property): void{
       }
       index++;
     });    
+    console.log('this.items',this.items);
+    if(this.items.length==0){
+      this.navCtrl.setRoot(PropertiesPage);
+    }
 }
 
 increaseWhatsappClick(property) {
