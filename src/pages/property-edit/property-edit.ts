@@ -105,6 +105,12 @@ export class PropertyEditPage {
       dataSend.base64Image = this.base64Image;
       dataSend.image = '';
     }
+
+    if(dataSend.image == '' && isNullOrUndefined(this.base64Image)){
+      this.showToast('Por favor agregue una imagen.');
+      this.showSplash = false;
+      return false;
+    }
     console.log('dataSend: ', dataSend);
     this.servicioProvider.saveProperty(dataSend)
       .subscribe(

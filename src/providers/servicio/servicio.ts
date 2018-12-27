@@ -23,8 +23,14 @@ export class ServicioProvider {
     return this.storage.get('urlInmobiliaria');
   }
   setUrlInmobiliaria(urlInmobiliaria) {
-    this.urlInmobiliaria = urlInmobiliaria;
-    this.storage.set('urlInmobiliaria', urlInmobiliaria);
+    if(!isNullOrUndefined){
+      this.urlInmobiliaria = urlInmobiliaria;       
+      this.storage.set('urlInmobiliaria', urlInmobiliaria);
+    }else{
+      this.urlInmobiliaria = this.urlInmobiliariaDefault;       
+      this.storage.set('this.urlInmobiliariaDefault', this.urlInmobiliariaDefault);
+    }
+   
   }
   getMyProperties(user) {
     this.token = user.hash;
