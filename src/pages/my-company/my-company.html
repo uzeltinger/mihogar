@@ -15,7 +15,7 @@
       </div>
 
   <ion-list>
-      <ion-item-divider color="dark">Propiedades / Consultas
+      <ion-item-divider color="dark" *ngIf="!myPropertiesEmpty">Propiedades / Consultas
           <p item-end> 
               <ion-badge item-end>{{agentTotals.totalPropiedades}}</ion-badge>
             <ion-badge item-end color="verdeWhatsapp">{{agentTotals.totalWhatsapps}}</ion-badge> </p>
@@ -24,7 +24,7 @@
     [ngClass]="{'despublicada':property.published==0}">
        
       <ion-thumbnail item-start>  
-        <img src="http://inmobiliaria.diportal.com.ar/images/osproperty/properties/{{property.id}}/medium/{{property.image}}" />
+        <img src="{{property.imagesrc}}" />
       </ion-thumbnail>
       <p>Ref: {{property.ref}}</p>
       <p>{{property.pro_name}}</p>

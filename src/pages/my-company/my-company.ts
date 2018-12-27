@@ -20,7 +20,8 @@ export class MyCompanyPage {
   propertiesWhatsapps: any;
   agentId: number = 0;
   agentTotals: any = [];
-  propertiesWhatsappsById: any= [];
+  propertiesWhatsappsById: any = [];
+  myPropertiesEmpty: boolean = true;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,7 +35,7 @@ export class MyCompanyPage {
     this.getCities();
   }
   ionViewWillEnter() {
-    this.agentTotals = {"totalPropiedades":0,"totalWhatsapps":0};
+    this.agentTotals = { "totalPropiedades": 0, "totalWhatsapps": 0 };
     let userLogued = this.sessionProvider.getUserLogued();
     this.showSplash = true;
     if (userLogued != null && userLogued.userid != null) {
@@ -44,21 +45,29 @@ export class MyCompanyPage {
     console.log('ionViewDidLoad MyCompanyPage userLogued', userLogued);
   }
   ionViewDidLoad() {
-    
+
   }
 
   getMyProperties(user) {
     this.servicioProvider.getMyProperties(user)
       .subscribe(
         (data) => {
+          let DataArray:any = [];
+          DataArray = data;
+          if (DataArray && DataArray.length > 0) {
           this.myProperties = data;
-          this.myProperties.forEach(property => {
-            this.agentId = property.agent_id;
-            console.log('img', 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/' + property.id + '/medium/' + property.image);
-          });
+          
+            this.myProperties.forEach(property => {
+              this.agentId = property.agent_id;
+              property.imagesrc = this.servicioProvider.urlInmobiliaria + '/images/osproperty/properties/'+property.id+'/medium/'+property.image+'';              
+              //console.log('img', 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/' + property.id + '/medium/' + property.image);
+            });
+            this.myPropertiesEmpty = false;
+          }
+
           console.log('this.myProperties', this.myProperties);
           this.showSplash = false;
-          
+
           this.getPropertiesWhatsapp();
 
           //this.sessionProvider.setMyProperties(this.myProperties);
@@ -70,7 +79,7 @@ export class MyCompanyPage {
       )
   }
 
-  addProperty(){
+  addProperty() {
     this.navCtrl.push(PropertyEditPage);
   }
 
@@ -109,48 +118,51 @@ export class MyCompanyPage {
       )
   }
 
-  getPropertiesWhatsapp() {    
+  getPropertiesWhatsapp() {
     console.log('this.agentId', this.agentId);
     this.servicioProvider.getPropertiesWhatsapp(this.agentId)
-    .subscribe(
-      (data) => {
-        console.log('getPropertiesWhatsapp', data);
-        this.propertiesWhatsapps = data;
-        let totalPropiedades: number = 0;
-        let totalWhatsapps: number = 0;
+      .subscribe(
+        (data) => {
+          console.log('getPropertiesWhatsapp', data);
+          if (data) {
 
-        this.agentTotals = {"totalPropiedades":0,"totalWhatsapps":0};
+          }
+          this.propertiesWhatsapps = data;
+          let totalPropiedades: number = 0;
+          let totalWhatsapps: number = 0;
 
-        this.propertiesWhatsapps.forEach(element => {
-          this.propertiesWhatsappsById[element.imported_property_id] = parseInt(element.total_pro_id);
-          totalPropiedades++;
-          totalWhatsapps = totalWhatsapps + parseInt(element.total_pro_id);
-        });
+          this.agentTotals = { "totalPropiedades": 0, "totalWhatsapps": 0 };
 
-        this.agentTotals.totalPropiedades = this.myProperties.length;
-        this.agentTotals.totalWhatsapps = totalWhatsapps;
+          this.propertiesWhatsapps.forEach(element => {
+            this.propertiesWhatsappsById[element.imported_property_id] = parseInt(element.total_pro_id);
+            totalPropiedades++;
+            totalWhatsapps = totalWhatsapps + parseInt(element.total_pro_id);
+          });
 
-        console.log('this.agentTotals', this.agentTotals);
-        console.log('this.propertiesWhatsappsById', this.propertiesWhatsappsById);
-      },
-      (error) => {
-        console.log('error', error);
-        this.showSplash = false;
-        if(error.status==0){
-          this.showAlert('Ocurrió un error', 'UPS! Parece que no hay conexión a internet.');
-        }else{
-          this.showAlert('Ocurrió un error', error.message);
+          this.agentTotals.totalPropiedades = this.myProperties.length;
+          this.agentTotals.totalWhatsapps = totalWhatsapps;
+
+          console.log('this.agentTotals', this.agentTotals);
+          console.log('this.propertiesWhatsappsById', this.propertiesWhatsappsById);
+        },
+        (error) => {
+          console.log('error', error);
+          this.showSplash = false;
+          if (error.status == 0) {
+            this.showAlert('Ocurrió un error', 'UPS! Parece que no hay conexión a internet.');
+          } else {
+            this.showAlert('Ocurrió un error', error.message);
+          }
+
         }
-        
-      }
-    )
+      )
 
   }
 
-  getPropertiesWhatsappsById(id){
+  getPropertiesWhatsappsById(id) {
     //console.log('id',id);
-//console.log('this.propertiesWhatsappsById[id]',this.propertiesWhatsappsById[id]);
-    if(this.propertiesWhatsappsById[id]){
+    //console.log('this.propertiesWhatsappsById[id]',this.propertiesWhatsappsById[id]);
+    if (this.propertiesWhatsappsById[id]) {
       return this.propertiesWhatsappsById[id];
     }
     return 0;

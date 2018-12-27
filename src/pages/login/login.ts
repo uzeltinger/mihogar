@@ -4,6 +4,7 @@ import { ServicioProvider } from '../../providers/servicio/servicio';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { SessionProvider } from '../../providers/session/session';
 import { MyCompanyPage } from '../my-company/my-company';
+import { ConfigurationPage } from '../configuration/configuration';
 
 @Component({
   selector: 'page-login',
@@ -13,33 +14,49 @@ export class LoginPage {
   login: any = { username: "", password: "" };
   loading: any;
   showSplash: boolean;
+  toolbarShow: boolean = false;
+  urlInmobiliaria: string = "";
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public servicioProvider: ServicioProvider,
     public sessionProvider: SessionProvider,
     private alertController: AlertController,
     public loadingCtrl: LoadingController,
-    private socialSharing: SocialSharing) {      
+    private socialSharing: SocialSharing) {
   }
 
   ionViewDidLoad() {
     this.showSplash = true;
     let userLogued = this.sessionProvider.getUserLogued();
+    this.getUrlInmobiliaria();
     console.log('ionViewDidLoad MyCompanyPage userLogued', userLogued);
   }
   ionViewWillEnter() {
     this.showSplash = true;
     console.log('ionViewWillEnter LoginPage');
     let userLogued = this.sessionProvider.getUserLogued();
-    if(userLogued && userLogued.userid!=null){
+    if (userLogued && userLogued.userid != null) {
       this.navCtrl.setRoot(MyCompanyPage);
       console.log('ionViewDidLoad MyCompanyPage userLogued', userLogued);
       //this.showSplash = false;
-    }else{
+    } else {
       this.showSplash = false;
     }
   }
   
+  getUrlInmobiliaria() {
+    this.servicioProvider.getUrlInmobiliaria().then
+      (
+        (data) => {
+          console.log('getUrlInmobiliaria ', data);
+          this.urlInmobiliaria = data;          
+        },
+        (error) => { console.log('error', error); }
+      )
+  }
+
+
   /*addCompany(){
     let data = {"nombre":"fabio","whatsapp":"2916481551"}
     this.servicioProvider.addCompany(data)
@@ -75,6 +92,7 @@ export class LoginPage {
     });
     this.loading.present();
     let formData = formulario.form.value;
+    this.servicioProvider.setUrlInmobiliaria(formData.urlInmobiliaria);
     this.servicioProvider.login(formData)
       .subscribe(
         data => {
@@ -104,4 +122,10 @@ export class LoginPage {
     alert.present();
   }
 
+  goConfigurationPage() {
+    this.navCtrl.push(ConfigurationPage);
+  }
+  toolbarToggle() {
+    this.toolbarShow = this.toolbarShow ? false : true;
+  }
 }

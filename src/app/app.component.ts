@@ -74,6 +74,7 @@ export class MyApp {
       //this.statusBar.styleDefault();      
       this.headerColor.tint('#2196F3');
       this.getStoredFavorites();
+      this.getUrlInmobiliaria();
       this.listenConnection();
       this.getLastVersion();
       if (this.platform.is('android')) {
@@ -90,6 +91,17 @@ export class MyApp {
     });
   }
   
+  getUrlInmobiliaria(){
+    this.proveedor.getUrlInmobiliaria().then
+      (
+        (data) => {
+          console.log('component getUrlInmobiliaria ', data);
+          this.proveedor.setUrlInmobiliaria(data);
+          //this.urlInmobiliaria = data;          
+        },
+        (error) => { console.log('component error', error); }
+      )
+  }
   getStoredFavorites(){
     this.favoriteService.getStoredFavorites();
   }

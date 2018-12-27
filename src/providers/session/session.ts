@@ -74,14 +74,7 @@ export class SessionProvider {
     console.log('setUserLogued user', user);
   }
   setUserLogout(){
-    this.servicioProvider.logout().subscribe(
-      (data) => {
-        console.log('setUserLogout data', data);
-      },
-      (error) => {
-        console.log('setUserLogout error', error);
-      }
-    )
+    this.servicioProvider.logout();
     this.user = null;
     this.isUserLogued = false;
     this.userEmitChange(false);

@@ -1,50 +1,54 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Mi Inmobiliaria</ion-title>
-  </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>Mi Inmobiliaria</ion-title>
+		<ion-buttons end>
+			<button (click)="goConfigurationPage()" ion-button icon-only>
+				<ion-icon name="settings"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 <div *ngIf="showSplash" class="splash">
-		<div class="spinner">
-			<ion-spinner></ion-spinner>
-		</div>
+	<div class="spinner">
+		<ion-spinner></ion-spinner>
 	</div>
-	
+</div>
+
 <ion-content class="darkbackground background">
 
-	<div style="text-align:center">    
-		<button ion-button class="seleccione" (click)="sendWhatsapp()">        
+	<div style="text-align:center">
+		<button ion-button class="seleccione" (click)="sendWhatsapp()">
 			<span>Quiero agregar<br>mi inmobiliaria</span>
 		</button>
-</div> 
+	</div>
 
-  <br>
-	
+	<br>
+
 	<form (ngSubmit)="onSubmitLogin(loginForm)" #loginForm="ngForm">
 
-	<ion-card>
-		<ion-card-header>
-			Ingresar a mi cuenta
-		</ion-card-header>
-		<ion-card-content>
-			<ion-list no-line>
-				<ion-item>						
-					<ion-input type="text" placeholder="Usuario" name="username" id="username" 
-					[(ngModel)]="username" required></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-input type="password" placeholder="Clave" name="password" id="password" 
-					[(ngModel)]="password" required></ion-input>
-				</ion-item>
-        <button ion-button block outline color="light" class="button-entrar"
-        [disabled]="!loginForm.valid" >ENTRAR</button>				
-				
-			</ion-list>
-		</ion-card-content>
-	</ion-card>
-</form>
-	
+		<ion-card>
+			<ion-card-header>
+				Ingresar a mi cuenta
+			</ion-card-header>
+			<ion-card-content>
+				<ion-list no-line>
+					<ion-item>
+						<ion-input type="text" placeholder="url si tiene web" name="urlInmobiliaria" id="urlInmobiliaria" [(ngModel)]="urlInmobiliaria"></ion-input>
+					</ion-item>
+					<ion-item>
+						<ion-input type="text" placeholder="Usuario" name="username" id="username" [(ngModel)]="username" required></ion-input>
+					</ion-item>
+					<ion-item>
+						<ion-input type="password" placeholder="Clave" name="password" id="password" [(ngModel)]="password" required></ion-input>
+					</ion-item>
+					<button ion-button block outline color="light" class="button-entrar" [disabled]="!loginForm.valid">ENTRAR</button>
+
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+	</form>
+
 
 </ion-content>

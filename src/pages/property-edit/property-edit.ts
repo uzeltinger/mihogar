@@ -55,7 +55,7 @@ export class PropertyEditPage {
       if(!isNullOrUndefined(this.property.price)){
         this.property.price = parseInt(this.property.price.toString());
       }
-      this.property.picture_path = 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/' + this.property.id + '/medium/' + this.property.image;
+      this.property.picture_path = this.servicioProvider.urlInmobiliaria + '/images/osproperty/properties/' + this.property.id + '/medium/' + this.property.image;
       this.pictures_path = '';
     }
 

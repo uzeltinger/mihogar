@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HeaderColor } from '@ionic-native/header-color';
 import { MyApp } from './app.component';
+import { IonicStorageModule } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { PropertyEditPage } from '../pages/property-edit/property-edit';
@@ -27,9 +28,9 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { FavoritesProvider } from '../providers/favorites/favorites';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { ConfigurationPage } from '../pages/configuration/configuration';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
     HomePage,
     LoginPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
-    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage,PropertyEditPage
+    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage,PropertyEditPage,
+    ConfigurationPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
     HomePage,
     LoginPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
-    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage,PropertyEditPage
+    WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage,PropertyEditPage,
+    ConfigurationPage
   ],
   providers: [
     StatusBar,
