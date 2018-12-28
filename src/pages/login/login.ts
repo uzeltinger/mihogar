@@ -86,6 +86,8 @@ export class LoginPage {
   }
 
   onSubmitLogin(formulario) {
+    if(formulario.valid){
+      
     this.loading = this.loadingCtrl.create({
       content: 'Un momento por favor...',
       dismissOnPageChange: true
@@ -111,6 +113,9 @@ export class LoginPage {
           this.showAlert('No hay conexión', 'UPS! Parece que no hay conexión con el servidor.');
         }
       );
+    }else{
+      this.showAlert('Error', 'UPS! Parece que los datos ingresados no son correctos.');
+    }
   }
 
   showAlert(title_: string, subTitle_: string) {

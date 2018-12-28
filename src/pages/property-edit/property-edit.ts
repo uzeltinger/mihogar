@@ -106,7 +106,7 @@ export class PropertyEditPage {
       dataSend.image = '';
     }
 
-    if(dataSend.image == '' && isNullOrUndefined(this.base64Image)){
+    if(isNullOrUndefined(this.base64Image) && this.property.picture_path == ''){
       this.showToast('Por favor agregue una imagen.');
       this.showSplash = false;
       return false;
