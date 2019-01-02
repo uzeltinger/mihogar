@@ -33,25 +33,39 @@ export class MyCompanyPage {
   ) {
     this.getCategories();
     this.getCities();
+
+    this.sessionProvider.userEmitter.subscribe(userIsLoggedIn => {
+      console.log('MyCompanyPage sessionProvider userEmitter userIsLoggedIn',userIsLoggedIn);
+      if(userIsLoggedIn){      
+        let userLogued = this.sessionProvider.getUserLogued();
+        if (userLogued != null && userLogued.userid != null) {
+          this.user = userLogued;
+          this.getMyProperties(userLogued);
+        }
+        console.log('ionViewDidLoad MyCompanyPage userLogued', userLogued);
+      }
+    });
+
+
   }
   ionViewWillEnter() {
-    this.agentTotals = { "totalPropiedades": 0, "totalWhatsapps": 0 };
-    let userLogued = this.sessionProvider.getUserLogued();
-    this.showSplash = true;
-    if (userLogued != null && userLogued.userid != null) {
-      this.user = userLogued;
-      this.getMyProperties(userLogued);
-    }
-    console.log('ionViewDidLoad MyCompanyPage userLogued', userLogued);
+    this.agentTotals = { "totalPropiedades": 0, "totalWhatsapps": 0 };    
+    this.showSplash = true;    
+        let userLogued = this.sessionProvider.getUserLogued();
+        //console.log('MyCompanyPage sessionProvider ionViewWillEnter getUserLogued',userLogued); 
+        this.getMyProperties(userLogued);
   }
   ionViewDidLoad() {
-
+    let userLogued = this.sessionProvider.getUserLogued();
+    //console.log('MyCompanyPage sessionProvider ionViewDidLoad getUserLogued',userLogued); 
   }
 
   getMyProperties(user) {
+    console.log('user', user);
     this.servicioProvider.getMyProperties(user)
       .subscribe(
         (data) => {
+          //console.log('data', data);
           let DataArray:any = [];
           DataArray = data;
           if (DataArray && DataArray.length > 0) {

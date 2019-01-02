@@ -23,7 +23,7 @@ export class ServicioProvider {
     return this.storage.get('urlInmobiliaria');
   }
   setUrlInmobiliaria(urlInmobiliaria) {
-    if(!isNullOrUndefined){
+    if(!isNullOrUndefined(urlInmobiliaria)){
       this.urlInmobiliaria = urlInmobiliaria;       
       this.storage.set('urlInmobiliaria', urlInmobiliaria);
     }else{

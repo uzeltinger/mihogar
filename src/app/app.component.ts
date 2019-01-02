@@ -48,7 +48,9 @@ export class MyApp {
 
     this.sessionProvider.userEmitter.subscribe(userIsLoggedIn => {
       console.log('userIsLoggedIn',userIsLoggedIn);
-      if(userIsLoggedIn){      
+      if(userIsLoggedIn){     
+        let userLogued = this.sessionProvider.getUserLogued();
+        //console.log('MyApp sessionProvider userEmitter userLogued',userLogued);   
       this.pages = [
         { title: 'Inicio', component: HomePage },
         { title: 'Propiedades', component: PropertiesPage },
