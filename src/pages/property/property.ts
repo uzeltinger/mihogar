@@ -67,7 +67,8 @@ export class PropertyPage {
       this.property.pro_video_url = this.sanitizer.bypassSecurityTrustResourceUrl(src);
     }
 
-    if (this.property.lat_add != null && this.property.long_add != null) {
+    if (this.property.lat_add != null && this.property.long_add != null 
+      && this.property.lat_add != "" && this.property.long_add != "") {
       this.propertyShowMap = true;
     }
     console.log('this.propertyShowMap',this.propertyShowMap);
