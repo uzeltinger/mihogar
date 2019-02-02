@@ -15,7 +15,7 @@ export class OfferServiceProvider {
   httpOptions: any = {};
   apiUrl: string = 'https://mioferta.com.ar/api';
   //apiUrl: string = 'http://mioferta.local/api';  
-  conectadoAinternet: boolean = false;
+  conectadoAinternet: boolean = true;
 
   constructor(public httpClient: HttpClient,
     public storage: Storage) {
@@ -46,6 +46,15 @@ export class OfferServiceProvider {
 
   }
 
+  increaseWhatsappClick(offer: any): Observable<any> {
+    console.log('offer', offer);
+    this.httpOptions = this.getHeader();
+    return this.httpClient.post<any>(this.apiUrl + "/v1/offer/increaseWhatsappClick", offer.id, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  
   getHeader() {
     return {
       headers: new HttpHeaders({

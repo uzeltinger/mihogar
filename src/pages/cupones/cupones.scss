@@ -1,5 +1,39 @@
 page-cupones {
-    .grid-bottom {
+    .offer-list-card {
+        border-radius: 10px;
+        background: #10191E;
+      }
+      .offer-list-card-img {
+        position: relative;
+      }
+      .offer-list-price {
+        color: #fff;
+      }
+      .offer-list-title {
+        color: #fff;
+      }
+      .offer-list-discount {
+        background: #FD0000;
+        color: #fff;
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        border-radius: 50%;
+        font-size: 2rem;
+        padding: 25px 0;
+        text-align: center;
+        width: 80px;
+        height: 80px;
+      }
+      .darkbackground p{
+        color: #fff;
+      }
+      .offer-list-icon-whatsapp {
+        position: absolute;
+       bottom: -24px;
+       right: 1rem;
+      }
+    /*.grid-bottom {
         background-color: #ff6900;
         font-weight: 500;
     }
@@ -8,19 +42,7 @@ page-cupones {
     }
     .text-white {
         color: #fff;
-    }
-    .boton-buscar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        background: none;
-        z-index: 10;
-    }    
-    .boton-buscar .item {
-        background: none;
-    }
+    }   
     .title-container {
         position:relative;
     }
@@ -36,5 +58,5 @@ page-cupones {
     .dosporuno {        
     font-size: 3rem;
     padding: 17px 0;
-    }
+    }*/
 }

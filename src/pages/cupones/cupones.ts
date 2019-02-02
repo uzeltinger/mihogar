@@ -50,7 +50,7 @@ export class CuponesPage {
           this.offersShowAll = true;
           }        
         this.offers = data; 
-        /*this.offers.forEach((element : any) => {
+        this.offers.forEach((element : any) => {
           element.showDiscount = "-" + element.priceDiscount + "%";
           element.dosporuno = false;
           if(element.price/2==element.specialPrice){
@@ -62,7 +62,7 @@ export class CuponesPage {
           }
           this.items.push(element);
           console.log('this.items',this.items);
-        });*/
+        });
       
         console.log('this.items',this.items);
         this.showSplash = false;
@@ -99,4 +99,17 @@ export class CuponesPage {
     alert.present();
   }
 
+  increaseWhatsappClick(offer){
+    console.log('increaseWhatsappClick');
+    this.offerService.increaseWhatsappClick(offer)
+    .subscribe(
+      data => {
+        console.log('increaseWhatsappClick data: ',data);        
+      },
+      error => {
+        console.log('increaseWhatsappClick error: ',error);             
+      }
+    ); 
+  }
+  
 }
