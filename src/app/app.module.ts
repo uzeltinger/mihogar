@@ -31,6 +31,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { ConfigurationPage } from '../pages/configuration/configuration';
+import { CuponesPage } from '../pages/cupones/cupones';
+import { OfferServiceProvider } from '../providers/offer-service/offer-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
     LoginPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
     WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage,PropertyEditPage,
-    ConfigurationPage
+    ConfigurationPage,CuponesPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
     LoginPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
     WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage,PropertyEditPage,
-    ConfigurationPage
+    ConfigurationPage,CuponesPage
   ],
   providers: [
     StatusBar,
@@ -62,7 +64,8 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicioProvider,GoogleMaps,
     SessionProvider,Network,Toast,HeaderColor,SocialSharing,
-    FavoritesProvider,InAppBrowser,Camera,ImagePicker
+    FavoritesProvider,InAppBrowser,Camera,ImagePicker,
+    OfferServiceProvider
   ]
 })
 export class AppModule {}

@@ -1,0 +1,52 @@
+<!--
+  Generated template for the OffersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Ofertas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<div *ngIf="showSplash" class="splash">
+  <div class="spinner">
+      <ion-spinner></ion-spinner>
+  </div>
+</div>
+
+<ion-content class="darkbackground">
+  <ion-card *ngFor="let offer of items" class="offer-list-card">
+      <div class="offer-list-card-img">
+          <img (click)="navToOfferPage($event, offer)" src="https://mioferta.com.ar/media/com_jbusinessdirectory/pictures{{offer.picture_path}}">
+          <div class="offer-list-discount" [ngClass]="{'dosporuno' : offer.dosporuno}" (click)="navToOfferPage($event, offer)"><span>{{offer.showDiscount}}</span></div>
+          <div class="offer-list-icon-whatsapp">
+              <ion-icon float-right>
+                  <a target="_blank" (click)="increaseWhatsappClick(offer)" href="https://api.whatsapp.com/send?phone=54{{offer.phone}}&text={{whatsappText}} {{offer.link}}">
+                      <img src="assets/img/whatsappbutton144.png">
+                  </a>
+              </ion-icon>
+          </div>
+      </div>
+      <ion-card-content class="title-container" (click)="navToOfferPage($event, offer)">
+          <ion-card-title>
+              <div class="offer-list-price">{{offer.specialPriceFormated}}</div>
+          </ion-card-title>
+          <div class="offer-list-title text-uppercase">{{offer.subject}}</div>
+          <div *ngIf="offer.distance" class="offer-list-distance">{{offer.distance}} Km</div>
+      </ion-card-content>
+
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más ofertas...">
+      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
