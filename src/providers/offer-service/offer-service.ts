@@ -16,6 +16,7 @@ export class OfferServiceProvider {
   apiUrl: string = 'https://mioferta.com.ar/api';
   //apiUrl: string = 'http://mioferta.local/api';  
   conectadoAinternet: boolean = true;
+  categoryFiltered: number = 0;
 
   constructor(public httpClient: HttpClient,
     public storage: Storage) {
@@ -29,12 +30,27 @@ export class OfferServiceProvider {
   getConectadoAinternet() {
     return this.conectadoAinternet;
   }
-
+  setCategoryFiltered(category){
+    this.categoryFiltered = category;
+    console.log('this.categoryFiltered', this.categoryFiltered);
+  }
+  getCategoryFiltered(){
+    console.log('this.categoryFiltered', this.categoryFiltered);
+    return this.categoryFiltered;
+  }
+  obtenerCategoriasDeOfertas(){
+    return this.httpClient.get('https://mioferta.com.ar/mihogarcupones/categoriasAplicadas.php', this.httpOptions);
+  }
+  
   obtenerOfertas(data: any): Observable<any> {
-    if (this.conectadoAinternet) {
-      console.log('obtenerOfertas data', data);
+    if (this.conectadoAinternet) {      
       this.httpOptions = this.getHeader();
-      return this.httpClient.post<any>(this.apiUrl + "/v1/offers/getOffers", data, this.httpOptions)
+      if(this.categoryFiltered>0){
+        data.categories = [];
+        data.categories.push(this.categoryFiltered);
+        console.log('obtenerOfertas data', data);
+      }
+      return this.httpClient.post<any>(this.apiUrl + "/v1/offers/getMiHogarOffers", data, this.httpOptions)
         .pipe(
           catchError(this.handleError)
         );

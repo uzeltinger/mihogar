@@ -33,6 +33,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { ConfigurationPage } from '../pages/configuration/configuration';
 import { CuponesPage } from '../pages/cupones/cupones';
 import { OfferServiceProvider } from '../providers/offer-service/offer-service';
+import { CuponesSearchPage } from '../pages/cupones-search/cupones-search';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     LoginPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
     WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage,PropertyEditPage,
-    ConfigurationPage,CuponesPage
+    ConfigurationPage,CuponesPage,CuponesSearchPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,7 @@ import { OfferServiceProvider } from '../providers/offer-service/offer-service';
     LoginPage,
     AgentPropertiesListPage,PropertyPage,ModalSearchPage,ProbarmapaPage,PropertiesPage,
     WhatsappPropertiesListPage,MyCompanyPage,FavoritesPage,AboutPage,LogoutPage,PropertyEditPage,
-    ConfigurationPage,CuponesPage
+    ConfigurationPage,CuponesPage,CuponesSearchPage
   ],
   providers: [
     StatusBar,
