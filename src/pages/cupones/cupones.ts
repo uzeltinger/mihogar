@@ -151,7 +151,7 @@ export class CuponesPage {
       this.getOffers();
     });
     modal.present();
-    this.showSplash = true;
+    //this.showSplash = true;
   }
 
   navToOfferPage(){
