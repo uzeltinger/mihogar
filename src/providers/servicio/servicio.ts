@@ -9,9 +9,9 @@ import { isNullOrUndefined } from 'util';
 export class ServicioProvider {
   token: string = null;
   //apiUrl: string = 'http://diportal.local/';
-  apiUrl: string = 'http://diportal.com.ar/';
-  urlInmobiliaria: string = 'https://inmobiliaria.diportal.com.ar/';
-  urlInmobiliariaDefault: string = 'https://inmobiliaria.diportal.com.ar/';
+  apiUrl: string = 'https://diportal.com.ar/';
+  urlInmobiliaria: string = 'inmobiliaria.diportal.com.ar/';
+  urlInmobiliariaDefault: string = 'inmobiliaria.diportal.com.ar/';
   //apiLoginUrl: string = 'http://inmobiliaria.diportal.local/';
   httpOptions: any = {};
   //urlInmobiliaria: string;
@@ -36,7 +36,7 @@ export class ServicioProvider {
     this.token = user.hash;
     this.httpOptions = this.getHeader();
     //return this.httpClient.post<any>(this.apiLoginUrl + "index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)
-    let url = this.urlInmobiliaria + '/index.php?option=com_api&app=mihogar&resource=mispropiedades&format=raw';
+    let url = 'https://'+this.urlInmobiliaria + '/index.php?option=com_api&app=mihogar&resource=mispropiedades&format=raw';
     console.log('url', url);
     return this.httpClient.get(url, this.httpOptions);
   }
@@ -117,7 +117,7 @@ export class ServicioProvider {
   getLastVersion() {
     this.httpOptions = this.getHeader();
     let url = this.apiUrl + 'index.php?option=com_osproperty&task=json_getLastVersion';
-    return this.httpClient.get(url);
+    return this.httpClient.get(url, this.httpOptions);
   }
 
   increaseWhatsappClick(property: any): Observable<any> {
@@ -159,7 +159,7 @@ export class ServicioProvider {
 
   saveProperty(property: any): Observable<any> {
     this.httpOptions = this.getHeader();
-    return this.httpClient.post(this.urlInmobiliaria + "/index.php?option=com_api&app=mihogar&resource=property&format=raw", property, this.httpOptions)
+    return this.httpClient.post('https://'+this.urlInmobiliaria + "/index.php?option=com_api&app=mihogar&resource=property&format=raw", property, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -176,7 +176,7 @@ export class ServicioProvider {
       this.urlInmobiliaria = this.urlInmobiliariaDefault
     }
     this.httpOptions = this.getHeader();
-    return this.httpClient.post<any>(this.urlInmobiliaria + "/index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)
+    return this.httpClient.post<any>('https://' + this.urlInmobiliaria + "/index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -185,7 +185,8 @@ export class ServicioProvider {
   logout() {
     this.httpOptions = this.getHeader();
     this.token = null;
-    return this.httpClient.get(this.urlInmobiliaria + "/index.php?option=com_api&app=mihogar&resource=logout&format=raw", this.httpOptions)
+    return this.httpClient.get('https://'+
+    this.urlInmobiliaria + "/index.php?option=com_api&app=mihogar&resource=logout&format=raw", this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
