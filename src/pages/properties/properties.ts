@@ -437,7 +437,7 @@ export class PropertiesPage {
     this.items = [];
     this.offersLimitStart = 0;
     this.offersShowAll = false;
-    const modal = this.modalCtrl.create(ModalSearchPage);
+    const modal = this.modalCtrl.create(ModalSearchPage, undefined, { cssClass: "modal-filter-properties" });
     modal.onDidDismiss(data => {
       console.log(data);
       this.showSplash = true;

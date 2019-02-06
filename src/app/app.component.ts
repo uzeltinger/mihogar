@@ -110,12 +110,14 @@ export class MyApp {
   }
 
   getLastVersion() {
-    let version = "1.1.2"
+    let version = "1.1.4"
+    let lastVersion: any = "0";
     this.proveedor.getLastVersion()
       .subscribe(
         (data) => {
+          lastVersion = data;
           console.log('getLastVersion : this version ', data+' : '+version);
-          if (data > version) {
+          if (lastVersion != version) {
             this.showConfirm();
           }
         },
