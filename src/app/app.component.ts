@@ -14,6 +14,7 @@ import { FavoritesProvider } from '../providers/favorites/favorites';
 import { AboutPage } from '../pages/about/about';
 import { LogoutPage } from '../pages/logout/logout';
 import { MyCompanyPage } from '../pages/my-company/my-company';
+import { CuponesPage } from '../pages/cupones/cupones';
 //import { isNullOrUndefined } from 'util';
 
 @Component({
@@ -42,6 +43,7 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HomePage },
       { title: 'Propiedades', component: PropertiesPage },
+      { title: 'Cupones descuento', component: CuponesPage },
       { title: 'Mis favoritos', component: FavoritesPage },
       { title: 'Información', component: AboutPage }
     ];
@@ -55,6 +57,7 @@ export class MyApp {
         { title: 'Inicio', component: HomePage },
         { title: 'Propiedades', component: PropertiesPage },
         { title: 'Mis favoritos', component: FavoritesPage },
+        { title: 'Cupones descuento', component: CuponesPage },
         { title: 'Información', component: AboutPage },
         { title: 'Inmobiliaria', component: MyCompanyPage },
         { title: 'Salir', component: LogoutPage }      
@@ -64,6 +67,7 @@ export class MyApp {
         { title: 'Inicio', component: HomePage },
         { title: 'Propiedades', component: PropertiesPage },
         { title: 'Mis favoritos', component: FavoritesPage },
+        { title: 'Cupones descuento', component: CuponesPage },
         { title: 'Información', component: AboutPage }
       ];
     }
