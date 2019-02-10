@@ -14,7 +14,7 @@ import { FavoritesProvider } from '../providers/favorites/favorites';
 import { AboutPage } from '../pages/about/about';
 import { LogoutPage } from '../pages/logout/logout';
 import { MyCompanyPage } from '../pages/my-company/my-company';
-import { isNullOrUndefined } from 'util';
+//import { isNullOrUndefined } from 'util';
 
 @Component({
   templateUrl: 'app.html'
@@ -49,7 +49,7 @@ export class MyApp {
     this.sessionProvider.userEmitter.subscribe(userIsLoggedIn => {
       console.log('userIsLoggedIn',userIsLoggedIn);
       if(userIsLoggedIn){     
-        let userLogued = this.sessionProvider.getUserLogued();
+        //let userLogued = this.sessionProvider.getUserLogued();
         //console.log('MyApp sessionProvider userEmitter userLogued',userLogued);   
       this.pages = [
         { title: 'Inicio', component: HomePage },

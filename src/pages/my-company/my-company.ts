@@ -73,7 +73,7 @@ export class MyCompanyPage {
           
             this.myProperties.forEach(property => {
               this.agentId = property.agent_id;
-              property.imagesrc = this.servicioProvider.urlInmobiliaria + '/images/osproperty/properties/'+property.id+'/medium/'+property.image+'';              
+              property.imagesrc = 'https://'+this.servicioProvider.urlInmobiliaria + '/images/osproperty/properties/'+property.id+'/medium/'+property.image+'';              
               //console.log('img', 'http://inmobiliaria.diportal.com.ar/images/osproperty/properties/' + property.id + '/medium/' + property.image);
             });
             this.myPropertiesEmpty = false;

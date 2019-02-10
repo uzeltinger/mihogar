@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServicioProvider } from '../../providers/servicio/servicio';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /**
  * Generated class for the WhatsappPropertiesListPage page.
@@ -20,6 +21,7 @@ export class WhatsappPropertiesListPage {
 
   constructor(public navCtrl: NavController, 
     private alertController: AlertController,
+    private iab: InAppBrowser,
     public navParams: NavParams,
     public proveedor: ServicioProvider) {
   }
@@ -65,6 +67,11 @@ export class WhatsappPropertiesListPage {
       }
     )
 
+  }
+
+  goCuponesCategorias(){
+    const browser = this.iab.create('https://mioferta.com.ar/mihogarcupones/');
+    browser.show();
   }
 
   showAlert(title_: string, subTitle_: string) {

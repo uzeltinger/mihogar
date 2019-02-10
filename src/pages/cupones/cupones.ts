@@ -32,7 +32,7 @@ export class CuponesPage {
     public modalCtrl: ModalController,
     public navParams: NavParams
   ) {
-    this.whatsappText = "Entre%20hoy%20y%20mañana%20paso%20a%20retirar%20la%20oferta.%0AGracias";
+    this.whatsappText = "Hola..Enviame%20un%20mensaje%20o%20llamame,%20asi%20coordinamos%20para%20retirar%20la%20oferta%20...Gracias";
   }
 
   ionViewDidLoad() {
