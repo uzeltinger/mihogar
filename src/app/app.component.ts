@@ -114,7 +114,7 @@ export class MyApp {
   }
 
   getLastVersion() {
-    let version = "1.1.4"
+    let version = "1.1.5"
     let lastVersion: any = "0";
     this.proveedor.getLastVersion()
       .subscribe(
