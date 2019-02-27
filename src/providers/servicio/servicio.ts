@@ -169,11 +169,17 @@ export class ServicioProvider {
     this.urlInmobiliaria = dateSend.urlInmobiliaria;
     this.storage.set('urlInmobiliaria', this.urlInmobiliaria);
     console.log('login dateSend.urlInmobiliaria', dateSend.urlInmobiliaria);
+    console.log('login dateSend', dateSend);
+if(dateSend.urlInmobiliaria == null){
+  console.log('dateSend.urlInmobiliaria',dateSend.urlInmobiliaria);
+}else{
+  console.log('dateSend.urlInmobiliaria',dateSend.urlInmobiliaria);
 
-    if (dateSend.urlInmobiliaria != "") {
-      this.urlInmobiliaria = dateSend.urlInmobiliaria;
-    }else{
+}
+    if (dateSend.urlInmobiliaria == "" || dateSend.urlInmobiliaria == null) {
       this.urlInmobiliaria = this.urlInmobiliariaDefault
+    }else{
+      this.urlInmobiliaria = dateSend.urlInmobiliaria;
     }
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>('https://' + this.urlInmobiliaria + "/index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)
