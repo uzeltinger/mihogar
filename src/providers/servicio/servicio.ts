@@ -23,7 +23,7 @@ export class ServicioProvider {
     return this.storage.get('urlInmobiliaria');
   }
   setUrlInmobiliaria(urlInmobiliaria) {
-    if(!isNullOrUndefined(urlInmobiliaria)){
+    if(!isNullOrUndefined(urlInmobiliaria && urlInmobiliaria != "")){
       this.urlInmobiliaria = urlInmobiliaria;       
       this.storage.set('urlInmobiliaria', urlInmobiliaria);
     }else{
@@ -32,7 +32,7 @@ export class ServicioProvider {
     }
    
   }
-  getMyProperties(user) {
+  getMyProperties(user) { 
     this.token = user.hash;
     this.httpOptions = this.getHeader();
     //return this.httpClient.post<any>(this.apiLoginUrl + "index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)
@@ -178,8 +178,10 @@ if(dateSend.urlInmobiliaria == null){
 }
     if (dateSend.urlInmobiliaria == "" || dateSend.urlInmobiliaria == null) {
       this.urlInmobiliaria = this.urlInmobiliariaDefault
+      console.log('this.urlInmobiliaria',this.urlInmobiliaria);
     }else{
       this.urlInmobiliaria = dateSend.urlInmobiliaria;
+      console.log('this.urlInmobiliaria',this.urlInmobiliaria);
     }
     this.httpOptions = this.getHeader();
     return this.httpClient.post<any>('https://' + this.urlInmobiliaria + "/index.php?option=com_api&app=mihogar&resource=login&format=raw", dateSend, this.httpOptions)
