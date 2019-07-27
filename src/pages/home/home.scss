@@ -5,10 +5,10 @@ page-home {
     }
     .home-logo {
         margin: auto;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
         /*width: 50%;*/
-        height: 40%;
+        height: 35vh;
         text-align: center;
         background: url('../assets/imgs/home-logo.png') no-repeat center center;
         background-size: 100%;
@@ -16,9 +16,10 @@ page-home {
     }
     button.seleccione {
         background-color: rgba(26, 24, 24, 0.6);        
-        padding: 4rem;
-        width: 80%;
-        margin-top: 2rem;
+        padding: 6vh;
+        width: 100%;
+        max-width: 300px;
+        margin-top: 1vh;
         font-size: 2rem;
     }
     .button span {

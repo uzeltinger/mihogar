@@ -205,7 +205,7 @@ if(dateSend.urlInmobiliaria == null){
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': this.token ? 'Bearer ' + this.token : ''
+        'X-Authorization': this.token ? 'Bearer ' + this.token : ''
       })
     };
   }
