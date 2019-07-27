@@ -25,4 +25,10 @@ page-home {
     .button span {
        color: #fff;
     }
+    
+    @media (max-width: 319px) {
+        button.seleccione {
+            font-size: 1.5rem;
+        }
+    }
 }
