@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the AboutPage page.
@@ -14,11 +15,19 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public socialSharing: SocialSharing,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutPage');
+  }
+  
+  contactToWhatsapp(property: any) {    
+    let whatsappText = "Hola.\r\nEstoy interesado en la app.";
+    console.log('whatsappText', whatsappText);
+    this.socialSharing.shareViaWhatsAppToReceiver("+541130190242", whatsappText, null, null)
   }
 
 }

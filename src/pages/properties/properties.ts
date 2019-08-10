@@ -371,7 +371,7 @@ export class PropertiesPage {
           console.log('increaseWhatsappClick error: ', error);
         }
       );
-  }
+  } 
 
   shareToWhatsapp(property: any) {
     /*
